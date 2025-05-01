@@ -1,0 +1,28 @@
+Identificadores 
+Comenzarán con una letra minúscula, seguida de más letras minúsculas. Por ejemplo: 
+ab, cuenta, z, etcétera.
+	(a-z)+
+
+Números binarios 
+Inician con un dígito binario (0, 1) seguido de 0 o más dígitos binarios y terminan 
+siempre con la letra B. Por ejemplo: 0B, 1B, 111010B, 1101B, 01101B, etcétera.
+	(0,1)+ B
+
+Números octales 
+Inician con un dígito octal (0-7) seguido de 0 o más dígitos octales y terminan siempre 
+con la letra O. Por ejemplo: 025O, 1701O, 11122007O, etcétera.
+	(0-7)+ O
+
+Números Hexadecimales 
+Inician con un dígito entre 0-9 ó una letra entre A-F seguido de 0 o más dígitos entre el 
+0-9 o letras de A-F y terminan siempre con letra X. Por ejemplo: 0X, 1, A123CX, 135B56X, 
+FEA123X, etcétera.
+	(0-9,A-F)+ X
+
+Caracteres simples 
+Solo los que se muestran a continuación ‘;’, ‘=’, ‘+’, ‘-‘, ‘/’, ‘*’, ‘,’, ‘(’ , ‘)’
+	; | = | + | - | / | * | , | ( | )
+
+Palabras reservadas 
+programa, binario, octal, hexadecimal, leer, escribir, finprograma
+	programa | binario | octal | hexadecimal | leer | escribir | finprograma

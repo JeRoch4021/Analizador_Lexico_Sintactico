@@ -9,7 +9,7 @@ class Automata:
         self.estado_inicial = estado_inicial
         self.estados_aceptacion = estados_aceptacion
 
-    def switch(self, estado)
+    def switch(self, estado):
         match estado:
             case 1:
                 return 2

@@ -1,0 +1,45 @@
+programa ejemplo
+
+    binario multiple, num;
+    octal numero = 230;
+    hexadecimal res;
+    
+    leer(num);
+
+    multiple =10010B+1001B;
+    numero = numero +1230*101O;
+    res = ADFX - B112EX;
+
+    escribir(res);
+
+    binario bin1, bin2;
+    octal oct1 = 170;
+    hexadecimal hex1;
+
+    leer(bin1);
+    leer(oct1);
+
+    bin1 = 10101B + 111B;
+    oct1 = oct1 * 007O + 3O;
+    hex1 = A1B2X - CDEFX;
+
+    escribir(hex1);
+
+programa test
+
+    # Casos validos adicionales
+    leer(data);
+    data = 1B + 0B;
+    direccion = F0F0X;
+    contador = 123O;
+
+    # Casos invalidos (errores lexico esperados)
+    Numero = 123;
+    alpha1 = 11H;
+    base-2 = 10B;
+    12cu = 1101B;
+    random_symbol = @;
+    otraLinea = .99X;
+    entrada = 34L;
+
+finprograma

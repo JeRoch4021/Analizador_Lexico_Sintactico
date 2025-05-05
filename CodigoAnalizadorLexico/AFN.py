@@ -9,11 +9,11 @@ class AFN:
         self.transiciones = {}
         
 
-    def agregar_estado(self, estado, es_inicial=False, es_aceptacion=False):
+    def agregar_estado(self, estado, estado_inicial=False, estado_final=False):
         self.estados.add(estado)
-        if es_inicial:
+        if estado_inicial:
             self.estado_inicial = estado
-        if es_aceptacion:
+        if estado_final:
             self.estados_aceptacion.add(estado)
 
 
@@ -38,8 +38,8 @@ class AFN:
 
 def crear_afn_identificador():
     afn = AFN(alfabeto="abcdefghijklmnopqrstuvwxyz")
-    afn.agregar_estado('q0', es_inicial=True)
-    afn.agregar_estado('q1', es_aceptacion=True)
+    afn.agregar_estado('q0', estado_inicial=True)
+    afn.agregar_estado('q1', estado_final=True)
     for letra in afn.alfabeto:
         afn.agregar_transicion('q0', letra, 'q1')
         afn.agregar_transicion('q1', letra, 'q1')
@@ -48,9 +48,9 @@ def crear_afn_identificador():
 
 def crear_afn_binario():
     afn = AFN(alfabeto="01B")
-    afn.agregar_estado('q0', es_inicial=True)
+    afn.agregar_estado('q0', estado_inicial=True)
     afn.agregar_estado('q1')
-    afn.agregar_estado('q2', es_aceptacion=True)
+    afn.agregar_estado('q2', estado_final=True)
     for b in '01':
         afn.agregar_transicion('q0', b, 'q0')
     afn.agregar_transicion('q0', 'B', 'q2')
@@ -59,9 +59,9 @@ def crear_afn_binario():
 
 def crear_afn_octal():
     afn = AFN(alfabeto="01234567O")
-    afn.agregar_estado('q0', es_inicial=True)
+    afn.agregar_estado('q0', estado_inicial=True)
     afn.agregar_estado('q1')
-    afn.agregar_estado('q2', es_aceptacion=True)
+    afn.agregar_estado('q2', estado_final=True)
     for o in '01234567':
         afn.agregar_transicion('q0', o, 'q0')
     afn.agregar_transicion('q0', 'O', 'q2')
@@ -70,9 +70,9 @@ def crear_afn_octal():
 
 def crear_afn_hexadecimal():
     afn = AFN(alfabeto="0123456789ABCDEF")
-    afn.agregar_estado('q0', es_inicial=True)
+    afn.agregar_estado('q0', estado_inicial=True)
     afn.agregar_estado('q1')
-    afn.agregar_estado('q2', es_aceptacion=True)
+    afn.agregar_estado('q2', estado_final=True)
     for h in '0123456789ABCDEF':
         afn.agregar_transicion('q0', h, 'q0')
     afn.agregar_transicion('q0', 'X', 'q2')
@@ -81,8 +81,8 @@ def crear_afn_hexadecimal():
 
 def crear_afn_caracter_simple():
     afn = AFN(alfabeto=";=+-*()/,")
-    afn.agregar_estado('q0', es_inicial=True)
-    afn.agregar_estado('q1', es_aceptacion=True)
+    afn.agregar_estado('q0', estado_inicial=True)
+    afn.agregar_estado('q1', estado_final=True)
     for c in ";=+-*()/,":
         afn.agregar_transicion('q0', c, 'q1')
     return afn

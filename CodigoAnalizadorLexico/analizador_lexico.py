@@ -118,8 +118,9 @@ class AnalizadorLexico:
                     self.pila_tokens.append((palabra, numero_linea))
 
                 numero_linea += 1
-        # Linea de espacio
+        
         print("\n\nObtención de Tokens:\n")
+        
         with open("resultados_lexicos.txt", 'w') as salida:
             salida.write("Resultados del Análisis Léxico\n\n")
             salida.write("Tokens Clasificados:\n")

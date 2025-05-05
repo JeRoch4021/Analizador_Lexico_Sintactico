@@ -1,0 +1,349 @@
+Resultados del Análisis Léxico
+
+Tokens Clasificados:
+(programa, atributo 257, Palabra Reservada, línea 1)
+(ejemplo, atributo 261, Identificador, línea 1)
+(binario, atributo 258, Palabra Reservada, línea 3)
+(multiple, atributo 261, Identificador, línea 3)
+(,, atributo 44, Caracter Simple, línea 3)
+(num, atributo 261, Identificador, línea 3)
+(;, atributo 59, Caracter Simple, línea 3)
+(octal, atributo 259, Palabra Reservada, línea 4)
+(numero, atributo 261, Identificador, línea 4)
+(=, atributo 61, Caracter Simple, línea 4)
+(230, atributo 0, Error Lexico, línea 4)
+(;, atributo 59, Caracter Simple, línea 4)
+(hexadecimal, atributo 260, Palabra Reservada, línea 5)
+(res, atributo 261, Identificador, línea 5)
+(;, atributo 59, Caracter Simple, línea 5)
+(leer, atributo 265, Palabra Reservada, línea 7)
+((, atributo 40, Caracter Simple, línea 7)
+(num, atributo 261, Identificador, línea 7)
+(), atributo 41, Caracter Simple, línea 7)
+(;, atributo 59, Caracter Simple, línea 7)
+(multiple, atributo 261, Identificador, línea 9)
+(=, atributo 61, Caracter Simple, línea 9)
+(10010B, atributo 520, Numero Binario, línea 9)
+(+, atributo 43, Caracter Simple, línea 9)
+(1001B, atributo 520, Numero Binario, línea 9)
+(;, atributo 59, Caracter Simple, línea 9)
+(numero, atributo 261, Identificador, línea 10)
+(=, atributo 61, Caracter Simple, línea 10)
+(numero, atributo 261, Identificador, línea 10)
+(+, atributo 43, Caracter Simple, línea 10)
+(1230, atributo 0, Error Lexico, línea 10)
+(*, atributo 42, Caracter Simple, línea 10)
+(101O, atributo 732, Numero Octal, línea 10)
+(;, atributo 59, Caracter Simple, línea 10)
+(res, atributo 261, Identificador, línea 11)
+(=, atributo 61, Caracter Simple, línea 11)
+(ADFX, atributo 891, Numero Hexadecimal, línea 11)
+(-, atributo 45, Caracter Simple, línea 11)
+(B112EX, atributo 891, Numero Hexadecimal, línea 11)
+(;, atributo 59, Caracter Simple, línea 11)
+(escribir, atributo 262, Palabra Reservada, línea 13)
+((, atributo 40, Caracter Simple, línea 13)
+(res, atributo 261, Identificador, línea 13)
+(), atributo 41, Caracter Simple, línea 13)
+(;, atributo 59, Caracter Simple, línea 13)
+(binario, atributo 258, Palabra Reservada, línea 15)
+(bin1, atributo 0, Error Lexico, línea 15)
+(,, atributo 44, Caracter Simple, línea 15)
+(bin2, atributo 0, Error Lexico, línea 15)
+(;, atributo 59, Caracter Simple, línea 15)
+(octal, atributo 259, Palabra Reservada, línea 16)
+(oct1, atributo 0, Error Lexico, línea 16)
+(=, atributo 61, Caracter Simple, línea 16)
+(170, atributo 0, Error Lexico, línea 16)
+(;, atributo 59, Caracter Simple, línea 16)
+(hexadecimal, atributo 260, Palabra Reservada, línea 17)
+(hex1, atributo 0, Error Lexico, línea 17)
+(;, atributo 59, Caracter Simple, línea 17)
+(leer, atributo 265, Palabra Reservada, línea 19)
+((, atributo 40, Caracter Simple, línea 19)
+(bin1, atributo 0, Error Lexico, línea 19)
+(), atributo 41, Caracter Simple, línea 19)
+(;, atributo 59, Caracter Simple, línea 19)
+(leer, atributo 265, Palabra Reservada, línea 20)
+((, atributo 40, Caracter Simple, línea 20)
+(oct1, atributo 0, Error Lexico, línea 20)
+(), atributo 41, Caracter Simple, línea 20)
+(;, atributo 59, Caracter Simple, línea 20)
+(bin1, atributo 0, Error Lexico, línea 22)
+(=, atributo 61, Caracter Simple, línea 22)
+(10101B, atributo 520, Numero Binario, línea 22)
+(+, atributo 43, Caracter Simple, línea 22)
+(111B, atributo 520, Numero Binario, línea 22)
+(;, atributo 59, Caracter Simple, línea 22)
+(oct1, atributo 0, Error Lexico, línea 23)
+(=, atributo 61, Caracter Simple, línea 23)
+(oct1, atributo 0, Error Lexico, línea 23)
+(*, atributo 42, Caracter Simple, línea 23)
+(007O, atributo 732, Numero Octal, línea 23)
+(+, atributo 43, Caracter Simple, línea 23)
+(3O, atributo 732, Numero Octal, línea 23)
+(;, atributo 59, Caracter Simple, línea 23)
+(hex1, atributo 0, Error Lexico, línea 24)
+(=, atributo 61, Caracter Simple, línea 24)
+(A1B2X, atributo 891, Numero Hexadecimal, línea 24)
+(-, atributo 45, Caracter Simple, línea 24)
+(CDEFX, atributo 891, Numero Hexadecimal, línea 24)
+(;, atributo 59, Caracter Simple, línea 24)
+(escribir, atributo 262, Palabra Reservada, línea 26)
+((, atributo 40, Caracter Simple, línea 26)
+(hex1, atributo 0, Error Lexico, línea 26)
+(), atributo 41, Caracter Simple, línea 26)
+(;, atributo 59, Caracter Simple, línea 26)
+(programa, atributo 257, Palabra Reservada, línea 28)
+(test, atributo 261, Identificador, línea 28)
+(#, atributo 0, Error Lexico, línea 30)
+(Casos, atributo 0, Error Lexico, línea 30)
+(validos, atributo 261, Identificador, línea 30)
+(adicionales, atributo 261, Identificador, línea 30)
+(leer, atributo 265, Palabra Reservada, línea 31)
+((, atributo 40, Caracter Simple, línea 31)
+(data, atributo 261, Identificador, línea 31)
+(), atributo 41, Caracter Simple, línea 31)
+(;, atributo 59, Caracter Simple, línea 31)
+(data, atributo 261, Identificador, línea 32)
+(=, atributo 61, Caracter Simple, línea 32)
+(1B, atributo 520, Numero Binario, línea 32)
+(+, atributo 43, Caracter Simple, línea 32)
+(0B, atributo 520, Numero Binario, línea 32)
+(;, atributo 59, Caracter Simple, línea 32)
+(direccion, atributo 261, Identificador, línea 33)
+(=, atributo 61, Caracter Simple, línea 33)
+(F0F0X, atributo 891, Numero Hexadecimal, línea 33)
+(;, atributo 59, Caracter Simple, línea 33)
+(contador, atributo 261, Identificador, línea 34)
+(=, atributo 61, Caracter Simple, línea 34)
+(123O, atributo 732, Numero Octal, línea 34)
+(;, atributo 59, Caracter Simple, línea 34)
+(#, atributo 0, Error Lexico, línea 36)
+(Casos, atributo 0, Error Lexico, línea 36)
+(invalidos, atributo 261, Identificador, línea 36)
+((, atributo 40, Caracter Simple, línea 36)
+(errores, atributo 261, Identificador, línea 36)
+(lexico, atributo 261, Identificador, línea 36)
+(esperados, atributo 261, Identificador, línea 36)
+(), atributo 41, Caracter Simple, línea 36)
+(Numero, atributo 0, Error Lexico, línea 37)
+(=, atributo 61, Caracter Simple, línea 37)
+(123, atributo 0, Error Lexico, línea 37)
+(;, atributo 59, Caracter Simple, línea 37)
+(alpha1, atributo 0, Error Lexico, línea 38)
+(=, atributo 61, Caracter Simple, línea 38)
+(11H, atributo 0, Error Lexico, línea 38)
+(;, atributo 59, Caracter Simple, línea 38)
+(base, atributo 261, Identificador, línea 39)
+(-, atributo 45, Caracter Simple, línea 39)
+(2, atributo 0, Error Lexico, línea 39)
+(=, atributo 61, Caracter Simple, línea 39)
+(10B, atributo 520, Numero Binario, línea 39)
+(;, atributo 59, Caracter Simple, línea 39)
+(12cu, atributo 0, Error Lexico, línea 40)
+(=, atributo 61, Caracter Simple, línea 40)
+(1101B, atributo 520, Numero Binario, línea 40)
+(;, atributo 59, Caracter Simple, línea 40)
+(random_symbol, atributo 0, Error Lexico, línea 41)
+(=, atributo 61, Caracter Simple, línea 41)
+(@, atributo 0, Error Lexico, línea 41)
+(;, atributo 59, Caracter Simple, línea 41)
+(otraLinea, atributo 0, Error Lexico, línea 42)
+(=, atributo 61, Caracter Simple, línea 42)
+(.99X, atributo 0, Error Lexico, línea 42)
+(;, atributo 59, Caracter Simple, línea 42)
+(entrada, atributo 261, Identificador, línea 43)
+(=, atributo 61, Caracter Simple, línea 43)
+(34L, atributo 0, Error Lexico, línea 43)
+(;, atributo 59, Caracter Simple, línea 43)
+(finprograma, atributo 263, Palabra Reservada, línea 45)
+
+Tabla de Símbolos:
+adicionales
+base
+contador
+data
+direccion
+ejemplo
+entrada
+errores
+esperados
+invalidos
+lexico
+multiple
+num
+numero
+res
+test
+validos
+
+Tabla de Palabras Reservadas:
+binario
+escribir
+finprograma
+hexadecimal
+leer
+octal
+programa
+
+Tabla de Tokens Válidos:
+programa   Atributo: 257   Palabra Reservada, Línea 1
+ejemplo   Atributo: 261   Identificador, Línea 1
+binario   Atributo: 258   Palabra Reservada, Línea 3
+multiple   Atributo: 261   Identificador, Línea 3
+,   Atributo: 44   Caracter Simple, Línea 3
+num   Atributo: 261   Identificador, Línea 3
+;   Atributo: 59   Caracter Simple, Línea 3
+octal   Atributo: 259   Palabra Reservada, Línea 4
+numero   Atributo: 261   Identificador, Línea 4
+=   Atributo: 61   Caracter Simple, Línea 4
+;   Atributo: 59   Caracter Simple, Línea 4
+hexadecimal   Atributo: 260   Palabra Reservada, Línea 5
+res   Atributo: 261   Identificador, Línea 5
+;   Atributo: 59   Caracter Simple, Línea 5
+leer   Atributo: 265   Palabra Reservada, Línea 7
+(   Atributo: 40   Caracter Simple, Línea 7
+num   Atributo: 261   Identificador, Línea 7
+)   Atributo: 41   Caracter Simple, Línea 7
+;   Atributo: 59   Caracter Simple, Línea 7
+multiple   Atributo: 261   Identificador, Línea 9
+=   Atributo: 61   Caracter Simple, Línea 9
+10010B   Atributo: 520   Numero Binario, Línea 9
++   Atributo: 43   Caracter Simple, Línea 9
+1001B   Atributo: 520   Numero Binario, Línea 9
+;   Atributo: 59   Caracter Simple, Línea 9
+numero   Atributo: 261   Identificador, Línea 10
+=   Atributo: 61   Caracter Simple, Línea 10
+numero   Atributo: 261   Identificador, Línea 10
++   Atributo: 43   Caracter Simple, Línea 10
+*   Atributo: 42   Caracter Simple, Línea 10
+101O   Atributo: 732   Numero Octal, Línea 10
+;   Atributo: 59   Caracter Simple, Línea 10
+res   Atributo: 261   Identificador, Línea 11
+=   Atributo: 61   Caracter Simple, Línea 11
+ADFX   Atributo: 891   Numero Hexadecimal, Línea 11
+-   Atributo: 45   Caracter Simple, Línea 11
+B112EX   Atributo: 891   Numero Hexadecimal, Línea 11
+;   Atributo: 59   Caracter Simple, Línea 11
+escribir   Atributo: 262   Palabra Reservada, Línea 13
+(   Atributo: 40   Caracter Simple, Línea 13
+res   Atributo: 261   Identificador, Línea 13
+)   Atributo: 41   Caracter Simple, Línea 13
+;   Atributo: 59   Caracter Simple, Línea 13
+binario   Atributo: 258   Palabra Reservada, Línea 15
+,   Atributo: 44   Caracter Simple, Línea 15
+;   Atributo: 59   Caracter Simple, Línea 15
+octal   Atributo: 259   Palabra Reservada, Línea 16
+=   Atributo: 61   Caracter Simple, Línea 16
+;   Atributo: 59   Caracter Simple, Línea 16
+hexadecimal   Atributo: 260   Palabra Reservada, Línea 17
+;   Atributo: 59   Caracter Simple, Línea 17
+leer   Atributo: 265   Palabra Reservada, Línea 19
+(   Atributo: 40   Caracter Simple, Línea 19
+)   Atributo: 41   Caracter Simple, Línea 19
+;   Atributo: 59   Caracter Simple, Línea 19
+leer   Atributo: 265   Palabra Reservada, Línea 20
+(   Atributo: 40   Caracter Simple, Línea 20
+)   Atributo: 41   Caracter Simple, Línea 20
+;   Atributo: 59   Caracter Simple, Línea 20
+=   Atributo: 61   Caracter Simple, Línea 22
+10101B   Atributo: 520   Numero Binario, Línea 22
++   Atributo: 43   Caracter Simple, Línea 22
+111B   Atributo: 520   Numero Binario, Línea 22
+;   Atributo: 59   Caracter Simple, Línea 22
+=   Atributo: 61   Caracter Simple, Línea 23
+*   Atributo: 42   Caracter Simple, Línea 23
+007O   Atributo: 732   Numero Octal, Línea 23
++   Atributo: 43   Caracter Simple, Línea 23
+3O   Atributo: 732   Numero Octal, Línea 23
+;   Atributo: 59   Caracter Simple, Línea 23
+=   Atributo: 61   Caracter Simple, Línea 24
+A1B2X   Atributo: 891   Numero Hexadecimal, Línea 24
+-   Atributo: 45   Caracter Simple, Línea 24
+CDEFX   Atributo: 891   Numero Hexadecimal, Línea 24
+;   Atributo: 59   Caracter Simple, Línea 24
+escribir   Atributo: 262   Palabra Reservada, Línea 26
+(   Atributo: 40   Caracter Simple, Línea 26
+)   Atributo: 41   Caracter Simple, Línea 26
+;   Atributo: 59   Caracter Simple, Línea 26
+programa   Atributo: 257   Palabra Reservada, Línea 28
+test   Atributo: 261   Identificador, Línea 28
+validos   Atributo: 261   Identificador, Línea 30
+adicionales   Atributo: 261   Identificador, Línea 30
+leer   Atributo: 265   Palabra Reservada, Línea 31
+(   Atributo: 40   Caracter Simple, Línea 31
+data   Atributo: 261   Identificador, Línea 31
+)   Atributo: 41   Caracter Simple, Línea 31
+;   Atributo: 59   Caracter Simple, Línea 31
+data   Atributo: 261   Identificador, Línea 32
+=   Atributo: 61   Caracter Simple, Línea 32
+1B   Atributo: 520   Numero Binario, Línea 32
++   Atributo: 43   Caracter Simple, Línea 32
+0B   Atributo: 520   Numero Binario, Línea 32
+;   Atributo: 59   Caracter Simple, Línea 32
+direccion   Atributo: 261   Identificador, Línea 33
+=   Atributo: 61   Caracter Simple, Línea 33
+F0F0X   Atributo: 891   Numero Hexadecimal, Línea 33
+;   Atributo: 59   Caracter Simple, Línea 33
+contador   Atributo: 261   Identificador, Línea 34
+=   Atributo: 61   Caracter Simple, Línea 34
+123O   Atributo: 732   Numero Octal, Línea 34
+;   Atributo: 59   Caracter Simple, Línea 34
+invalidos   Atributo: 261   Identificador, Línea 36
+(   Atributo: 40   Caracter Simple, Línea 36
+errores   Atributo: 261   Identificador, Línea 36
+lexico   Atributo: 261   Identificador, Línea 36
+esperados   Atributo: 261   Identificador, Línea 36
+)   Atributo: 41   Caracter Simple, Línea 36
+=   Atributo: 61   Caracter Simple, Línea 37
+;   Atributo: 59   Caracter Simple, Línea 37
+=   Atributo: 61   Caracter Simple, Línea 38
+;   Atributo: 59   Caracter Simple, Línea 38
+base   Atributo: 261   Identificador, Línea 39
+-   Atributo: 45   Caracter Simple, Línea 39
+=   Atributo: 61   Caracter Simple, Línea 39
+10B   Atributo: 520   Numero Binario, Línea 39
+;   Atributo: 59   Caracter Simple, Línea 39
+=   Atributo: 61   Caracter Simple, Línea 40
+1101B   Atributo: 520   Numero Binario, Línea 40
+;   Atributo: 59   Caracter Simple, Línea 40
+=   Atributo: 61   Caracter Simple, Línea 41
+;   Atributo: 59   Caracter Simple, Línea 41
+=   Atributo: 61   Caracter Simple, Línea 42
+;   Atributo: 59   Caracter Simple, Línea 42
+entrada   Atributo: 261   Identificador, Línea 43
+=   Atributo: 61   Caracter Simple, Línea 43
+;   Atributo: 59   Caracter Simple, Línea 43
+finprograma   Atributo: 263   Palabra Reservada, Línea 45
+
+Tabla de Errores Léxicos:
+230   Línea 4
+1230   Línea 10
+bin1   Línea 15
+bin2   Línea 15
+oct1   Línea 16
+170   Línea 16
+hex1   Línea 17
+bin1   Línea 19
+oct1   Línea 20
+bin1   Línea 22
+oct1   Línea 23
+oct1   Línea 23
+hex1   Línea 24
+hex1   Línea 26
+#   Línea 30
+Casos   Línea 30
+#   Línea 36
+Casos   Línea 36
+Numero   Línea 37
+123   Línea 37
+alpha1   Línea 38
+11H   Línea 38
+2   Línea 39
+12cu   Línea 40
+random_symbol   Línea 41
+@   Línea 41
+otraLinea   Línea 42
+.99X   Línea 42
+34L   Línea 43

@@ -1,7 +1,7 @@
 programa ejemplo
 
     binario multiple, num;
-    octal numero = 230 ;
+    octal numero = 230;
     hexadecimal res;
     
     leer(num);

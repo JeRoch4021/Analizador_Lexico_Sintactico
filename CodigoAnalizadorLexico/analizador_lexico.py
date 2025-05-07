@@ -1,5 +1,4 @@
 import os
-from collections import deque
 import AFN
 import Pila as stack
 
@@ -56,7 +55,7 @@ class AnalizadorLexico:
         while i < len(cadena):
             caracter = cadena[i]
 
-            # Detectar si el carácter es un separador simple
+            # Detectar si hay algun caracter simple
             if caracter.isspace() or self.es_caracter_simple(caracter):
                 if palabra:
                     palabras.append("".join(palabra))
@@ -68,7 +67,7 @@ class AnalizadorLexico:
 
             palabra.append(caracter)
 
-            # Verificar si terminamos un posible número binario/octal/hex
+            # Verificar si el token termina en un posible número binario/octal/hex
             if caracter in "BOX":
                 posible_token = "".join(palabra)
                 if self.afn_binario.procesar(posible_token) or \

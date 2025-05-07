@@ -1,5 +1,5 @@
 class AFN:
-
+    
     
     def __init__(self, alfabeto):
         self.estados = set()

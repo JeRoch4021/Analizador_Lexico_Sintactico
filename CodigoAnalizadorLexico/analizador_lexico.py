@@ -22,16 +22,26 @@ class AnalizadorLexico:
             'finprograma': 263
         }
 
+
     def es_caracter_simple(self, caracter: str) -> bool:
         return self.afn_caracter_simple.procesar(caracter)
 
 
     def leer_por_linea_de_texto(self, linea_texto: str) -> list:
-        cadenas = linea_texto.split()
         palabras = []
+        palabra = ""
 
-        for cadena in cadenas:
-            palabras_en_cadena = self.obtener_palabras_de_cadena(cadena)
+        for caracter in linea_texto:
+            if caracter.isspace():
+                if palabra:
+                    palabras_en_cadena = self.obtener_palabras_de_cadena(palabra)
+                    palabras.extend(palabras_en_cadena)
+                    palabra = ""
+            else:
+                palabra += caracter
+
+        if palabra:
+            palabras_en_cadena = self.obtener_palabras_de_cadena(palabra)
             palabras.extend(palabras_en_cadena)
 
         return palabras
@@ -41,19 +51,32 @@ class AnalizadorLexico:
         palabras = []
         palabra = []
 
-        if not cadena or len(cadena.strip()) == 0:
-            return palabras
+        i = 0
+        while i < len(cadena):
+            caracter = cadena[i]
 
-        for caracter in cadena:
+            # Detectar si el carácter es un separador simple
             if caracter.isspace() or self.es_caracter_simple(caracter):
                 if palabra:
                     palabras.append("".join(palabra))
                     palabra = []
-
                 if self.es_caracter_simple(caracter):
                     palabras.append(caracter)
-            else:
-                palabra.append(caracter)
+                i += 1
+                continue
+
+            palabra.append(caracter)
+
+            # Verificar si terminamos un posible número binario/octal/hex
+            if caracter in "BOX":
+                posible_token = "".join(palabra)
+                if self.afn_binario.procesar(posible_token) or \
+                self.afn_octal.procesar(posible_token) or \
+                self.afn_hexadecimal.procesar(posible_token):
+                    palabras.append(posible_token)
+                    palabra = []
+
+            i += 1
 
         if palabra:
             palabras.append("".join(palabra))
@@ -77,7 +100,8 @@ class AnalizadorLexico:
                 return 'Caracter Simple'
             case _:
                 return 'Error Lexico'
-            
+
+
     def obtener_atributo(self, token: str, tipo: str) -> int:
         match tipo:
             case 'Palabra Reservada':
@@ -153,7 +177,7 @@ class AnalizadorLexico:
 
             salida.write("\nTabla de Tokens Válidos:\n")
             for token,  atributo, linea, tipo in tabla_tokens_validos:
-                salida.write(f"{token}   Atributo: {atributo}   {tipo}, Línea {linea}\n")
+                salida.write(f"{token:<15} | Atributo: {atributo:<4} | {tipo:<20} | Línea {linea}\n")
 
             salida.write("\nTabla de Errores Léxicos:\n")
             for token, linea in tabla_errores:

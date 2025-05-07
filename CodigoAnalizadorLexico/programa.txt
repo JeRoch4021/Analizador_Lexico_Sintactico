@@ -6,9 +6,9 @@ programa ejemplo
     
     leer(num);
 
-    multiple=10010B + 1001B;
-    numero = numero +1230 * 101O;
-    res = ADFX - B112EX;
+    multiple=10010B+1001B;
+    numero = numero+1230*101O;
+    res=ADFX-B112EX;
 
     escribir(res);
 
@@ -32,6 +32,8 @@ programa test
     data = 1B + 0B;
     direccion = F0F0X;
     contador = 123O;
+    100O1B
+    12cu
 
     # Casos invalidos (errores lexico esperados)
     Numero = 123;

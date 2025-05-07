@@ -1,6 +1,7 @@
 import os
 from collections import deque
 import AFN
+import Pila as stack
 
 class AnalizadorLexico:
 
@@ -11,7 +12,7 @@ class AnalizadorLexico:
         self.afn_octal = AFN.crear_afn_octal()
         self.afn_hexadecimal = AFN.crear_afn_hexadecimal()
         self.afn_caracter_simple = AFN.crear_afn_caracter_simple()
-        self.pila_tokens = deque()
+        self.pila_tokens = stack.Pila()
         self.atributos_reseervados = {
             'programa': 257, 
             'binario': 258, 
@@ -119,7 +120,6 @@ class AnalizadorLexico:
             case _ :
                 return 0
 
-
     def analizar_archivo(self, nombre_archivo: str):
         if not os.path.exists(nombre_archivo):
             print("Archivo no encontrado.")
@@ -139,7 +139,7 @@ class AnalizadorLexico:
                 palabras = self.leer_por_linea_de_texto(linea.strip())
 
                 for palabra in palabras:
-                    self.pila_tokens.append((palabra, numero_linea))
+                    self.pila_tokens.push((palabra, numero_linea))
 
                 numero_linea += 1
         
@@ -150,7 +150,12 @@ class AnalizadorLexico:
             salida.write("Tokens Clasificados:\n")
 
             while self.pila_tokens:
-                token, linea = self.pila_tokens.popleft()
+                resultado = self.pila_tokens.popDat()
+                if resultado is not None:
+                    token, linea = resultado
+                else:
+                    print("No hay más tokens en la pila.")
+                    break
                 tipo = self.clasificar_token(token)
                 atributo = self.obtener_atributo(token, tipo)
                 print(f"({token}, atributo {atributo}, {tipo}, línea {linea})")

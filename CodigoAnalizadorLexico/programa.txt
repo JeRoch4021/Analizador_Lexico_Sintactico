@@ -12,4 +12,5 @@ programa ejemplo
 
     escribir(res);
     1001B20AX
+    ++ ;;
 finprograma

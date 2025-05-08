@@ -1,7 +1,11 @@
 Resultados del Análisis Léxico
 
 Tokens Clasificados:
-(finprograma, atributo 263, Palabra Reservada, línea 15)
+(finprograma, atributo 263, Palabra Reservada, línea 16)
+(;, atributo 59, Caracter Simple, línea 15)
+(;, atributo 59, Caracter Simple, línea 15)
+(+, atributo 43, Caracter Simple, línea 15)
+(+, atributo 43, Caracter Simple, línea 15)
 (1001B20AX, atributo 891, Numero Hexadecimal, línea 14)
 (;, atributo 59, Caracter Simple, línea 13)
 (), atributo 41, Caracter Simple, línea 13)
@@ -66,7 +70,11 @@ octal
 programa
 
 Tabla de Tokens Válidos:
-finprograma     | Atributo: 263  | Palabra Reservada    | Línea 15
+finprograma     | Atributo: 263  | Palabra Reservada    | Línea 16
+;               | Atributo: 59   | Caracter Simple      | Línea 15
+;               | Atributo: 59   | Caracter Simple      | Línea 15
++               | Atributo: 43   | Caracter Simple      | Línea 15
++               | Atributo: 43   | Caracter Simple      | Línea 15
 1001B20AX       | Atributo: 891  | Numero Hexadecimal   | Línea 14
 ;               | Atributo: 59   | Caracter Simple      | Línea 13
 )               | Atributo: 41   | Caracter Simple      | Línea 13

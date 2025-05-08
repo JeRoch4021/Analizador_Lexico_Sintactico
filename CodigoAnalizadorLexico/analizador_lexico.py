@@ -1,17 +1,22 @@
 import os
+# Módulo que contiene los AFNs para diferentes tipos de tokens
 import AFN
-import Pila as stack
+# Módulo que contiene la clase Pila (estructura tipo stack)
+import pila as stack
 
 class AnalizadorLexico:
 
 
     def __init__(self):
+        # Inicialización de los AFNs para reconocer diferentes tipos de tokens
         self.afn_identificador = AFN.crear_afn_identificador()
         self.afn_binario = AFN.crear_afn_binario()
         self.afn_octal = AFN.crear_afn_octal()
         self.afn_hexadecimal = AFN.crear_afn_hexadecimal()
         self.afn_caracter_simple = AFN.crear_afn_caracter_simple()
+        # Pila para almacenar los tokens encontrados
         self.pila_tokens = stack.Pila()
+         # Diccionario con palabras reservadas y sus atributos únicos
         self.atributos_reseervados = {
             'programa': 257, 
             'binario': 258, 
@@ -24,10 +29,12 @@ class AnalizadorLexico:
 
 
     def es_caracter_simple(self, caracter: str) -> bool:
+        # Verifica si un carácter es un símbolo reconocido por el AFN de caracteres simples
         return self.afn_caracter_simple.procesar(caracter)
 
 
     def leer_por_linea_de_texto(self, linea_texto: str) -> list:
+        # Divide una línea de texto en palabras/tokens según espacios y caracteres simples
         palabras = []
         palabra = ""
 
@@ -48,35 +55,23 @@ class AnalizadorLexico:
 
 
     def obtener_palabras_de_cadena(self, cadena: str) -> list:
+        # Procesa una cadena sin espacios para separar posibles tokens válidos
         palabras = []
         palabra = []
 
-        i = 0
-        while i < len(cadena):
-            caracter = cadena[i]
+        if not cadena or len(cadena.strip()) == 0:
+            return palabras
 
-            # Detectar si hay algun caracter simple
+        for caracter in cadena:
             if caracter.isspace() or self.es_caracter_simple(caracter):
                 if palabra:
                     palabras.append("".join(palabra))
                     palabra = []
+
                 if self.es_caracter_simple(caracter):
                     palabras.append(caracter)
-                i += 1
-                continue
-
-            palabra.append(caracter)
-
-            # Verificar si el token termina en un posible número binario/octal/hex
-            if caracter in "BOX":
-                posible_token = "".join(palabra)
-                if self.afn_binario.procesar(posible_token) or \
-                self.afn_octal.procesar(posible_token) or \
-                self.afn_hexadecimal.procesar(posible_token):
-                    palabras.append(posible_token)
-                    palabra = []
-
-            i += 1
+            else:
+                palabra.append(caracter)
 
         if palabra:
             palabras.append("".join(palabra))
@@ -85,6 +80,7 @@ class AnalizadorLexico:
     
 
     def clasificar_token(self, token: str) -> str:
+        # Clasifica un token usando los AFNs disponibles y palabras reservadas
         match True:
             case _ if token in AFN.palabras_reservadas:
                 return 'Palabra Reservada'
@@ -103,6 +99,7 @@ class AnalizadorLexico:
 
 
     def obtener_atributo(self, token: str, tipo: str) -> int:
+         # Devuelve el valor numérico del atributo para cada tipo de token
         match tipo:
             case 'Palabra Reservada':
                 return self.atributos_reseervados.get(token, 0)
@@ -120,6 +117,7 @@ class AnalizadorLexico:
                 return 0
 
     def analizar_archivo(self, nombre_archivo: str):
+        # Analiza línea por línea un archivo de texto para extraer y clasificar tokens
         if not os.path.exists(nombre_archivo):
             print("Archivo no encontrado.")
             return
@@ -160,6 +158,7 @@ class AnalizadorLexico:
                 print(f"({token}, atributo {atributo}, {tipo}, línea {linea})")
                 salida.write(f"({token}, atributo {atributo}, {tipo}, línea {linea})\n")
 
+                 # Clasificación y almacenamiento de los tokens en sus tablas correspondientes
                 if tipo == 'Identificador':
                     tabla_simbolos.add(token)
                     tabla_tokens_validos.append((token, atributo, linea, tipo))
@@ -171,6 +170,7 @@ class AnalizadorLexico:
                 else:
                     tabla_errores.append((token, linea))
 
+             # Guardado de resultados en archivo de salida
             salida.write("\nTabla de Símbolos:\n")
             for simbolo in sorted(tabla_simbolos):
                 salida.write(f"{simbolo}\n")
@@ -189,7 +189,7 @@ class AnalizadorLexico:
 
         print("\nAnálisis completado. Resultados guardados en 'resultados_lexicos.txt'.")
 
-
+# Punto de entrada principal del programa
 if __name__ == "__main__":
     analizador = AnalizadorLexico()
     analizador.analizar_archivo("CodigoAnalizadorLexico/programa.txt")

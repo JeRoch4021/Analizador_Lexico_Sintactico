@@ -11,4 +11,5 @@ programa ejemplo
     res = ADFX-B112EX;
 
     escribir(res);
+    1001B20AX
 finprograma

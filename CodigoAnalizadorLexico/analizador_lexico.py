@@ -6,7 +6,6 @@ import pila as stack
 
 class AnalizadorLexico:
 
-
     def __init__(self):
         # Inicialización de los AFNs para reconocer diferentes tipos de tokens
         self.afn_identificador = AFN.crear_afn_identificador()
@@ -116,6 +115,7 @@ class AnalizadorLexico:
             case _ :
                 return 0
 
+
     def analizar_archivo(self, nombre_archivo: str):
         # Analiza línea por línea un archivo de texto para extraer y clasificar tokens
         if not os.path.exists(nombre_archivo):
@@ -155,8 +155,8 @@ class AnalizadorLexico:
                     break
                 tipo = self.clasificar_token(token)
                 atributo = self.obtener_atributo(token, tipo)
-                print(f"( {token:<15}, atributo {atributo:<6}, {tipo:<20}, línea {linea} )")
-                salida.write(f"| {token:<15} | atributo {atributo:<4} | {tipo:<20} | línea {linea} |\n")
+                print(f"( {token:<15}, atributo {atributo:<6}, {tipo:<20}, línea {linea:<2} )")
+                salida.write(f"| {token:<15} | atributo {atributo:<4} | {tipo:<20} | línea {linea:<5} |\n")
 
                  # Clasificación y almacenamiento de los tokens en sus tablas correspondientes
                 if tipo == 'Identificador':
@@ -181,11 +181,11 @@ class AnalizadorLexico:
 
             salida.write("\nTabla de Tokens Válidos:\n")
             for token,  atributo, linea, tipo in tabla_tokens_validos:
-                salida.write(f"| {token:<15} | Atributo: {atributo:<4} | {tipo:<20} | Línea {linea} |\n")
+                salida.write(f"| {token:<15} | Atributo: {atributo:<4} | {tipo:<20} | Línea {linea:<5} |\n")
 
             salida.write("\nTabla de Errores Léxicos:\n")
             for token, linea in tabla_errores:
-                salida.write(f"{token}   Línea {linea}\n")
+                salida.write(f"{token:<15} Línea {linea:<5}\n")
 
         print("\nAnálisis completado. Resultados guardados en 'resultados_lexicos.txt'.")
 

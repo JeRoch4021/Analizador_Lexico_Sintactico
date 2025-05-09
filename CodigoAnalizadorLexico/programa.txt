@@ -12,5 +12,10 @@ programa ejemplo
 
     escribir(res);
     1001B20AX
-    ++ ;;
+    
+    Numero
+    Base
+    12cu
+    45
+    .99H
 finprograma

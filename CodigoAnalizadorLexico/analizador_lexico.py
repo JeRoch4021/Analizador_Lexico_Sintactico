@@ -122,8 +122,8 @@ class AnalizadorLexico:
             print("Archivo no encontrado.")
             return
 
-        tabla_simbolos = set()
-        tabla_palabras_reservadas = set()
+        tabla_simbolos = []
+        tabla_palabras_reservadas = []
         tabla_tokens_validos = []
         tabla_errores = []
 
@@ -155,15 +155,15 @@ class AnalizadorLexico:
                     break
                 tipo = self.clasificar_token(token)
                 atributo = self.obtener_atributo(token, tipo)
-                print(f"({token}, atributo {atributo}, {tipo}, línea {linea})")
-                salida.write(f"({token}, atributo {atributo}, {tipo}, línea {linea})\n")
+                print(f"( {token:<15}, atributo {atributo:<6}, {tipo:<20}, línea {linea} )")
+                salida.write(f"| {token:<15} | atributo {atributo:<4} | {tipo:<20} | línea {linea} |\n")
 
                  # Clasificación y almacenamiento de los tokens en sus tablas correspondientes
                 if tipo == 'Identificador':
-                    tabla_simbolos.add(token)
+                    tabla_simbolos.append((token, atributo))
                     tabla_tokens_validos.append((token, atributo, linea, tipo))
                 elif tipo == 'Palabra Reservada':
-                    tabla_palabras_reservadas.add(token)
+                    tabla_palabras_reservadas.append((token, atributo))
                     tabla_tokens_validos.append((token, atributo, linea, tipo))
                 elif tipo.startswith("Numero") or tipo == 'Caracter Simple':
                     tabla_tokens_validos.append((token, atributo, linea, tipo))
@@ -172,16 +172,16 @@ class AnalizadorLexico:
 
              # Guardado de resultados en archivo de salida
             salida.write("\nTabla de Símbolos:\n")
-            for simbolo in sorted(tabla_simbolos):
-                salida.write(f"{simbolo}\n")
+            for simbolo, atributo in sorted(tabla_simbolos):
+                salida.write(f"| {simbolo:<15} | Atributo: {atributo:<6} |\n")
 
             salida.write("\nTabla de Palabras Reservadas:\n")
-            for palabra in sorted(tabla_palabras_reservadas):
-                salida.write(f"{palabra}\n")
+            for palabra, atributo in sorted(tabla_palabras_reservadas):
+                salida.write(f"| {palabra:<15} | Atributo: {atributo:<6} |\n")
 
             salida.write("\nTabla de Tokens Válidos:\n")
             for token,  atributo, linea, tipo in tabla_tokens_validos:
-                salida.write(f"{token:<15} | Atributo: {atributo:<4} | {tipo:<20} | Línea {linea}\n")
+                salida.write(f"| {token:<15} | Atributo: {atributo:<4} | {tipo:<20} | Línea {linea} |\n")
 
             salida.write("\nTabla de Errores Léxicos:\n")
             for token, linea in tabla_errores:

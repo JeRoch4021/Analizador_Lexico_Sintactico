@@ -58,7 +58,7 @@ class AnalizadorLexico:
         palabras = []
         palabra = []
 
-        if not cadena or len(cadena.strip()) == 0:
+        if not cadena or len(self.stritpCadena(cadena)) == 0:
             return palabras
 
         for caracter in cadena:
@@ -130,10 +130,10 @@ class AnalizadorLexico:
         with open(nombre_archivo, 'r') as archivo:
             numero_linea = 1
             for linea in archivo:
-                print(f"\nAnalizando línea {numero_linea}: {linea.strip()}")
+                print(f"\nAnalizando línea {numero_linea}: {self.stripCadena(linea)}")
 
                 # Método para extraer palabras/tokens
-                palabras = self.leer_por_linea_de_texto(linea.strip())
+                palabras = self.leer_por_linea_de_texto(self.stripCadena(linea))
 
                 for palabra in palabras:
                     self.pila_tokens.push((palabra, numero_linea))
@@ -188,6 +188,14 @@ class AnalizadorLexico:
                 salida.write(f"{token:<15} Línea {linea:<5}\n")
 
         print("\nAnálisis completado. Resultados guardados en 'resultados_lexicos.txt'.")
+
+    # Elimina los espacios en blanco de una cadena
+    def stripCadena(self, cadena: str) -> str:
+        cadena_sin_espacios = ""
+        for char in cadena:
+            if char != ' ' and char != '\n':
+                cadena_sin_espacios += char
+        return cadena_sin_espacios
 
 # Punto de entrada principal del programa
 if __name__ == "__main__":

@@ -197,7 +197,7 @@ class AnalizadorLexico:
                 tipo = self.clasificar_token(token)
                 atributo = self.obtener_atributo(token, tipo)
                 print(f"( {token:<15}, atributo {atributo:<6}, {tipo:<20}, línea {linea:<2} )")
-                salida.write(f"| {token:<15} | atributo {atributo:<4} | {tipo:<20} | línea {linea:<5} |\n")
+                salida.write(f"| {token:<15} | Atributo {atributo:<4} | {tipo:<20} | línea {linea:<5} |\n")
 
                  # Clasificación y almacenamiento de los tokens en sus tablas correspondientes
                 if tipo == 'Identificador':

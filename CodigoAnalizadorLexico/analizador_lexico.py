@@ -4,6 +4,8 @@ import AFN
 # Módulo que contiene la clase Pila (estructura tipo stack)
 import pila as stack
 
+
+# Clase principal que implementa un analizador léxico utilizando AFNs.
 class AnalizadorLexico:
 
     def __init__(self):
@@ -49,6 +51,7 @@ class AnalizadorLexico:
     
 
     def obtener_palabras_de_cadena(self, cadena: str) -> list:
+        # Separa una cadena continua en tokens, reconociendo caracteres simples y espacios.
         palabras = []
         palabra = []
         i = 0
@@ -80,7 +83,7 @@ class AnalizadorLexico:
     
 
     def procesar_subcadena(self, cadena: str) -> list:
-        # Procesa una subcadena sin caracteres simples ni espacios
+        # Divide una subcadena continua en múltiples tokens válidos (máximo prefijo válido).
         palabras = []
         inicio = 0
         longitud = len(cadena)
@@ -180,22 +183,29 @@ class AnalizadorLexico:
         
         print("\n\nObtención de Tokens:\n")
         
+        # Abre el archivo 'resultados_lexicos.txt' en modo escritura ('w')
+        # para guardar los resultados del análisis léxico.
         with open("resultados_lexicos.txt", 'w') as salida:
             salida.write("Resultados del Análisis Léxico\n\n")
             salida.write("Tokens Clasificados:\n")
 
+            # Recorre la pila de tokens mientras no esté vacía.
             while self.pila_tokens:
+                # Extrae un token desde la pila (tipo pila LIFO)
                 resultado = self.pila_tokens.popDat()
                 if resultado is not None:
+                    # Desempaqueta el token y su número de línea
                     token, linea = resultado
 
-                    if isinstance(token, tuple):
-                        token = token[0]
                 else:
                     print("No hay más tokens en la pila.")
-                    break
+                    break # Sale del ciclo si no hay más tokens
+                
+                # Determina el tipo léxico del token (identificador, número, palabra reservada, etc.)
                 tipo = self.clasificar_token(token)
+                # Obtiene el atributo asociado al token (puede ser un valor numérico o textual)
                 atributo = self.obtener_atributo(token, tipo)
+
                 print(f"( {token:<15}, atributo {atributo:<6}, {tipo:<20}, línea {linea:<2} )")
                 salida.write(f"| {token:<15} | Atributo {atributo:<4} | {tipo:<20} | línea {linea:<5} |\n")
 
@@ -230,6 +240,7 @@ class AnalizadorLexico:
 
         print("\nAnálisis completado. Resultados guardados en 'resultados_lexicos.txt'.")
 
+
     # Elimina los espacios en blanco de una cadena
     def stripCadena(self, cadena: str) -> str:
         caracteres_no_validos = " \n\t\r"
@@ -243,6 +254,7 @@ class AnalizadorLexico:
             fin -= 1
         
         return cadena[inicio:fin + 1] # Devuelve una subcadena desde el inicio hasta el fin + 1 
+
 
 # Punto de entrada principal del programa
 if __name__ == "__main__":

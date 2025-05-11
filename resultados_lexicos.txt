@@ -1,63 +1,63 @@
 Resultados del Análisis Léxico
 
 Tokens Clasificados:
-| finprograma     | atributo 263  | Palabra Reservada    | línea 24    |
-| .99H            | atributo 0    | Error Lexico         | línea 23    |
-| Base            | atributo 0    | Error Lexico         | línea 22    |
-| 1001B           | atributo 520  | Numero Binario       | línea 21    |
-| 1237O           | atributo 732  | Numero Octal         | línea 21    |
-| 123BAX          | atributo 891  | Numero Hexadecimal   | línea 20    |
-| 234AX           | atributo 891  | Numero Hexadecimal   | línea 19    |
-| num             | atributo 261  | Identificador        | línea 19    |
-| 45              | atributo 0    | Error Lexico         | línea 18    |
-| 12cu            | atributo 0    | Error Lexico         | línea 17    |
-| Numero          | atributo 0    | Error Lexico         | línea 16    |
-| 1001B20AX       | atributo 891  | Numero Hexadecimal   | línea 14    |
-| ;               | atributo 59   | Caracter Simple      | línea 13    |
-| )               | atributo 41   | Caracter Simple      | línea 13    |
-| res             | atributo 261  | Identificador        | línea 13    |
-| (               | atributo 40   | Caracter Simple      | línea 13    |
-| escribir        | atributo 262  | Palabra Reservada    | línea 13    |
-| ;               | atributo 59   | Caracter Simple      | línea 11    |
-| B112EX          | atributo 891  | Numero Hexadecimal   | línea 11    |
-| -               | atributo 45   | Caracter Simple      | línea 11    |
-| ADFX            | atributo 891  | Numero Hexadecimal   | línea 11    |
-| =               | atributo 61   | Caracter Simple      | línea 11    |
-| res             | atributo 261  | Identificador        | línea 11    |
-| ;               | atributo 59   | Caracter Simple      | línea 10    |
-| 101O            | atributo 732  | Numero Octal         | línea 10    |
-| *               | atributo 42   | Caracter Simple      | línea 10    |
-| 1230            | atributo 0    | Error Lexico         | línea 10    |
-| +               | atributo 43   | Caracter Simple      | línea 10    |
-| numero          | atributo 261  | Identificador        | línea 10    |
-| =               | atributo 61   | Caracter Simple      | línea 10    |
-| numero          | atributo 261  | Identificador        | línea 10    |
-| ;               | atributo 59   | Caracter Simple      | línea 9     |
-| 1001B           | atributo 520  | Numero Binario       | línea 9     |
-| +               | atributo 43   | Caracter Simple      | línea 9     |
-| 10010B          | atributo 520  | Numero Binario       | línea 9     |
-| =               | atributo 61   | Caracter Simple      | línea 9     |
-| multiple        | atributo 261  | Identificador        | línea 9     |
-| ;               | atributo 59   | Caracter Simple      | línea 7     |
-| )               | atributo 41   | Caracter Simple      | línea 7     |
-| num             | atributo 261  | Identificador        | línea 7     |
-| (               | atributo 40   | Caracter Simple      | línea 7     |
-| leer            | atributo 265  | Palabra Reservada    | línea 7     |
-| ;               | atributo 59   | Caracter Simple      | línea 5     |
-| res             | atributo 261  | Identificador        | línea 5     |
-| hexadecimal     | atributo 260  | Palabra Reservada    | línea 5     |
-| ;               | atributo 59   | Caracter Simple      | línea 4     |
-| 230             | atributo 0    | Error Lexico         | línea 4     |
-| =               | atributo 61   | Caracter Simple      | línea 4     |
-| numero          | atributo 261  | Identificador        | línea 4     |
-| octal           | atributo 259  | Palabra Reservada    | línea 4     |
-| ;               | atributo 59   | Caracter Simple      | línea 3     |
-| num             | atributo 261  | Identificador        | línea 3     |
-| ,               | atributo 44   | Caracter Simple      | línea 3     |
-| multiple        | atributo 261  | Identificador        | línea 3     |
-| binario         | atributo 258  | Palabra Reservada    | línea 3     |
-| ejemplo         | atributo 261  | Identificador        | línea 1     |
-| programa        | atributo 257  | Palabra Reservada    | línea 1     |
+| finprograma     | Atributo 263  | Palabra Reservada    | línea 24    |
+| .99H            | Atributo 0    | Error Lexico         | línea 23    |
+| Base            | Atributo 0    | Error Lexico         | línea 22    |
+| 1001B           | Atributo 520  | Numero Binario       | línea 21    |
+| 1237O           | Atributo 732  | Numero Octal         | línea 21    |
+| 123BAX          | Atributo 891  | Numero Hexadecimal   | línea 20    |
+| 234AX           | Atributo 891  | Numero Hexadecimal   | línea 19    |
+| num             | Atributo 261  | Identificador        | línea 19    |
+| 45              | Atributo 0    | Error Lexico         | línea 18    |
+| 12cu            | Atributo 0    | Error Lexico         | línea 17    |
+| Numero          | Atributo 0    | Error Lexico         | línea 16    |
+| 1001B20AX       | Atributo 891  | Numero Hexadecimal   | línea 14    |
+| ;               | Atributo 59   | Caracter Simple      | línea 13    |
+| )               | Atributo 41   | Caracter Simple      | línea 13    |
+| res             | Atributo 261  | Identificador        | línea 13    |
+| (               | Atributo 40   | Caracter Simple      | línea 13    |
+| escribir        | Atributo 262  | Palabra Reservada    | línea 13    |
+| ;               | Atributo 59   | Caracter Simple      | línea 11    |
+| B112EX          | Atributo 891  | Numero Hexadecimal   | línea 11    |
+| -               | Atributo 45   | Caracter Simple      | línea 11    |
+| ADFX            | Atributo 891  | Numero Hexadecimal   | línea 11    |
+| =               | Atributo 61   | Caracter Simple      | línea 11    |
+| res             | Atributo 261  | Identificador        | línea 11    |
+| ;               | Atributo 59   | Caracter Simple      | línea 10    |
+| 101O            | Atributo 732  | Numero Octal         | línea 10    |
+| *               | Atributo 42   | Caracter Simple      | línea 10    |
+| 1230            | Atributo 0    | Error Lexico         | línea 10    |
+| +               | Atributo 43   | Caracter Simple      | línea 10    |
+| numero          | Atributo 261  | Identificador        | línea 10    |
+| =               | Atributo 61   | Caracter Simple      | línea 10    |
+| numero          | Atributo 261  | Identificador        | línea 10    |
+| ;               | Atributo 59   | Caracter Simple      | línea 9     |
+| 1001B           | Atributo 520  | Numero Binario       | línea 9     |
+| +               | Atributo 43   | Caracter Simple      | línea 9     |
+| 10010B          | Atributo 520  | Numero Binario       | línea 9     |
+| =               | Atributo 61   | Caracter Simple      | línea 9     |
+| multiple        | Atributo 261  | Identificador        | línea 9     |
+| ;               | Atributo 59   | Caracter Simple      | línea 7     |
+| )               | Atributo 41   | Caracter Simple      | línea 7     |
+| num             | Atributo 261  | Identificador        | línea 7     |
+| (               | Atributo 40   | Caracter Simple      | línea 7     |
+| leer            | Atributo 265  | Palabra Reservada    | línea 7     |
+| ;               | Atributo 59   | Caracter Simple      | línea 5     |
+| res             | Atributo 261  | Identificador        | línea 5     |
+| hexadecimal     | Atributo 260  | Palabra Reservada    | línea 5     |
+| ;               | Atributo 59   | Caracter Simple      | línea 4     |
+| 230             | Atributo 0    | Error Lexico         | línea 4     |
+| =               | Atributo 61   | Caracter Simple      | línea 4     |
+| numero          | Atributo 261  | Identificador        | línea 4     |
+| octal           | Atributo 259  | Palabra Reservada    | línea 4     |
+| ;               | Atributo 59   | Caracter Simple      | línea 3     |
+| num             | Atributo 261  | Identificador        | línea 3     |
+| ,               | Atributo 44   | Caracter Simple      | línea 3     |
+| multiple        | Atributo 261  | Identificador        | línea 3     |
+| binario         | Atributo 258  | Palabra Reservada    | línea 3     |
+| ejemplo         | Atributo 261  | Identificador        | línea 1     |
+| programa        | Atributo 257  | Palabra Reservada    | línea 1     |
 
 Tabla de Símbolos:
 | ejemplo         | Atributo: 261    |

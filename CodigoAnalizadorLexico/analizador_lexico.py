@@ -2,7 +2,7 @@ import os
 # Módulo que contiene los AFNs para diferentes tipos de tokens
 import AFN
 # Módulo que contiene la clase Pila (estructura tipo stack)
-import Pila as stack
+import pila as stack
 
 class AnalizadorLexico:
 

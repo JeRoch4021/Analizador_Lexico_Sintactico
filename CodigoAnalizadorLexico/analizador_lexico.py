@@ -152,23 +152,6 @@ class AnalizadorLexico:
                 return ord(token)
             case _ :
                 return 0
-
-
-    def limpiar_linea(self, linea: str) -> str:
-        # Eliminar los espacios en blanco al inicio y al final de la linea
-        inicio = 0
-        final = len(linea) - 1
-
-        # Mover el apuntador de inicio hasta el primer caracter no blanco
-        while inicio <= final and linea[inicio].isspace():
-            inicio += 1
-        
-        # Mover el apuntador de final hacia atras hasta el ultimo caracter no blanco
-        while final >= inicio and linea[final].isspace():
-            final -= 1
-
-        # Retornar la subcadena limpia
-        return linea[inicio:final + 1]
     
     
     def analizar_archivo(self, nombre_archivo: str):
@@ -185,10 +168,10 @@ class AnalizadorLexico:
         with open(nombre_archivo, 'r') as archivo:
             numero_linea = 1
             for linea in archivo:
-                print(f"\nAnalizando línea {numero_linea}: {linea.strip()}")
+                print(f"\nAnalizando línea {numero_linea}: {self.stripCadena(linea)}")
 
                 # Método para extraer palabras/tokens
-                palabras = self.leer_por_linea_de_texto(linea.strip())
+                palabras = self.obtener_palabras_de_cadena(self.stripCadena(linea))
 
                 for palabra in palabras:
                     self.pila_tokens.push((palabra, numero_linea))

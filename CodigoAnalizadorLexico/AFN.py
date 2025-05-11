@@ -1,6 +1,5 @@
 class AFN:
     
-    
     def __init__(self, alfabeto):
         self.estados = set()
         # Alfabeto permitido (símbolos válidos)
@@ -60,8 +59,9 @@ def crear_afn_binario():
     afn.agregar_estado('q1')
     afn.agregar_estado('q2', es_aceptacion=True)
     for binario in '01':
-        afn.agregar_transicion('q0', binario, 'q0')
-    afn.agregar_transicion('q0', 'B', 'q2')
+        afn.agregar_transicion('q0', binario, 'q1')
+        afn.agregar_transicion('q1', binario, 'q1')
+    afn.agregar_transicion('q1', 'B', 'q2')
     return afn
 
 
@@ -71,8 +71,9 @@ def crear_afn_octal():
     afn.agregar_estado('q1')
     afn.agregar_estado('q2', es_aceptacion=True)
     for octal in '01234567':
-        afn.agregar_transicion('q0', octal, 'q0')
-    afn.agregar_transicion('q0', 'O', 'q2')
+        afn.agregar_transicion('q0', octal, 'q1')
+        afn.agregar_transicion('q1', octal, 'q1')
+    afn.agregar_transicion('q1', 'O', 'q2')
     return afn
 
 
@@ -82,8 +83,9 @@ def crear_afn_hexadecimal():
     afn.agregar_estado('q1')
     afn.agregar_estado('q2', es_aceptacion=True)
     for hexadecimal in '0123456789ABCDEF':
-        afn.agregar_transicion('q0', hexadecimal, 'q0')
-    afn.agregar_transicion('q0', 'X', 'q2')
+        afn.agregar_transicion('q0', hexadecimal, 'q1')
+        afn.agregar_transicion('q1', hexadecimal, 'q1')
+    afn.agregar_transicion('q1', 'X', 'q2')
     return afn
 
 

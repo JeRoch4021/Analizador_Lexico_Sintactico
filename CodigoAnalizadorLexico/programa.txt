@@ -1,5 +1,5 @@
 programa ejemplo
-
+    
     binario multiple, num;
     octal numero = 230;
     hexadecimal res;
@@ -14,8 +14,11 @@ programa ejemplo
     1001B20AX
     
     Numero
-    Base
     12cu
     45
+    num234AX
+    123BAX
+    1237O1001B
+    Base
     .99H
 finprograma

@@ -16,7 +16,7 @@ class AnalizadorLexico:
         # Pila para almacenar los tokens encontrados
         self.pila_tokens = stack.Pila()
          # Diccionario con palabras reservadas y sus atributos únicos
-        self.atributos_reseervados = {
+        self.atributos_reservados = {
             'programa': 257, 
             'binario': 258, 
             'octal': 259, 
@@ -25,11 +25,6 @@ class AnalizadorLexico:
             'escribir': 262, 
             'finprograma': 263
         }
-
-
-    def es_caracter_simple(self, caracter: str) -> bool:
-        # Verifica si un carácter es un símbolo reconocido por el AFN de caracteres simples
-        return self.afn_caracter_simple.procesar(caracter)
 
 
     def leer_por_linea_de_texto(self, linea_texto: str) -> list:
@@ -51,32 +46,75 @@ class AnalizadorLexico:
             palabras.extend(palabras_en_cadena)
 
         return palabras
-
+    
 
     def obtener_palabras_de_cadena(self, cadena: str) -> list:
-        # Procesa una cadena sin espacios para separar posibles tokens válidos
         palabras = []
         palabra = []
+        i = 0
+        longitud = len(cadena)
 
-        if not cadena or len(cadena.strip()) == 0:
-            return palabras
+        while i < longitud:
+            caracter = cadena[i]
 
-        for caracter in cadena:
+            # Si hay espacio o carácter simple, finaliza token anterior y guarda el símbolo
             if caracter.isspace() or self.es_caracter_simple(caracter):
                 if palabra:
-                    palabras.append("".join(palabra))
+                    subcadena = "".join(palabra)
+                    palabras.extend(self.procesar_subcadena(subcadena))
                     palabra = []
-
                 if self.es_caracter_simple(caracter):
                     palabras.append(caracter)
-            else:
-                palabra.append(caracter)
+                i += 1
+                continue
 
+            palabra.append(caracter)
+            i += 1
+
+        # Procesar la última palabra si queda algo
         if palabra:
-            palabras.append("".join(palabra))
+            subcadena = "".join(palabra)
+            palabras.extend(self.procesar_subcadena(subcadena))
 
         return palabras
     
+
+    def procesar_subcadena(self, cadena: str) -> list:
+        # Procesa una subcadena sin caracteres simples ni espacios
+        palabras = []
+        inicio = 0
+        longitud = len(cadena)
+
+        while inicio < longitud:
+            final = inicio + 1
+            ultimo_token_valido = None
+            ultima_pos_valida = inicio
+
+            while final <= longitud:
+                subcadena = cadena[inicio:final]
+                tipo = self.clasificar_token(subcadena)
+                if tipo != 'Error Lexico':
+                    ultimo_token_valido = subcadena
+                    ultima_pos_valida = final
+                final += 1
+
+            if ultimo_token_valido:
+                palabras.append(ultimo_token_valido)
+                inicio = ultima_pos_valida
+            else:
+                final = inicio + 1
+                while final < longitud and self.clasificar_token(cadena[inicio:final + 1]) == 'Error Lexico':
+                    final += 1
+                palabras.append(cadena[inicio:final])
+                inicio = final
+
+        return palabras
+    
+
+    def es_caracter_simple(self, caracter: str) -> bool:
+        # Verifica si un carácter es un símbolo reconocido por el AFN de caracteres simples
+        return self.afn_caracter_simple.procesar(caracter)
+
 
     def clasificar_token(self, token: str) -> str:
         # Clasifica un token usando los AFNs disponibles y palabras reservadas
@@ -101,7 +139,7 @@ class AnalizadorLexico:
          # Devuelve el valor numérico del atributo para cada tipo de token
         match tipo:
             case 'Palabra Reservada':
-                return self.atributos_reseervados.get(token, 0)
+                return self.atributos_reservados.get(token, 0)
             case 'Identificador':
                 return 261
             case 'Numero Binario':
@@ -116,6 +154,23 @@ class AnalizadorLexico:
                 return 0
 
 
+    def limpiar_linea(self, linea: str) -> str:
+        # Eliminar los espacios en blanco al inicio y al final de la linea
+        inicio = 0
+        final = len(linea) - 1
+
+        # Mover el apuntador de inicio hasta el primer caracter no blanco
+        while inicio <= final and linea[inicio].isspace():
+            inicio += 1
+        
+        # Mover el apuntador de final hacia atras hasta el ultimo caracter no blanco
+        while final >= inicio and linea[final].isspace():
+            final -= 1
+
+        # Retornar la subcadena limpia
+        return linea[inicio:final + 1]
+    
+    
     def analizar_archivo(self, nombre_archivo: str):
         # Analiza línea por línea un archivo de texto para extraer y clasificar tokens
         if not os.path.exists(nombre_archivo):
@@ -130,10 +185,14 @@ class AnalizadorLexico:
         with open(nombre_archivo, 'r') as archivo:
             numero_linea = 1
             for linea in archivo:
-                print(f"\nAnalizando línea {numero_linea}: {linea.strip()}")
+                linea_limpia = self.limpiar_linea(linea)
+                print(f"\nAnalizando línea {numero_linea}: {linea_limpia}")
 
                 # Método para extraer palabras/tokens
-                palabras = self.leer_por_linea_de_texto(linea.strip())
+                palabras = self.leer_por_linea_de_texto(linea_limpia)
+                # palabras = self.analizar_cadena_por_apuntadores(linea_limpia)
+                # palabras = self.separar_palabra_con_errores(linea_limpia)
+                palabras = self.obtener_palabras_de_cadena(linea_limpia)
 
                 for palabra in palabras:
                     self.pila_tokens.push((palabra, numero_linea))
@@ -150,6 +209,9 @@ class AnalizadorLexico:
                 resultado = self.pila_tokens.popDat()
                 if resultado is not None:
                     token, linea = resultado
+
+                    if isinstance(token, tuple):
+                        token = token[0]
                 else:
                     print("No hay más tokens en la pila.")
                     break
@@ -192,4 +254,5 @@ class AnalizadorLexico:
 # Punto de entrada principal del programa
 if __name__ == "__main__":
     analizador = AnalizadorLexico()
+    #analizador.separar_palabra_con_errores("Numero")
     analizador.analizar_archivo("CodigoAnalizadorLexico/programa.txt")

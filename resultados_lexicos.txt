@@ -1,11 +1,16 @@
 Resultados del Análisis Léxico
 
 Tokens Clasificados:
-| finprograma     | atributo 263  | Palabra Reservada    | línea 21    |
-| .99H            | atributo 0    | Error Lexico         | línea 20    |
-| 45              | atributo 0    | Error Lexico         | línea 19    |
-| 12cu            | atributo 0    | Error Lexico         | línea 18    |
-| Base            | atributo 0    | Error Lexico         | línea 17    |
+| finprograma     | atributo 263  | Palabra Reservada    | línea 24    |
+| .99H            | atributo 0    | Error Lexico         | línea 23    |
+| Base            | atributo 0    | Error Lexico         | línea 22    |
+| 1001B           | atributo 520  | Numero Binario       | línea 21    |
+| 1237O           | atributo 732  | Numero Octal         | línea 21    |
+| 123BAX          | atributo 891  | Numero Hexadecimal   | línea 20    |
+| 234AX           | atributo 891  | Numero Hexadecimal   | línea 19    |
+| num             | atributo 261  | Identificador        | línea 19    |
+| 45              | atributo 0    | Error Lexico         | línea 18    |
+| 12cu            | atributo 0    | Error Lexico         | línea 17    |
 | Numero          | atributo 0    | Error Lexico         | línea 16    |
 | 1001B20AX       | atributo 891  | Numero Hexadecimal   | línea 14    |
 | ;               | atributo 59   | Caracter Simple      | línea 13    |
@@ -60,6 +65,7 @@ Tabla de Símbolos:
 | multiple        | Atributo: 261    |
 | num             | Atributo: 261    |
 | num             | Atributo: 261    |
+| num             | Atributo: 261    |
 | numero          | Atributo: 261    |
 | numero          | Atributo: 261    |
 | numero          | Atributo: 261    |
@@ -77,7 +83,12 @@ Tabla de Palabras Reservadas:
 | programa        | Atributo: 257    |
 
 Tabla de Tokens Válidos:
-| finprograma     | Atributo: 263  | Palabra Reservada    | Línea 21    |
+| finprograma     | Atributo: 263  | Palabra Reservada    | Línea 24    |
+| 1001B           | Atributo: 520  | Numero Binario       | Línea 21    |
+| 1237O           | Atributo: 732  | Numero Octal         | Línea 21    |
+| 123BAX          | Atributo: 891  | Numero Hexadecimal   | Línea 20    |
+| 234AX           | Atributo: 891  | Numero Hexadecimal   | Línea 19    |
+| num             | Atributo: 261  | Identificador        | Línea 19    |
 | 1001B20AX       | Atributo: 891  | Numero Hexadecimal   | Línea 14    |
 | ;               | Atributo: 59   | Caracter Simple      | Línea 13    |
 | )               | Atributo: 41   | Caracter Simple      | Línea 13    |
@@ -124,10 +135,10 @@ Tabla de Tokens Válidos:
 | programa        | Atributo: 257  | Palabra Reservada    | Línea 1     |
 
 Tabla de Errores Léxicos:
-.99H            Línea 20   
-45              Línea 19   
-12cu            Línea 18   
-Base            Línea 17   
+.99H            Línea 23   
+Base            Línea 22   
+45              Línea 18   
+12cu            Línea 17   
 Numero          Línea 16   
 1230            Línea 10   
 230             Línea 4    

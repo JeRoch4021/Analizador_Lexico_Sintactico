@@ -232,11 +232,17 @@ class AnalizadorLexico:
 
     # Elimina los espacios en blanco de una cadena
     def stripCadena(self, cadena: str) -> str:
-        cadena_sin_espacios = ""
-        for char in cadena:
-            if char != ' ' and char != '\n':
-                cadena_sin_espacios += char
-        return cadena_sin_espacios
+        caracteres_no_validos = " \n\t\r"
+        inicio = 0
+        fin = len(cadena) - 1
+
+        while inicio <= fin and cadena[inicio] in caracteres_no_validos:
+            inicio += 1
+
+        while fin >= inicio and cadena[fin] in caracteres_no_validos:
+            fin -= 1
+        
+        return cadena[inicio:fin + 1] # Devuelve una subcadena desde el inicio hasta el fin + 1 
 
 # Punto de entrada principal del programa
 if __name__ == "__main__":

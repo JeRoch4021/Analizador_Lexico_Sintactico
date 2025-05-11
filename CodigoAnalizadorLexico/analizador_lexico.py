@@ -54,8 +54,8 @@ class AnalizadorLexico:
         i = 0
         longitud = len(cadena)
 
-        if not cadena or len(cadena.strip()) == 0:
-            return palabras
+        while i < longitud:
+            caracter = cadena[i]
 
             # Si hay espacio o carácter simple, finaliza token anterior y guarda el símbolo
             if caracter.isspace() or self.es_caracter_simple(caracter):

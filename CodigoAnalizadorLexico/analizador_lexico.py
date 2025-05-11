@@ -54,8 +54,8 @@ class AnalizadorLexico:
         i = 0
         longitud = len(cadena)
 
-        while i < longitud:
-            caracter = cadena[i]
+        if not cadena or len(cadena.strip()) == 0:
+            return palabras
 
             # Si hay espacio o carácter simple, finaliza token anterior y guarda el símbolo
             if caracter.isspace() or self.es_caracter_simple(caracter):
@@ -185,14 +185,10 @@ class AnalizadorLexico:
         with open(nombre_archivo, 'r') as archivo:
             numero_linea = 1
             for linea in archivo:
-                linea_limpia = self.limpiar_linea(linea)
-                print(f"\nAnalizando línea {numero_linea}: {linea_limpia}")
+                print(f"\nAnalizando línea {numero_linea}: {linea.strip()}")
 
                 # Método para extraer palabras/tokens
-                palabras = self.leer_por_linea_de_texto(linea_limpia)
-                # palabras = self.analizar_cadena_por_apuntadores(linea_limpia)
-                # palabras = self.separar_palabra_con_errores(linea_limpia)
-                palabras = self.obtener_palabras_de_cadena(linea_limpia)
+                palabras = self.leer_por_linea_de_texto(linea.strip())
 
                 for palabra in palabras:
                     self.pila_tokens.push((palabra, numero_linea))
@@ -250,6 +246,14 @@ class AnalizadorLexico:
                 salida.write(f"{token:<15} Línea {linea:<5}\n")
 
         print("\nAnálisis completado. Resultados guardados en 'resultados_lexicos.txt'.")
+
+    # Elimina los espacios en blanco de una cadena
+    def stripCadena(self, cadena: str) -> str:
+        cadena_sin_espacios = ""
+        for char in cadena:
+            if char != ' ' and char != '\n':
+                cadena_sin_espacios += char
+        return cadena_sin_espacios
 
 # Punto de entrada principal del programa
 if __name__ == "__main__":

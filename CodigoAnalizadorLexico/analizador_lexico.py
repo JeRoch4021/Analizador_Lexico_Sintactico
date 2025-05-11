@@ -241,5 +241,4 @@ class AnalizadorLexico:
 # Punto de entrada principal del programa
 if __name__ == "__main__":
     analizador = AnalizadorLexico()
-    #analizador.separar_palabra_con_errores("Numero")
     analizador.analizar_archivo("CodigoAnalizadorLexico/programa.txt")

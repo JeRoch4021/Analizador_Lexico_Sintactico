@@ -75,7 +75,7 @@ class GeneradorEstructurasGramatica:
             # Si el simbolo empieza con un caracter "<"", entonces es un no terminal
             if caracter == "<":
                 # Si el no terminal tiene caracteres antes del "<" y no son vacios, entonces separalos
-                # Si salir fuera del rango de la cadena
+                # Si sale fuera del rango de la cadena, ignoralo
                 if inicio > 0 and linea[inicio -1] != " ":
                     caracter = linea[inicio-1]
                     if caracter not in self.terminales:
@@ -84,7 +84,7 @@ class GeneradorEstructurasGramatica:
                 while inicio < fin and linea[inicio] != ">":
                     inicio += 1
                 # Si el no terminal tiene caracteres después del ">" y no son vacios, entonces separalos
-                # Sin salir fuera del rango de la cadena
+                # Si sale fuera del rango de la cadena, ignoralo
                 if inicio + 1 < fin and linea[inicio + 1] != " ":
                     inicio += 1
                     caracter = linea[inicio]

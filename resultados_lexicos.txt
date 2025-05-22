@@ -1,7 +1,8 @@
 Resultados del Análisis Léxico
 
 Tokens Clasificados:
-| finprograma     | Atributo 263  | Palabra Reservada    | línea 24    |
+| finprograma     | Atributo 263  | Palabra Reservada    | línea 25    |
+| Bum234AX        | Atributo 0    | Error Lexico         | línea 24    |
 | .99H            | Atributo 0    | Error Lexico         | línea 23    |
 | Base            | Atributo 0    | Error Lexico         | línea 22    |
 | 1001B           | Atributo 520  | Numero Binario       | línea 21    |
@@ -83,7 +84,7 @@ Tabla de Palabras Reservadas:
 | programa        | Atributo: 257    |
 
 Tabla de Tokens Válidos:
-| finprograma     | Atributo: 263  | Palabra Reservada    | Línea 24    |
+| finprograma     | Atributo: 263  | Palabra Reservada    | Línea 25    |
 | 1001B           | Atributo: 520  | Numero Binario       | Línea 21    |
 | 1237O           | Atributo: 732  | Numero Octal         | Línea 21    |
 | 123BAX          | Atributo: 891  | Numero Hexadecimal   | Línea 20    |
@@ -135,6 +136,7 @@ Tabla de Tokens Válidos:
 | programa        | Atributo: 257  | Palabra Reservada    | Línea 1     |
 
 Tabla de Errores Léxicos:
+Bum234AX        Línea 24   
 .99H            Línea 23   
 Base            Línea 22   
 45              Línea 18   

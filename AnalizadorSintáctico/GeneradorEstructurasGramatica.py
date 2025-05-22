@@ -16,7 +16,6 @@ class GeneradorEstructurasGramatica:
             numero_linea = 1
             for linea in archivo:
                 inicio = 0
-                #print("Analizando línea ", str(numLinea), ": ", linea)
                 while inicio < len(linea):
                     if linea[inicio] == ".":
                         break

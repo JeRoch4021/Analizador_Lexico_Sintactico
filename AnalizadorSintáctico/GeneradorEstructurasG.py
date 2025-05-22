@@ -24,24 +24,24 @@ class GeneradorEstructurasG:
 
     def agregarNoTerminales(self):
         for i in range(len(self.gramatica)):
-            cadena = self.leerNoTerminales(self.gramatica[i][1])
-            if cadena not in self.noterminales:
-                self.noterminales.append(self.stripCadena(cadena))
+            ladoIzquierdo = self.stripCadena(self.leerNoTerminales(self.gramatica[i][1]))
+            if ladoIzquierdo not in self.noterminales:
+                self.noterminales.append(ladoIzquierdo)
 
     def leerNoTerminales(self, linea):
         inicio = 0
         fin = len(linea) - 1
-        while inicio <= fin:
-            if linea[inicio] == ".":
+        while inicio <= fin :
+            if linea[inicio] == '<':
                 break
             inicio += 1
-
-        while fin >= inicio:
-            if linea[fin] == "-" and linea[fin+1] == ">":
+        while fin >= inicio :
+            if linea[fin] == '>' and linea[fin-1] == '-':
+                fin -= 1
                 break
             fin -= 1
-
-        return linea[inicio+1:fin]
+            
+        return linea[inicio:fin]
 
     def leerDerivacion(self, linea):
         inicio = 0

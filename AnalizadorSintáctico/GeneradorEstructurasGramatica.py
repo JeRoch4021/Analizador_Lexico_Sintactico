@@ -106,7 +106,7 @@ class GeneradorEstructurasGramatica:
                 # Si es un simbolo valido
                 if simbolo:
                     # Si el simblo no se encuentra en el arreglo de terminales y no es "ε", entonces agregalo
-                    if simbolo not in self.terminales and simbolo != "ε":
+                    if simbolo not in self.terminales:
                         self.terminales.append(simbolo)
                     simbolo = ""
             else:
@@ -116,7 +116,7 @@ class GeneradorEstructurasGramatica:
         # Si es un simbolo valido
         if simbolo:
             # Si el simblo no se encuentra en el arreglo de terminales y no es "ε", entonces agregalo
-            if simbolo not in self.terminales and simbolo != "ε":
+            if simbolo not in self.terminales:
                 self.terminales.append(simbolo)
 
     # Elimina los espacios en blanco de una cadena

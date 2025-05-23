@@ -16,8 +16,10 @@ class GeneradorEstructurasGramatica:
         # Busca el primer punto '.' para empezar a leer la producción
         with open(nombre_archivo, 'r') as archivo:
             numero_linea = 1
+            print()
             for linea in archivo:
                 inicio = 0
+                print("Analizando línea ", str(numero_linea), ": ", linea)
                 while inicio < len(linea):
                     if linea[inicio] == ".":
                         break

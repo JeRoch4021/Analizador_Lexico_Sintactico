@@ -7,11 +7,13 @@ class GeneradorEstructurasGramatica:
         self.noterminales = []
         self.terminales = []
 
+    # Método para leer la gramática desde un archivo y almacenarla
     def agregarGramatica(self, nombre_archivo: str):
         if not os.path.exists(nombre_archivo):
             print("El archivo no existe")
             return
         
+        # Busca el primer punto '.' para empezar a leer la producción
         with open(nombre_archivo, 'r') as archivo:
             numero_linea = 1
             for linea in archivo:
@@ -20,24 +22,28 @@ class GeneradorEstructurasGramatica:
                     if linea[inicio] == ".":
                         break
                     inicio += 1
+                # Almacena la línea con número de línea y la parte de la producción
                 self.gramatica.append((numero_linea, linea[inicio+2:len(linea)]))
                 numero_linea += 1
 
-
+    # Extrae las derivaciones del lado derecho de cada producción
     def agregarDerivacion(self):
         for i in range(len(self.gramatica)):
             self.derivaciones.append(self.stripCadena(self.leerDerivacion(self.gramatica[i][1])))
 
+    # Extrae los no terminales del lado izquierdo de cada producción
     def agregarNoTerminales(self):
         for i in range(len(self.gramatica)):
             ladoIzquierdo = self.stripCadena(self.leerNoTerminales(self.gramatica[i][1]))
             if ladoIzquierdo not in self.noterminales:
                 self.noterminales.append(ladoIzquierdo)
 
+    # Extrae los terminales desde las derivaciones
     def agregarTerminales(self):
         for i in range(len(self.derivaciones)):
             self.leerTerminales(self.derivaciones[i])
 
+    # Extrae el lado izquierdo (no terminal) de una producción
     def leerNoTerminales(self, linea):
         inicio = 0
         fin = len(linea) - 1
@@ -53,6 +59,7 @@ class GeneradorEstructurasGramatica:
             
         return linea[inicio:fin]
 
+    # Extrae el lado derecho (derivación) de una producción
     def leerDerivacion(self, linea):
         inicio = 0
         fin = len(linea) - 1
@@ -63,6 +70,7 @@ class GeneradorEstructurasGramatica:
 
         return linea[inicio+2:fin+1]
     
+    # Identifica y almacena los símbolos terminales en una derivación
     def leerTerminales(self, linea):
         inicio = 0
         fin = len(linea)
@@ -109,7 +117,6 @@ class GeneradorEstructurasGramatica:
             if simbolo not in self.terminales and simbolo != "ε":
                 self.terminales.append(simbolo)
 
-
     # Elimina los espacios en blanco de una cadena
     def stripCadena(self, cadena: str) -> str:
         caracteres_no_validos = " \n\t\r"
@@ -123,7 +130,6 @@ class GeneradorEstructurasGramatica:
             fin -= 1
         
         return cadena[inicio:fin + 1] # Devuelve una subcadena desde el inicio hasta el fin + 1
-    
     
     def printGramatica(self):
         print("Gramática: ")
@@ -145,6 +151,7 @@ class GeneradorEstructurasGramatica:
         for i in range(len(self.terminales)):
             print(self.terminales[i])
 
+    # Método principal que ejecuta todos los pasos de análisis
     def main(self):
         self.agregarGramatica("AnalizadorSintáctico/gramatica.txt")
         print('\n')

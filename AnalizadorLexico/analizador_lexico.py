@@ -1,14 +1,15 @@
 import os
 # Módulo que contiene los AFNs para diferentes tipos de tokens
-import AFN
+from . import AFN
 # Módulo que contiene la clase Pila (estructura tipo stack)
-import pila as stack
-
+from . import pila as stack
+# import analizador_sintactico as prueba
 
 # Clase principal que implementa un analizador léxico utilizando AFNs.
 class AnalizadorLexico:
 
-    def __init__(self):
+
+    def __init__(self, nombre_archivo="AnalizadorLexico/programa.txt"):
         # Inicialización de los AFNs para reconocer diferentes tipos de tokens
         self.afn_identificador = AFN.crear_afn_identificador()
         self.afn_binario = AFN.crear_afn_binario()
@@ -27,28 +28,36 @@ class AnalizadorLexico:
             'escribir': 262, 
             'finprograma': 263
         }
+        self.tokens = []
+        self.indice_token = 0
+        self.cargar_tokens(nombre_archivo)
+        self.analizar_archivo(nombre_archivo)
 
 
-    def leer_por_linea_de_texto(self, linea_texto: str) -> list:
-        # Divide una línea de texto en palabras/tokens según espacios y caracteres simples
-        palabras = []
-        palabra = ""
+    def cargar_tokens(self, nombre_archivo):
+        if not os.path.exists(nombre_archivo):
+            print("Archivo no encontrado.")
+            return
+        with open (nombre_archivo, 'r') as archivo:
+            numero_linea = 1
+            for linea in archivo:
+                palabras = self.obtener_palabras_de_cadena(self.stripCadena(linea))
 
-        for caracter in linea_texto:
-            if caracter.isspace():
-                if palabra:
-                    palabras_en_cadena = self.obtener_palabras_de_cadena(palabra)
-                    palabras.extend(palabras_en_cadena)
-                    palabra = ""
-            else:
-                palabra += caracter
+                for palabra in palabras:
+                    self.tokens.append(palabra)
 
-        if palabra:
-            palabras_en_cadena = self.obtener_palabras_de_cadena(palabra)
-            palabras.extend(palabras_en_cadena)
+                numero_linea += 1
 
-        return palabras
-    
+
+    def scanner(self):
+        # Devuelve el siguiente token del archivo fuente
+        if self.indice_token < len(self.tokens):
+            token = self.tokens[self.indice_token]
+            self.indice_token += 1
+            return token 
+        else:
+            return None
+
 
     def obtener_palabras_de_cadena(self, cadena: str) -> list:
         # Separa una cadena continua en tokens, reconociendo caracteres simples y espacios.
@@ -73,7 +82,6 @@ class AnalizadorLexico:
 
             palabra.append(caracter)
             i += 1
-
         # Procesar la última palabra si queda algo
         if palabra:
             subcadena = "".join(palabra)
@@ -157,22 +165,18 @@ class AnalizadorLexico:
                 return 0
     
     
-    def analizar_archivo(self, nombre_archivo: str):
+    def analizar_archivo(self, nombre_archivo: str) -> str:
         # Analiza línea por línea un archivo de texto para extraer y clasificar tokens
         if not os.path.exists(nombre_archivo):
             print("Archivo no encontrado.")
             return
-
-        tabla_simbolos = []
-        tabla_palabras_reservadas = []
-        tabla_tokens_validos = []
-        tabla_errores = []
 
         with open(nombre_archivo, 'r') as archivo:
             numero_linea = 1
             for linea in archivo:
                 print(f"\nAnalizando línea {numero_linea}: {self.stripCadena(linea)}")
 
+                # Aquí entra el analizador sintáctico
                 # Método para extraer palabras/tokens
                 palabras = self.obtener_palabras_de_cadena(self.stripCadena(linea))
 
@@ -180,14 +184,15 @@ class AnalizadorLexico:
                     self.pila_tokens.push((palabra, numero_linea))
 
                 numero_linea += 1
-        
-        print("\n\nObtención de Tokens:\n")
-        
+
+
+    def distribuir_tokens_en_tablas(self):
+        tabla_simbolos = []
+        tabla_palabras_reservadas = []
         # Abre el archivo 'resultados_lexicos.txt' en modo escritura ('w')
         # para guardar los resultados del análisis léxico.
         with open("resultados_lexicos.txt", 'w') as salida:
-            salida.write("Resultados del Análisis Léxico\n\n")
-            salida.write("Tokens Clasificados:\n")
+            salida.write("Resultados del Análisis Léxico\n")
 
             # Recorre la pila de tokens mientras no esté vacía.
             while self.pila_tokens:
@@ -195,10 +200,8 @@ class AnalizadorLexico:
                 resultado = self.pila_tokens.popDat()
                 if resultado is not None:
                     # Desempaqueta el token y su número de línea
-                    token, linea = resultado
-
+                    token, _ = resultado
                 else:
-                    print("No hay más tokens en la pila.")
                     break # Sale del ciclo si no hay más tokens
                 
                 # Determina el tipo léxico del token (identificador, número, palabra reservada, etc.)
@@ -206,22 +209,14 @@ class AnalizadorLexico:
                 # Obtiene el atributo asociado al token (puede ser un valor numérico o textual)
                 atributo = self.obtener_atributo(token, tipo)
 
-                print(f"( {token:<15}, atributo {atributo:<6}, {tipo:<20}, línea {linea:<2} )")
-                salida.write(f"| {token:<15} | Atributo {atributo:<4} | {tipo:<20} | línea {linea:<5} |\n")
-
                  # Clasificación y almacenamiento de los tokens en sus tablas correspondientes
-                if tipo == 'Identificador':
+                if tipo == 'Identificador' and (token, atributo) not in tabla_simbolos:
                     tabla_simbolos.append((token, atributo))
-                    tabla_tokens_validos.append((token, atributo, linea, tipo))
-                elif tipo == 'Palabra Reservada':
+                    # tabla_tokens_validos.append((token, atributo, linea, tipo))
+                if tipo == 'Palabra Reservada' and (token, atributo) not in tabla_palabras_reservadas:
                     tabla_palabras_reservadas.append((token, atributo))
-                    tabla_tokens_validos.append((token, atributo, linea, tipo))
-                elif tipo.startswith("Numero") or tipo == 'Caracter Simple':
-                    tabla_tokens_validos.append((token, atributo, linea, tipo))
-                else:
-                    tabla_errores.append((token, linea))
 
-             # Guardado de resultados en archivo de salida
+            # Guardado de resultados en archivo de salida
             salida.write("\nTabla de Símbolos:\n")
             for simbolo, atributo in sorted(tabla_simbolos):
                 salida.write(f"| {simbolo:<15} | Atributo: {atributo:<6} |\n")
@@ -229,17 +224,7 @@ class AnalizadorLexico:
             salida.write("\nTabla de Palabras Reservadas:\n")
             for palabra, atributo in sorted(tabla_palabras_reservadas):
                 salida.write(f"| {palabra:<15} | Atributo: {atributo:<6} |\n")
-
-            salida.write("\nTabla de Tokens Válidos:\n")
-            for token,  atributo, linea, tipo in tabla_tokens_validos:
-                salida.write(f"| {token:<15} | Atributo: {atributo:<4} | {tipo:<20} | Línea {linea:<5} |\n")
-
-            salida.write("\nTabla de Errores Léxicos:\n")
-            for token, linea in tabla_errores:
-                salida.write(f"{token:<15} Línea {linea:<5}\n")
-
-        print("\nAnálisis completado. Resultados guardados en 'resultados_lexicos.txt'.")
-
+    
 
     # Elimina los espacios en blanco de una cadena
     def stripCadena(self, cadena: str) -> str:
@@ -255,8 +240,11 @@ class AnalizadorLexico:
         
         return cadena[inicio:fin + 1] # Devuelve una subcadena desde el inicio hasta el fin + 1 
 
+    def main_analizador_lexico(self):
+        self.distribuir_tokens_en_tablas()
 
 # Punto de entrada principal del programa
-if __name__ == "__main__":
-    analizador = AnalizadorLexico()
-    analizador.analizar_archivo("AnalizadorLexico/programa.txt")
+# if __name__ == "__main__":
+#     analizador_lexico = AnalizadorLexico()
+#     analizador_lexico.main_analizador_lexico()
+

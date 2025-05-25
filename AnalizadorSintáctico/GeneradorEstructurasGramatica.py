@@ -164,22 +164,23 @@ class GeneradorEstructurasGramatica:
         for i in range(len(self.terminales)):
             print(self.terminales[i])
 
-    # Método principal que ejecuta todos los pasos de análisis
-    def main(self):
-        self.agregarGramatica("AnalizadorSintáctico/gramatica.txt")
-        print('\n')
-        self.printGramatica()
-        print('\n')
-        self.agregarDerivacion()
-        self.printDerivacion()
-        print('\n')
-        self.agregarNoTerminales()
-        self.printNoTerminales()
-        print('\n')
-        self.agregarTerminales()
-        self.printTerminales()
-        print('\n')
+    def getGramatica(self):
+        return self.gramatica
 
-if __name__ == "__main__":
-    generador = GeneradorEstructurasGramatica()
-    generador.main()
+    def getDerivaciones(self):
+        return self.derivaciones
+    
+    def getNoTerminales(self):
+        return self.noterminales
+    
+    def getTerminales(self):
+        return self.terminales
+        
+    def getMatrizPredictiva(self):
+        return self.matrizPredictiva
+    
+    def crearEstructuras(self):
+        self.agregarGramatica("PythonProjects\AnalizadorLexico\gramatica.txt")
+        self.agregarDerivacion()
+        self.agregarNoTerminales()
+        self.agregarTerminales() 

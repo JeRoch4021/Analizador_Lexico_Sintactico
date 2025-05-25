@@ -12,17 +12,7 @@ class AnalizadorSintactico:
         self.derivaciones = self.estructuras.getDerivaciones()
         self.noterminales = self.estructuras.getNoTerminales()
         self.terminales = self.estructuras.getTerminales()
-        self.matrizPredictiva = {[1, 0,0, 0,0,0,0, 0,0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                                 [0, 2,0, 0,0,2,0, 0,2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                                 [0, 3,4, 0,0,3,0, 0,3, 0, 0, 0, 0, 3, 3, 3, 0, 0, 0, 0],
-                                 [0, 6,0, 0,0,7,0, 0,8, 0, 0, 0, 0, 5, 5, 5, 0, 0, 0, 0],
-                                 [0, 9,0, 0,0,0,0, 0,0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                                 [0, 0,0,11,0,0,0,11,0,10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                                 [0,12,0, 0,0,0,0, 0,0, 0,12,12,12, 0, 0, 0, 0, 0, 0, 0],
-                                 [0, 0,0,14,0,0,0,14,0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                                 [0, 0,0, 0,0,0,0, 0,0, 0,16,17,18, 0, 0, 0,13,13,13,13],
-                                 [0, 0,0, 0,0,0,0, 0,0, 0, 0, 0, 0,19,20,21, 0, 0, 0, 0],
-                                 [0, 0,0, 0,0,0,0, 0,0, 0, 0, 0, 0, 0, 0, 0,22,23,25,24]}
+        self.matrizPredictiva = self.estructuras.getMatrizPredictiva()
 
     def LlDriver(self):
         self.pila.push(self.noterminales[0])  # Agregar el símbolo inicial a la pila
@@ -57,10 +47,7 @@ class AnalizadorSintactico:
 
     def procesarErrorSintactico(self):
         print(f"Error sintáctico: token inesperado '{token}'")
-        # Aquí puedes agregar más lógica para manejar el error, como registrar el error o intentar recuperarse.
-        # Por ejemplo, podrías intentar ignorar el token y continuar con el análisis.
-        # self.pila.pop()  # Ignorar el token inesperado
-        # self.token_actual = self.analizador_lexico.scanner()  # Obtener el siguiente token
+        # Agregar Lógica de manejo de errores
 
 class AnaliadorSintactico:
     def __init__(self, lexico):

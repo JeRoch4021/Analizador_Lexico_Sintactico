@@ -47,12 +47,14 @@ class AnalizadorSintactico:
                     self.cicloPush(self.stripCadena(x)) # Agrega los símbolos de la derivación a la pila
                 else:
                     self.procesarErrorSintactico(a)
+                    break # Detiene el ciclo despues de procesar el error
             else:
                 if self.coinciden(x, a) or x == a:
                     self.pila.pop()
                     a = self.analizador_lexico.scanner()
                 else:
                     self.procesarErrorSintactico(a)
+                    break # Detiene el ciclo despues de procesar el error
             print("Pila actual: ", self.pila)
 
     def obtenerProduccion(self, x, a):

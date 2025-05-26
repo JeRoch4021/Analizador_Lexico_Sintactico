@@ -67,8 +67,8 @@ class AnalizadorSintactico:
     # Método para meter los simbolos de las derivaciones a la pila
     def cicloPush(self, x):
         print("Derivación: ", x)
-        cursor1 = len(x)-1
-        cursor2 = len(x)-1
+        cursor1 = len(x)
+        cursor2 = len(x)
         while cursor1 >= 0:
             if x[cursor1-1] == " " or cursor1 == 0:  # Verifica si es un espacio o el inicio de la cadena
                 print("metiendo a la pila: ", x[cursor1:cursor2])

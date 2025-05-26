@@ -243,8 +243,4 @@ class AnalizadorLexico:
     def main_analizador_lexico(self):
         self.distribuir_tokens_en_tablas()
 
-# Punto de entrada principal del programa
-# if __name__ == "__main__":
-#     analizador_lexico = AnalizadorLexico()
-#     analizador_lexico.main_analizador_lexico()
 

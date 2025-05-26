@@ -32,6 +32,7 @@ class AnalizadorLexico:
         self.indice_token = 0
         self.cargar_tokens(nombre_archivo)
         self.analizar_archivo(nombre_archivo)
+        self.distribuir_tokens_en_tablas()
 
 
     def cargar_tokens(self, nombre_archivo):
@@ -170,7 +171,8 @@ class AnalizadorLexico:
         if not os.path.exists(nombre_archivo):
             print("Archivo no encontrado.")
             return
-
+        
+        print("\nAbriendo Programa.txt")
         with open(nombre_archivo, 'r') as archivo:
             numero_linea = 1
             for linea in archivo:
@@ -184,7 +186,7 @@ class AnalizadorLexico:
                     self.pila_tokens.push((palabra, numero_linea))
 
                 numero_linea += 1
-
+        print()
 
     def distribuir_tokens_en_tablas(self):
         tabla_simbolos = []
@@ -239,8 +241,4 @@ class AnalizadorLexico:
             fin -= 1
         
         return cadena[inicio:fin + 1] # Devuelve una subcadena desde el inicio hasta el fin + 1 
-
-    def main_analizador_lexico(self):
-        self.distribuir_tokens_en_tablas()
-
 

@@ -6,6 +6,17 @@ class GeneradorEstructurasGramatica:
         self.derivaciones = []
         self.noterminales = []
         self.terminales = []
+        self.matrizPredictiva = [[1, 0,0, 0,0,0,0, 0,0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                                 [0, 2,0, 0,0,2,0, 0,2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                                 [0, 3,4, 0,0,3,0, 0,3, 0, 0, 0, 0, 3, 3, 3, 0, 0, 0, 0],
+                                 [0, 6,0, 0,0,7,0, 0,8, 0, 0, 0, 0, 5, 5, 5, 0, 0, 0, 0],
+                                 [0, 9,0, 0,0,0,0, 0,0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                                 [0, 0,0,11,0,0,0,11,0,10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                                 [0,12,0, 0,0,0,0, 0,0, 0,12,12,12, 0, 0, 0, 0, 0, 0, 0],
+                                 [0, 0,0,14,0,0,0,14,0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                                 [0, 0,0, 0,0,0,0, 0,0, 0,16,17,18, 0, 0, 0,13,13,13,13],
+                                 [0, 0,0, 0,0,0,0, 0,0, 0, 0, 0, 0,19,20,21, 0, 0, 0, 0],
+                                 [0, 0,0, 0,0,0,0, 0,0, 0, 0, 0, 0, 0, 0, 0,22,23,25,24]]
 
     # Método para leer la gramática desde un archivo y almacenarla
     def agregarGramatica(self, nombre_archivo: str):
@@ -14,6 +25,7 @@ class GeneradorEstructurasGramatica:
             return
         
         # Busca el primer punto '.' para empezar a leer la producción
+        print("\nAbriendo gramatica.txt")
         with open(nombre_archivo, 'r') as archivo:
             numero_linea = 1
             print()
@@ -152,23 +164,28 @@ class GeneradorEstructurasGramatica:
         print("Terminales: ")
         for i in range(len(self.terminales)):
             print(self.terminales[i])
+    
+    def printMatrizPredictiva(self):
+        for fila in self.matrizPredictiva:
+            print(fila)
 
-    # Método principal que ejecuta todos los pasos de análisis
-    def main(self):
+    def getGramatica(self):
+        return self.gramatica
+
+    def getDerivaciones(self):
+        return self.derivaciones
+    
+    def getNoTerminales(self):
+        return self.noterminales
+    
+    def getTerminales(self):
+        return self.terminales
+        
+    def getMatrizPredictiva(self):
+        return self.matrizPredictiva
+    
+    def crearEstructuras(self):
         self.agregarGramatica("AnalizadorSintáctico/gramatica.txt")
-        print('\n')
-        self.printGramatica()
-        print('\n')
         self.agregarDerivacion()
-        self.printDerivacion()
-        print('\n')
         self.agregarNoTerminales()
-        self.printNoTerminales()
-        print('\n')
-        self.agregarTerminales()
-        self.printTerminales()
-        print('\n')
-
-if __name__ == "__main__":
-    generador = GeneradorEstructurasGramatica()
-    generador.main()
+        self.agregarTerminales() 

@@ -26,22 +26,23 @@ class AnalizadorSintactico:
         self.terminales = self.estructuras.getTerminales()
         self.matrizPredictiva = self.estructuras.getMatrizPredictiva()
 
-    def imprimir_tokens(self):
-        while True:
-            token = self.analizador_lexico.scanner()  # Obtener el siguiente token del analizador léxico
-            if token is None:
-                break
-            print(token)
+    # def imprimir_tokens(self):
+    #     while True:
+    #         token = self.analizador_lexico.scanner()  # Obtener el siguiente token del analizador léxico
+    #         if token is None:
+    #             break
+    #         print(token)
 
     def LlDriver(self):
         self.pila.push(self.noterminales[0])  # Agregar el símbolo inicial a la pila
-        #x = self.pila.peek() # Actualiza x con el símbolo en la parte superior de la pila
+        x = self.pila.peek() # Actualiza x con el símbolo en la parte superior de la pila
         a = self.analizador_lexico.scanner()  # Obtener el token de entrada del analizador léxico
         while self.pila.isEmpty() == False:
             x = self.pila.peek()  # Actualiza x con el símbolo en la parte superior de la pila
             if x in self.noterminales:
-                if self.matrizPredictiva[self.noterminales.index(x)][self.terminales.index(a)] != 0:
-                    x = self.derivaciones[self.matrizPredictiva[self.noterminales.index(x)][self.terminales.index(a)]-1]
+                predict = self.obtenerProduccion(x, a)  # Obtiene la producción correspondiente
+                if predict != 0:
+                    x = self.derivaciones[predict-1]
                     self.pila.pop()
                     self.cicloPush(self.stripCadena(x)) # Agrega los símbolos de la derivación a la pila
                 else:
@@ -53,6 +54,15 @@ class AnalizadorSintactico:
                 else:
                     self.procesarErrorSintactico(a)
             print("Pila actual: ", self.pila)
+
+    def obtenerProduccion(self, x, a):
+        # Obtiene la produccion correspondiente a un no termianl (x) y un terminal (a)
+        if x in self.noterminales and a in self.terminales:
+            i = self.noterminales.index(x)
+            j = self.terminales.index(a)
+            return self.matrizPredictiva[i][j]
+        return 0
+
 
     # Método para meter los simbolos de las derivaciones a la pila
     def cicloPush(self, x):
@@ -81,10 +91,12 @@ class AnalizadorSintactico:
         else:
             return False
 
+
     def procesarErrorSintactico(self, token):
         print(f"Error sintáctico: token inesperado '{token}'")
         self.pila.pop()  # Ignorar el token inesperado
     
+
     def stripCadena(self, cadena: str) -> str:
         caracteres_no_validos = " \n\t\r"
         inicio = 0
@@ -97,6 +109,7 @@ class AnalizadorSintactico:
             fin -= 1
         
         return cadena[inicio:fin + 1] # Devuelve una subcadena desde el inicio hasta el fin + 1 
+
 
     def main(self):
         print()
@@ -113,6 +126,7 @@ class AnalizadorSintactico:
         print()
         # Inicia el análisis sintáctico
         self.LlDriver()
+
 
 # if __name__ == "__main__":
 #     # Crea una instancia del analizador léxico

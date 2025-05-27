@@ -88,7 +88,7 @@ class AnalizadorSintactico:
         elif clasificacionA == 'Numero Octal':
             return 'litoctal'
         elif clasificacionA == 'Numero Hexadecimal':
-            return 'lithexadecimal'
+            return 'lithexa'
         return token  # Retorna el token tal cual si no es un identificador o número
     
     def coinciden(self, x, a):

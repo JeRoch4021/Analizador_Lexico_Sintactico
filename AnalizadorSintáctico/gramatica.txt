@@ -2,10 +2,10 @@
 2. <sentencias> ->  <sent> <sentf> 
 3. <sentf> -> <sent> <sentf>
 4. <sentf> -> ε 
-5. <sent> -> <tipo> <listaid>;
-6. <sent> -> id = <expresión>;
-7. <sent> -> leer (<listaid>);
-8. <sent> -> escribir (<expresión>);
+5. <sent> -> <tipo> <listaid> ;
+6. <sent> -> id = <expresión> ;
+7. <sent> -> leer ( <listaid> ) ;
+8. <sent> -> escribir ( <expresión> ) ;
 9. <listaid> -> id <listaf>
 10. <listaf> -> , id <listaf>
 11. <listaf> -> ε 

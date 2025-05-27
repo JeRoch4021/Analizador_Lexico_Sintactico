@@ -15,73 +15,85 @@ class AnalizadorSintactico:
     def __init__(self):
         # Inicializa el analizador léxico
         #self.analizador_lexico = lexico.AnalizadorLexico()
-        self.analizador_lexico = AnalizadorLexico()
+        self.analizador_lexico = al.AnalizadorLexico()
         #self.pila = p.Pila()
-        self.pila = Pila()
+        self.pila = p.Pila()
         self.token_actual = None
-        self.estructuras = GeneradorEstructurasGramatica()
+        self.estructuras = gen.GeneradorEstructurasG()
         self.estructuras.crearEstructuras()
         self.derivaciones = self.estructuras.getDerivaciones()
         self.noterminales = self.estructuras.getNoTerminales()
         self.terminales = self.estructuras.getTerminales()
         self.matrizPredictiva = self.estructuras.getMatrizPredictiva()
 
-    # def imprimir_tokens(self):
-    #     while True:
-    #         token = self.analizador_lexico.scanner()  # Obtener el siguiente token del analizador léxico
-    #         if token is None:
-    #             break
-    #         print(token)
-
     def LlDriver(self):
         self.pila.push(self.noterminales[0])  # Agregar el símbolo inicial a la pila
         x = self.pila.peek() # Actualiza x con el símbolo en la parte superior de la pila
         a = self.analizador_lexico.scanner()  # Obtener el token de entrada del analizador léxico
         while self.pila.isEmpty() == False:
-            x = self.pila.peek()  # Actualiza x con el símbolo en la parte superior de la pila
+            print("\tSímbolo en la parte superior de la pila (x): ", x)
+            print("\tToken actual (a): ", a)
             if x in self.noterminales:
                 predict = self.obtenerProduccion(x, a)  # Obtiene la producción correspondiente
+                print("\tDerivación obtenida: ", str(predict))
                 if predict != 0:
-                    x = self.derivaciones[predict-1]
+                    x = self.derivaciones[predict-1] # Obtiene la cadena de derivación
                     self.pila.pop()
                     self.cicloPush(self.stripCadena(x)) # Agrega los símbolos de la derivación a la pila
                 else:
                     self.procesarErrorSintactico(a)
-                    break # Detiene el ciclo despues de procesar el error
+                    break  # Sale del ciclo si hay un error sintáctico
             else:
                 if self.coinciden(x, a) or x == a:
                     self.pila.pop()
                     a = self.analizador_lexico.scanner()
                 else:
                     self.procesarErrorSintactico(a)
-                    break # Detiene el ciclo despues de procesar el error
+                    break  # Sale del ciclo si hay un error sintáctico
             print("Pila actual: ", self.pila)
+            if self.pila.isEmpty() == False: 
+                x = self.stripCadena(self.pila.peek())  # Actualiza x con el símbolo en la parte superior de la pila
 
     def obtenerProduccion(self, x, a):
         # Obtiene la produccion correspondiente a un no termianl (x) y un terminal (a)
-        if x in self.noterminales and a in self.terminales:
+        term = self.obtenerClasificacion(a)
+        if x in self.noterminales and term in self.terminales:
             i = self.noterminales.index(x)
-            j = self.terminales.index(a)
+            j = self.terminales.index(term)
+            print("Posición en la matriz: ", str(i),", ", str(j))
             return self.matrizPredictiva[i][j]
         return 0
 
 
     # Método para meter los simbolos de las derivaciones a la pila
     def cicloPush(self, x):
-        print("Derivación: ", x)
+        print("\t\tDerivación: ", x)
         cursor1 = len(x)
         cursor2 = len(x)
         while cursor1 >= 0:
             if x[cursor1-1] == " " or cursor1 == 0:  # Verifica si es un espacio o el inicio de la cadena
-                print("metiendo a la pila: ", x[cursor1:cursor2])
-                self.pila.push(self.stripCadena(x[cursor1:cursor2]))  # Agrega el símbolo a la pila
+                if self.stripCadena(x[cursor1:cursor2]) != "&": # Si no es la cadena vacía
+                    print("\tmetiendo a la pila: ", x[cursor1:cursor2])
+                    self.pila.push(self.stripCadena(x[cursor1:cursor2]))  # Agrega el símbolo a la pila
                 cursor2 = cursor1  # Actualiza el cursor2 al inicio del siguiente símbolo
             cursor1 -= 1
+
+    def obtenerClasificacion(self, token):
+        # Obtiene la clasificación léxica del token
+        clasificacionA = self.analizador_lexico.clasificar_token(token)
+        if clasificacionA == 'Identificador':
+            return 'id'
+        elif clasificacionA == 'Numero Binario':
+            return 'litbinaria'
+        elif clasificacionA == 'Numero Octal':
+            return 'litoctal'
+        elif clasificacionA == 'Numero Hexadecimal':
+            return 'lithexa'
+        return token  # Retorna el token tal cual si no es un identificador o número
     
     def coinciden(self, x, a):
         # Verifica si la parte superior de la pila (x) coincide con el token actual (a) en cuanto a clasificación lexica
         clasificacionA = self.analizador_lexico.clasificar_token(a)
-        print(a," Clasificación del token actual: ", clasificacionA," | Símbolo en la pila - {x}: ", x)
         if clasificacionA == 'Identificador' and x == 'id':
             return True
         elif clasificacionA == 'Numero Binario' and x == 'litbinaria':
@@ -114,7 +126,6 @@ class AnalizadorSintactico:
 
 
     def main(self):
-        print()
         # Imprime la gramática, derivaciones, no terminales y terminales
         self.estructuras.printGramatica()
         print()
@@ -128,12 +139,3 @@ class AnalizadorSintactico:
         print()
         # Inicia el análisis sintáctico
         self.LlDriver()
-
-
-# if __name__ == "__main__":
-#     # Crea una instancia del analizador léxico
-#     analizador_lexico = AnalizadorLexico()
-#     # Crea una instancia del analizador sintáctico 
-#     analizador_sintactico = AnalizadorSintactico()
-#     # Llama al método principal del analizador sintáctico
-#     analizador_sintactico.main()

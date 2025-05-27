@@ -100,7 +100,7 @@ class AnalizadorSintactico:
             return True
         elif clasificacionA == 'Numero Octal' and x == 'litoctal':
             return True
-        elif clasificacionA == 'Numero Hexadecimal' and x == 'lithexadecimal':
+        elif clasificacionA == 'Numero Hexadecimal' and x == 'lithexa':
             return True
         else:
             return False

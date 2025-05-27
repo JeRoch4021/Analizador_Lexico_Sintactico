@@ -15,11 +15,11 @@ class AnalizadorSintactico:
     def __init__(self):
         # Inicializa el analizador léxico
         #self.analizador_lexico = lexico.AnalizadorLexico()
-        self.analizador_lexico = al.AnalizadorLexico()
+        self.analizador_lexico = AnalizadorLexico()
         #self.pila = p.Pila()
-        self.pila = p.Pila()
+        self.pila = Pila()
         self.token_actual = None
-        self.estructuras = gen.GeneradorEstructurasG()
+        self.estructuras = GeneradorEstructurasGramatica()
         self.estructuras.crearEstructuras()
         self.derivaciones = self.estructuras.getDerivaciones()
         self.noterminales = self.estructuras.getNoTerminales()

@@ -2,6 +2,7 @@ Resultados del Análisis Léxico
 
 Tabla de Símbolos:
 | ejemplo         | Atributo: 261    |
+| hexadecimal     | Atributo: 261    |
 | multiple        | Atributo: 261    |
 | num             | Atributo: 261    |
 | numero          | Atributo: 261    |
@@ -11,7 +12,6 @@ Tabla de Palabras Reservadas:
 | binario         | Atributo: 258    |
 | escribir        | Atributo: 262    |
 | finprograma     | Atributo: 263    |
-| hexadecimal     | Atributo: 260    |
 | leer            | Atributo: 265    |
 | octal           | Atributo: 259    |
 | programa        | Atributo: 257    |

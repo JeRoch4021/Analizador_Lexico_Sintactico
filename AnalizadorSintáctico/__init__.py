@@ -1,4 +1,4 @@
-from AnalizadorSintactico import AnalizadorSintactico
+from AnalizadorSintáctico.analizador_sintactico import AnalizadorSintactico
 class main:
     def __init__(self):
         self.analizador_sintactico = AnalizadorSintactico()

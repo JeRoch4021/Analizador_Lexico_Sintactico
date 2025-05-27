@@ -99,5 +99,5 @@ def crear_afn_caracter_simple():
 
 
 palabras_reservadas = {
-    'programa', 'binario', 'octal', 'hexadecimal', 'leer', 'escribir', 'finprograma'
+    'programa', 'binario', 'octal', 'hexad', 'leer', 'escribir', 'finprograma'
 }

@@ -23,7 +23,7 @@ class AnalizadorLexico:
             'programa': 257, 
             'binario': 258, 
             'octal': 259, 
-            'hexadecimal': 260, 
+            'hexad': 260, 
             'leer': 265, 
             'escribir': 262, 
             'finprograma': 263

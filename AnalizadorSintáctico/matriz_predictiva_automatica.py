@@ -47,18 +47,7 @@ class FirstFollowMatrix:
         if simbolo:
             partes.append(self.stripCadena(simbolo))
         return partes
-
-    # Verificar si el primer símbolo de una derivación es un terminal
-    def esTerminal(self, simbolo):
-        return self.stripCadena(simbolo) in self.terminales
     
-    # Verificar si el símbolo de una derivación es un no terminal
-    def esNoTerminal(self, simbolo):
-        return self.stripCadena(simbolo) in self.noterminales
-    
-    # Verificar si el símbolo de una derivación es vacío
-    def esVacio(self, simbolo):
-        return self.stripCadena(simbolo) == '&'
     
     # Calcula los conjuntos FIRST para todos los no terminales de la gramática.
     def calcularFirst(self):

@@ -2,13 +2,13 @@ import GeneradorEstructurasG as ges
 
 class FirstFollowMatrix:
     def __init__(self):
-        self.generador = ges.GeneradorEstructurasG()
-        self.estructuras = self.generador.crearEstructuras()
+        self.estructuras = ges.GeneradorEstructurasG()
+        self.estructuras.crearEstructuras()
         self.gramatica = self.estructuras.getGramatica()
         self.derivaciones = self.estructuras.getDerivaciones()
         self.noterminales = self.estructuras.getNoTerminales()
         self.terminales = self.estructuras.getTerminales()
-        self.first = [[]] # Conjunto First
+        self.first = [[]] # Conjunto First (primeros simbolos, numero de produccion)
         self.follow = [] # Conjunto Follow para cada no terminal
         self.matrix = [[]]  # Matriz predictiva
     

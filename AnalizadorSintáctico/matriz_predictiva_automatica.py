@@ -5,6 +5,8 @@ from AnalizadorSintáctico.GeneradorEstructurasGramatica import GeneradorEstruct
 
 
 class FirstFollowMatrix:
+
+
     def __init__(self):
         self.estructuras = GeneradorEstructurasGramatica()
         self.estructuras.crearEstructuras()
@@ -15,7 +17,7 @@ class FirstFollowMatrix:
         self.first = [[]] # Conjunto First (primeros simbolos, numero de produccion)
         self.follow = [] # Conjunto Follow para cada no terminal
         self.matrix = [[]]  # Matriz predictiva
-    
+   
     def stripCadena(self, cadena):
         caracteres_no_validos = " \n\t\r"
         inicio = 0
@@ -58,7 +60,7 @@ class FirstFollowMatrix:
     def esVacio(self, simbolo):
         return self.stripCadena(simbolo) == '&'
     
-    
+    # Calcula los conjuntos FIRST para todos los no terminales de la gramática.
     def calcularFirst(self):
         producciones = {}
         for i in range(len(self.noterminales)):
@@ -97,7 +99,7 @@ class FirstFollowMatrix:
                             break
         self.first = FIRST
     
-
+    # Calcula los conjuntos FOLLOW para todos los no terminales
     def calcularFollow(self):
         producciones = {}
         for i in range(len(self.noterminales)):
@@ -145,7 +147,7 @@ class FirstFollowMatrix:
                                 cambio = True
         self.follow = FOLLOW
     
-
+    # Construye la matriz predictiva LL(1) a partir de los conjuntos FIRST y FOLLOW.
     def calcularMatriz(self):
         self.matrix = [[None for _ in self.terminales + ['$']] for _ in self.noterminales]
         for i, produccion in enumerate(self.gramatica):

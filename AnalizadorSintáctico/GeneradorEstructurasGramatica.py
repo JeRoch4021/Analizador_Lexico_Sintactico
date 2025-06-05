@@ -148,7 +148,7 @@ class GeneradorEstructurasGramatica:
     def printGramatica(self):
         print("Gramática: ")
         for i in range(len(self.gramatica)):
-            print(self.gramatica[i][0], ": ", self.gramatica[i][1])
+            print("\t",self.gramatica[i][0], ": ", self.stripCadena(self.gramatica[i][1]))
 
     def printDerivacion(self):
         print("Derivaciones: ")

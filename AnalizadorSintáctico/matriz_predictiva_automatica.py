@@ -37,13 +37,13 @@ class FirstFollowMatrix:
         """
         partes = []
         simbolo = ''
-        for c in cadena:
-            if c.isspace():
+        for caracter in cadena:
+            if caracter.isspace():
                 if simbolo:
                     partes.append(self.stripCadena(simbolo))
                     simbolo = ''
             else:
-                simbolo += c
+                simbolo += caracter
         if simbolo:
             partes.append(self.stripCadena(simbolo))
         return partes
@@ -61,29 +61,29 @@ class FirstFollowMatrix:
             lado_derecho = self.stripCadena(self.estructuras.leerDerivacion(self.gramatica[i][1]))
             producciones[lado_izquierdo].append(self.dividirSimbolos(lado_derecho))
 
-        FIRST = {nt: set() for nt in self.noterminales}
+        FIRST = {noterminal: set() for noterminal in self.noterminales}
         cambio = True
         while cambio:
             cambio = False
-            for nt in self.noterminales:
-                for prod in producciones[nt]:
+            for noterminal in self.noterminales:
+                for prod in producciones[noterminal]:
                     for simbolo in prod:
                         simbolo = self.stripCadena(simbolo)
                         if simbolo in self.terminales:
-                            if simbolo not in FIRST[nt]:
-                                FIRST[nt].add(simbolo)
+                            if simbolo not in FIRST[noterminal]:
+                                FIRST[noterminal].add(simbolo)
                                 cambio = True
                             break
                         elif simbolo in self.noterminales:
-                            tam_antes = len(FIRST[nt])
-                            FIRST[nt].update(FIRST[simbolo] - {'ε'})
+                            tamanio_antes = len(FIRST[noterminal])
+                            FIRST[noterminal].update(FIRST[simbolo] - {'ε'})
                             if 'ε' not in FIRST[simbolo]:
                                 break
-                            if len(FIRST[nt]) > tam_antes:
+                            if len(FIRST[noterminal]) > tamanio_antes:
                                 cambio = True
                         elif simbolo == 'ε':
-                            if 'ε' not in FIRST[nt]:
-                                FIRST[nt].add('ε')
+                            if 'ε' not in FIRST[noterminal]:
+                                FIRST[noterminal].add('ε')
                                 cambio = True
                             break
         self.first = FIRST

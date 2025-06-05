@@ -72,7 +72,7 @@ class AnalizadorSintactico:
         cursor2 = len(x)
         while cursor1 >= 0:
             if x[cursor1-1] == " " or cursor1 == 0:  # Verifica si es un espacio o el inicio de la cadena
-                if self.stripCadena(x[cursor1:cursor2]) != "&": # Si no es la cadena vacía
+                if self.stripCadena(x[cursor1:cursor2]) != "ε": # Si no es la cadena vacía
                     print("\tmetiendo a la pila: ", x[cursor1:cursor2])
                     self.pila.push(self.stripCadena(x[cursor1:cursor2]))  # Agrega el símbolo a la pila
                 cursor2 = cursor1  # Actualiza el cursor2 al inicio del siguiente símbolo
@@ -81,6 +81,7 @@ class AnalizadorSintactico:
     def obtenerClasificacion(self, token):
         # Obtiene la clasificación léxica del token
         clasificacionA = self.analizador_lexico.clasificar_token(token)
+        print("\tClasificación del token: ", token, " -> ", clasificacionA)
         if clasificacionA == 'Identificador':
             return 'id'
         elif clasificacionA == 'Numero Binario':

@@ -1,4 +1,5 @@
 programa ejemplo
+   a = b + c;
    hexad z;
    z = AF25X;
    binario a, b, c;

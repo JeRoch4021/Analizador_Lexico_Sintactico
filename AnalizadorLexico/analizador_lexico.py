@@ -1,11 +1,8 @@
 import os
 # Módulo que contiene los AFNs para diferentes tipos de tokens
 from . import AFN_Correccion
-#import AFN_Correccion
 # Módulo que contiene la clase Pila (estructura tipo stack)
 from . import pila as stack
-#import pila as stack
-# import analizador_sintactico as prueba
 
 # Clase principal que implementa un analizador léxico utilizando AFNs.
 class AnalizadorLexico:

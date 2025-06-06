@@ -1,8 +1,11 @@
 import os
 # Módulo que contiene los AFNs para diferentes tipos de tokens
-from . import AFN
+# from . import AFN
+# from .AFN_Correccion import automata
+import AFN_Correccion
 # Módulo que contiene la clase Pila (estructura tipo stack)
-from . import pila as stack
+# from . import pila as stack
+import pila as stack
 # import analizador_sintactico as prueba
 
 # Clase principal que implementa un analizador léxico utilizando AFNs.
@@ -11,11 +14,13 @@ class AnalizadorLexico:
 
     def __init__(self, nombre_archivo="AnalizadorLexico/programa.txt"):
         # Inicialización de los AFNs para reconocer diferentes tipos de tokens
-        self.afn_identificador = AFN.crear_afn_identificador()
-        self.afn_binario = AFN.crear_afn_binario()
-        self.afn_octal = AFN.crear_afn_octal()
-        self.afn_hexadecimal = AFN.crear_afn_hexadecimal()
-        self.afn_caracter_simple = AFN.crear_afn_caracter_simple()
+        # self.afn_identificador = AFN.crear_afn_identificador()
+        # self.afn_binario = AFN.crear_afn_binario()
+        # self.afn_octal = AFN.crear_afn_octal()
+        # self.afn_hexadecimal = AFN.crear_afn_hexadecimal()
+        # self.afn_caracter_simple = AFN.crear_afn_caracter_simple()
+        
+        self.automata_transiciones = AFN_Correccion.automata()
         # Pila para almacenar los tokens encontrados
         self.pila_tokens = stack.Pila()
          # Diccionario con palabras reservadas y sus atributos únicos
@@ -32,7 +37,7 @@ class AnalizadorLexico:
         self.indice_token = 0
         self.cargar_tokens(nombre_archivo)
         self.analizar_archivo(nombre_archivo)
-        self.distribuir_tokens_en_tablas()
+        # self.distribuir_tokens_en_tablas()
 
 
     def cargar_tokens(self, nombre_archivo):
@@ -99,52 +104,39 @@ class AnalizadorLexico:
 
         while inicio < longitud:
             final = inicio + 1
-            ultimo_token_valido = None
-            ultima_pos_valida = inicio
+            ultimo_token_vacio = None
+            ultima_posicion_valida = inicio
 
             while final <= longitud:
                 subcadena = cadena[inicio:final]
                 tipo = self.clasificar_token(subcadena)
                 if tipo != 'Error Lexico':
-                    ultimo_token_valido = subcadena
-                    ultima_pos_valida = final
+                    ultimo_token_vacio = subcadena
+                    ultima_posicion_valida = final
                 final += 1
 
-            if ultimo_token_valido:
-                palabras.append(ultimo_token_valido)
-                inicio = ultima_pos_valida
+            if ultimo_token_vacio:
+                palabras.append(ultimo_token_vacio)
+                inicio = ultima_posicion_valida
+                
             else:
-                final = inicio + 1
-                while final < longitud and self.clasificar_token(cadena[inicio:final + 1]) == 'Error Lexico':
-                    final += 1
-                palabras.append(cadena[inicio:final])
-                inicio = final
+                palabras.append(cadena[inicio])
+                inicio += 1
 
         return palabras
     
 
     def es_caracter_simple(self, caracter: str) -> bool:
         # Verifica si un carácter es un símbolo reconocido por el AFN de caracteres simples
-        return self.afn_caracter_simple.procesar(caracter)
+        return caracter in '()*+,-/;='
 
 
     def clasificar_token(self, token: str) -> str:
         # Clasifica un token usando los AFNs disponibles y palabras reservadas
-        match True:
-            case _ if token in AFN.palabras_reservadas:
-                return 'Palabra Reservada'
-            case _ if self.afn_identificador.procesar(token):
-                return 'Identificador'
-            case _ if self.afn_binario.procesar(token):
-                return 'Numero Binario'
-            case _ if self.afn_octal.procesar(token):
-                return 'Numero Octal'
-            case _ if self.afn_hexadecimal.procesar(token):
-                return 'Numero Hexadecimal'
-            case _ if self.afn_caracter_simple.procesar(token):
-                return 'Caracter Simple'
-            case _:
-                return 'Error Lexico'
+        estado = self.automata_transiciones.transiciones(0, token)
+        tipo = self.automata_transiciones.transiciones(estado, token)
+        return tipo
+
 
 
     def obtener_atributo(self, token: str, tipo: str) -> int:
@@ -241,4 +233,13 @@ class AnalizadorLexico:
             fin -= 1
         
         return cadena[inicio:fin + 1] # Devuelve una subcadena desde el inicio hasta el fin + 1 
+    
+    def main(self):
+        self.distribuir_tokens_en_tablas()
 
+
+if __name__ == "__main__":
+    # Crea una instancia del analizador sintáctico 
+    analizador_lexico = AnalizadorLexico()
+    # Llama al método principal del analizador sintáctico
+    analizador_lexico.main()

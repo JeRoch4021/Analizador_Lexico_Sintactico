@@ -22,7 +22,7 @@ class automata:
         fin = len(simbolo) - 1
         match estado:
             case 0:
-                if simbolo[inicio] in self.atributos_reservados:
+                if simbolo in self.atributos_reservados:
                     estado = 6
                 elif simbolo[inicio] in '01' and simbolo[fin] == 'B':
                     estado = 1
@@ -72,12 +72,12 @@ class automata:
             case 5:
                 return self.generarToken(ord(simbolo[inicio]))  # Carácter Simple
             case 6:
-                return self.generarToken(self.atributos_reservados[simbolo[inicio]]) # Palabra Reservada
+                return self.generarToken(self.atributos_reservados[simbolo]) # Palabra Reservada
             case 7:
                 return self.generarToken(0) # Error Lexico
             
     def generarToken(self, numero: int) -> str:
-        if numero in self.atributos_reservados:
+        if numero in self.atributos_reservados.values():
             return "Palabra Reservada"
         elif numero == 261:
             return "Identificador"

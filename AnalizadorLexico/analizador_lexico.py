@@ -161,7 +161,6 @@ class AnalizadorLexico:
             for linea in archivo:
                 print(f"\nAnalizando línea {numero_linea}: {self.stripCadena(linea)}")
 
-                # Aquí entra el analizador sintáctico
                 # Método para extraer palabras/tokens
                 palabras = self.obtener_palabras_de_cadena(self.stripCadena(linea))
 

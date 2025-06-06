@@ -4,10 +4,6 @@ class Pila:
         self.inicio = None
         self.fin = None
         self.tamanio = 0
-
-
-    def size(self):
-        return self.tamanio
     
     
     def push(self, dato):
@@ -29,7 +25,7 @@ class Pila:
         # Nodo vacío temporal por si la pila está vacía
         borrado = self.Nodo(None)
         if self.inicio is not None:
-            if self.size() == 1:
+            if self.tamanio == 1:
                 # Si solo hay un nodo, se elimina y se reinicia la pila
                 borrado = self.inicio
                 self.inicio = None
@@ -48,7 +44,7 @@ class Pila:
     def popDat(self):
         dato = None
         if self.inicio is not None:
-            if self.size() == 1:
+            if self.tamanio == 1:
                 # Si hay un solo nodo, extrae su dato y limpia la pila
                 dato = self.inicio.dato
                 self.inicio = None

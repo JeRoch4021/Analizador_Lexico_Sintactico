@@ -6,9 +6,6 @@ class Pila:
         self.fin = None
         self.tamanio = 0
     
-    def size(self):
-        return self.tamanio
-    
     def isEmpty(self):
         return self.tamanio == 0
     
@@ -25,11 +22,11 @@ class Pila:
     def pop(self):
         borrado = Nodo(None)
         if self.inicio is not None:
-            if self.size() == 1:
+            if self.tamanio == 1:
                 borrado = self.inicio
                 self.inicio = self.fin = None
                 self.tamanio = 0
-            elif self.size() == 2:
+            elif self.tamanio == 2:
                 borrado = self.fin
                 self.fin = self.inicio
                 self.inicio.siguiente = None
@@ -50,7 +47,7 @@ class Pila:
         return None
     
     def __str__(self):
-        cadena = "Pila(" + str(self.size()) + "): { "
+        cadena = "Pila(" + str(self.tamanio) + "): { "
         cursor = self.inicio
         while cursor is not None:
             if cursor is self.fin:

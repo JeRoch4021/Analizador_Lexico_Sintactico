@@ -1,11 +1,10 @@
 import os
 # Módulo que contiene los AFNs para diferentes tipos de tokens
-# from . import AFN
-# from .AFN_Correccion import automata
-import AFN_Correccion
+from . import AFN_Correccion
+#import AFN_Correccion
 # Módulo que contiene la clase Pila (estructura tipo stack)
-# from . import pila as stack
-import pila as stack
+from . import pila as stack
+#import pila as stack
 # import analizador_sintactico as prueba
 
 # Clase principal que implementa un analizador léxico utilizando AFNs.
@@ -13,13 +12,6 @@ class AnalizadorLexico:
 
 
     def __init__(self, nombre_archivo="AnalizadorLexico/programa.txt"):
-        # Inicialización de los AFNs para reconocer diferentes tipos de tokens
-        # self.afn_identificador = AFN.crear_afn_identificador()
-        # self.afn_binario = AFN.crear_afn_binario()
-        # self.afn_octal = AFN.crear_afn_octal()
-        # self.afn_hexadecimal = AFN.crear_afn_hexadecimal()
-        # self.afn_caracter_simple = AFN.crear_afn_caracter_simple()
-        
         self.automata_transiciones = AFN_Correccion.automata()
         # Pila para almacenar los tokens encontrados
         self.pila_tokens = stack.Pila()
@@ -37,7 +29,7 @@ class AnalizadorLexico:
         self.indice_token = 0
         self.cargar_tokens(nombre_archivo)
         self.analizar_archivo(nombre_archivo)
-        # self.distribuir_tokens_en_tablas()
+        self.distribuir_tokens_en_tablas()
 
 
     def cargar_tokens(self, nombre_archivo):
@@ -138,7 +130,6 @@ class AnalizadorLexico:
         return tipo
 
 
-
     def obtener_atributo(self, token: str, tipo: str) -> int:
          # Devuelve el valor numérico del atributo para cada tipo de token
         match tipo:
@@ -179,6 +170,7 @@ class AnalizadorLexico:
 
                 numero_linea += 1
         print()
+
 
     def distribuir_tokens_en_tablas(self):
         tabla_simbolos = []
@@ -233,13 +225,3 @@ class AnalizadorLexico:
             fin -= 1
         
         return cadena[inicio:fin + 1] # Devuelve una subcadena desde el inicio hasta el fin + 1 
-    
-    def main(self):
-        self.distribuir_tokens_en_tablas()
-
-
-if __name__ == "__main__":
-    # Crea una instancia del analizador sintáctico 
-    analizador_lexico = AnalizadorLexico()
-    # Llama al método principal del analizador sintáctico
-    analizador_lexico.main()

@@ -82,12 +82,12 @@ class automata:
         elif numero == 261:
             return "Identificador"
         elif numero == 520:
-            return "Número Binario"
+            return "Numero Binario"
         elif numero == 732:
-            return "Número Octal"
+            return "Numero Octal"
         elif numero == 891:
-            return "Número Hexadecimal"
+            return "Numero Hexadecimal"
         elif numero in range(39, 62):
-            return "Carácter Simple"
+            return "Caracter Simple"
         else:
             return "Error Lexico"

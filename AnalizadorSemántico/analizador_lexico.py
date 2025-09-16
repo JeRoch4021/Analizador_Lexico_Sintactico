@@ -88,17 +88,11 @@ class AnalizadorLexico:
                 subcadena = cadena[inicio:final]
                 tipo = self.clasificar_token(subcadena)
                 if tipo != 'Error Léxico':
-                    ultimo_token_vacio = subcadena
-                    ultima_posicion_valida = final
-                final += 1
-
-            if ultimo_token_vacio:
-                palabras.append(ultimo_token_vacio)
-                inicio = ultima_posicion_valida
-                
-            else:
-                palabras.append(cadena[inicio])
-                inicio += 1
+                    # Si la subcadena completa es un token valido, lo guardamos como valido
+                    return [cadena]
+                else:
+                    # Si no es un token valido, lo guardamos como error léxico
+                    return [cadena]
 
         return palabras
     

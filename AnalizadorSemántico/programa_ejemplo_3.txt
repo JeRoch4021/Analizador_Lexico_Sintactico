@@ -3,7 +3,7 @@ programa ejemplo
    b = 1;
    c = 1;
    float a;
-   double f;
+   double13N$$;
    a = b + c;
    leer a;
    escribir a;

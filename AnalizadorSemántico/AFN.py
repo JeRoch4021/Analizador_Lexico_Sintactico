@@ -73,7 +73,7 @@ class automata:
                         inicio += 1
                     else:
                         estado = 8  # Error Léxico
-                        return estado
+                        return self.transiciones(estado, simbolo)
                 return self.generarToken(261)  # Identificador
             case 2:
                 return self.generarToken(520)  # Asignación
@@ -85,7 +85,7 @@ class automata:
                         inicio += 1
                     else:
                         estado = 8  # Error Léxico
-                        return estado
+                        return self.transiciones(estado, simbolo)
                 return self.generarToken(732)  # Numeros enteros
             case 5:
                 partes = self.splitCadena(simbolo, '.')
@@ -93,7 +93,7 @@ class automata:
                     return self.generarToken(891)  # Numeros reales
                 else:
                     estado = 8  # Error Léxico
-                    return estado
+                    return self.transiciones(estado, simbolo)
             case 6:
                 return self.generarToken(ord(simbolo[inicio]))  # Carácter Simple
             case 7:

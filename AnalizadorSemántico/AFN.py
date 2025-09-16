@@ -88,7 +88,7 @@ class automata:
                         return estado
                 return self.generarToken(732)  # Numeros enteros
             case 5:
-                partes = simbolo.split(".")
+                partes = self.splitCadena(simbolo, '.')
                 if len(partes) == 2 and all(p.isdigit() for p in partes if p):
                     return self.generarToken(891)  # Numeros reales
                 else:

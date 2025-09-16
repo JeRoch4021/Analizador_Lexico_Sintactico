@@ -88,7 +88,7 @@ class automata:
                         return estado
                 return self.generarToken(732)  # Numeros enteros
             case 5:
-                partes = simbolo.split(".")
+                partes = self.splitCadena(simbolo, '.')
                 if len(partes) == 2 and all(p.isdigit() for p in partes if p):
                     return self.generarToken(891)  # Numeros reales
                 else:
@@ -118,3 +118,18 @@ class automata:
             return "Número Real"
         else:
             return "Error Léxico"
+
+    def splitCadena(self, cadena: str, caracter) -> list:
+        # Divide una cadena en una lista usando un carácter separador específico
+        partes = []
+        palabra = []
+        for char in cadena:
+            if char == caracter:
+                if palabra:
+                    partes.append("".join(palabra))
+                    palabra = []
+            else:
+                palabra.append(char)
+        if palabra:
+            partes.append("".join(palabra))
+        return partes

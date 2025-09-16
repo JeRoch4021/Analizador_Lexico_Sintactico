@@ -15,7 +15,7 @@ class automata:
         # Números Binarios: Token 520
         # Números Octales: Token 732
         # Números Hexadecimales: Token 891
-        # Caracteres Simples: Token ASCII  
+        # Caracteres Simples: Token ASCII
     
     def transiciones(self, estado: int, simbolo: str) -> str | None:
         inicio = 0

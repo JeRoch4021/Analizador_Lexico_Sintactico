@@ -1,0 +1,10 @@
+programa ejemplo
+   int b, c;
+   b = 1;
+   c = 1;
+   float a;
+   double f;
+   a = b + c;
+   leer a;
+   escribir a;
+finprograma

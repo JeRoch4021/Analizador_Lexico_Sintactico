@@ -1,17 +1,25 @@
 Archivo Tabla de Tokens
 
 Tabla de Tokens:
-| finprograma     | Tipo: Palabra Reservada    | Atributo: 263    | Linea: 8    
-| ;               | Tipo: Caracter Simple      | Atributo: 59     | Linea: 7, 6, 5, 4, 3, 2
-| a               | Tipo: Identificador        | Atributo: 261    | Linea: 7, 6, 5, 2
-| escribir        | Tipo: Palabra Reservada    | Atributo: 262    | Linea: 7    
-| leer            | Tipo: Palabra Reservada    | Atributo: 265    | Linea: 6    
-| c               | Tipo: Identificador        | Atributo: 261    | Linea: 5, 4, 2
-| +               | Tipo: Operador Aritmético  | Atributo: 43     | Linea: 5    
-| b               | Tipo: Identificador        | Atributo: 261    | Linea: 5, 3, 2
-| =               | Tipo: Asignación           | Atributo: 520    | Linea: 5, 4, 3
+| finprograma     | Tipo: Palabra Reservada    | Atributo: 263    | Linea: 10   
+| ;               | Tipo: Caracter Simple      | Atributo: 59     | Linea: 9, 8, 7, 6, 5, 4, 3, 2
+| a               | Tipo: Identificador        | Atributo: 261    | Linea: 9, 8, 7, 5
+| escribir        | Tipo: Palabra Reservada    | Atributo: 262    | Linea: 9    
+| leer            | Tipo: Palabra Reservada    | Atributo: 265    | Linea: 8    
+| c               | Tipo: Identificador        | Atributo: 261    | Linea: 7, 4, 2
+| +               | Tipo: Operador Aritmético  | Atributo: 43     | Linea: 7    
+| b               | Tipo: Identificador        | Atributo: 261    | Linea: 7, 3, 2
+| =               | Tipo: Asignación           | Atributo: 520    | Linea: 7, 4, 3
+| float           | Tipo: Palabra Reservada    | Atributo: 259    | Linea: 5    
 | 1               | Tipo: Número Entero        | Atributo: 732    | Linea: 4, 3 
-| ,               | Tipo: Caracter Simple      | Atributo: 44     | Linea: 2, 2 
+| ,               | Tipo: Caracter Simple      | Atributo: 44     | Linea: 2    
 | int             | Tipo: Palabra Reservada    | Atributo: 258    | Linea: 2    
 | ejemplo         | Tipo: Identificador        | Atributo: 261    | Linea: 1    
 | programa        | Tipo: Palabra Reservada    | Atributo: 257    | Linea: 1    
+
+Tabla de Símbolos:
+| a               | Tipo: Identificador        | Atributo: 261    | Repeticiones: 4   | Linea: 9, 8, 7, 5          
+| c               | Tipo: Identificador        | Atributo: 261    | Repeticiones: 3   | Linea: 7, 4, 2             
+| b               | Tipo: Identificador        | Atributo: 261    | Repeticiones: 3   | Linea: 7, 3, 2             
+| 1               | Tipo: Número Entero        | Atributo: 732    | Repeticiones: 2   | Linea: 4, 3                
+| ejemplo         | Tipo: Identificador        | Atributo: 261    | Repeticiones: 1   | Linea: 1                   

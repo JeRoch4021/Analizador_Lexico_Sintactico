@@ -8,7 +8,7 @@ import pila as stack
 class AnalizadorLexico:
 
 
-    def __init__(self, nombre_archivo="AnalizadorSemántico/programa_ejemplo_1.txt"):
+    def __init__(self, nombre_archivo="AnalizadorSemántico/programa_ejemplo_3.txt"):
         self.automata_transiciones = AFN.automata()
         # Pila para almacenar los tokens encontrados
         self.pila_tokens = stack.Pila()
@@ -81,8 +81,6 @@ class AnalizadorLexico:
 
         while inicio < longitud:
             final = inicio + 1
-            ultimo_token_vacio = None
-            ultima_posicion_valida = inicio
 
             while final <= longitud:
                 subcadena = cadena[inicio:final]
@@ -152,6 +150,32 @@ class AnalizadorLexico:
         print()
 
 
+    def generar_tabla_simbolos(self, tabla_tokens: dict) -> dict:
+        """
+        Construye la tabla de símbolos a partir de la tabla de tokens.
+        Incluye solo identificadores y constantes
+        """
+
+        tabla_simbolos = {}
+
+        for token, info in tabla_tokens.items():
+            #Filtramos solo los identificadores y las constantes
+            if info["tipo"] in ["Identificador", "Número Entero", "Número Real"]:
+                if token not in tabla_simbolos:
+                    tabla_simbolos[token] = {
+                        "tipo": info["tipo"],
+                        "atributo": info["atributo"],
+                        "repeticiones": info["repeticiones"],
+                        "lineas": info["lineas"]
+                    }
+                else:
+                    # Por si acaso se quiere acumular
+                    tabla_simbolos[token]["repeticiones"] += info["repeticiones"]
+                    tabla_simbolos[token]["lineas"].append(info["lineas"])
+
+        return tabla_simbolos
+
+
     def distribuir_tokens_en_tablas(self):
         # Definimos la ruta y nombre del archivo
         ruta_carpeta = "AnalizadorSemántico"
@@ -197,6 +221,13 @@ class AnalizadorLexico:
             for token, info in tabla_tokens.items():
                 lineas_string = ", ".join(map(str, info['lineas']))
                 salida.write(f"| {token:<15} | Tipo: {info['tipo']:<20} | Atributo: {info['atributo']:<6} | Linea: {lineas_string:<5}\n")
+
+            tabla_simbolos = self.generar_tabla_simbolos(tabla_tokens)
+
+            salida.write("\nTabla de Símbolos:\n")
+            for simbolo, info in tabla_simbolos.items():
+                lineas_string = ", ".join(map(str, info['lineas']))
+                salida.write(f"| {simbolo:<15} | Tipo: {info['tipo']:<20} | Atributo: {info['atributo']:<6} | Repeticiones: {info['repeticiones']:<3} | Linea: {lineas_string:<20}\n")
     
 
     # Elimina los espacios en blanco de una cadena

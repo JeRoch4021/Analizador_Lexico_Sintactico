@@ -8,7 +8,7 @@ import pila as stack
 class AnalizadorLexico:
 
 
-    def __init__(self, nombre_archivo="AnalizadorSemántico/programa_ejemplo_3.txt"):
+    def __init__(self, nombre_archivo="AnalizadorSemántico/programa_ejemplo_4.txt"):
         self.automata_transiciones = AFN.automata()
         # Pila para almacenar los tokens encontrados
         self.pila_tokens = stack.Pila()
@@ -150,28 +150,61 @@ class AnalizadorLexico:
         print()
 
 
-    def generar_tabla_simbolos(self, tabla_tokens: dict) -> dict:
+    def generar_tabla_simbolos(self, tabla_tokens: dict, tokens_linea: list) -> dict:
         """
         Construye la tabla de símbolos a partir de la tabla de tokens.
         Incluye solo identificadores y constantes
         """
 
         tabla_simbolos = {}
+        id_token_actual = 500
+        i = 0
 
+        while i < len(tokens_linea):
+            token = tokens_linea[i][0] # Ubicación del lexema
+
+            # Detectar declaraciones de variables
+            if token.lower() in ["float", "int"]:
+                tipo_var = "float" if token.lower() == "float" else "int"
+                i += 1
+
+                # Recorrer hasta encontrar ';'
+                while i < len(tokens_linea) and tokens_linea[i][0] != ";":
+                    var_token, _ = tokens_linea[i]
+
+                    if var_token not in [",", "=", ";"]:
+                        if var_token in tabla_tokens and tabla_tokens[var_token]["tipo"] == "Identificador": # Nos aseguramos de que este en la tabla de tokens
+                            if var_token not in tabla_simbolos:
+                                tabla_simbolos[var_token] = {
+                                    "tipo": tipo_var,
+                                    "id_token": id_token_actual,
+                                    "repeticiones": tabla_tokens[var_token]["repeticiones"],
+                                    "lineas": tabla_tokens[var_token]["lineas"],
+                                    "valor": "0.0" if tipo_var == "float" else "0"
+                                }
+                            id_token_actual += 1
+
+                    # Si hay asignación (=) después del identificador
+                    if i + 2 < len(tokens_linea) and tokens_linea[i+1][0] == "=":
+                        valor = tokens_linea[i+2][0]
+                        if var_token in tabla_simbolos:
+                            tabla_simbolos[var_token]["valor"] = valor
+                            
+                    i += 1
+            else:
+                i += 1
+
+        # Ahora agregamos las constantes literales (enteros y relaes)
         for token, info in tabla_tokens.items():
-            #Filtramos solo los identificadores y las constantes
-            if info["tipo"] in ["Identificador", "Número Entero", "Número Real"]:
+            if info["tipo"] in ["Número Real", "Número Entero"]:
                 if token not in tabla_simbolos:
                     tabla_simbolos[token] = {
-                        "tipo": info["tipo"],
-                        "atributo": info["atributo"],
+                        "tipo": "int" if info["tipo"] == "Número Entero" else "float",
+                        "id_token": "",
                         "repeticiones": info["repeticiones"],
-                        "lineas": info["lineas"]
+                        "lineas": info["lineas"],
+                        "valor": token
                     }
-                else:
-                    # Por si acaso se quiere acumular
-                    tabla_simbolos[token]["repeticiones"] += info["repeticiones"]
-                    tabla_simbolos[token]["lineas"].append(info["lineas"])
 
         return tabla_simbolos
 
@@ -183,6 +216,7 @@ class AnalizadorLexico:
         ruta_completa = os.path.join(ruta_carpeta, archivo_salida)
 
         tabla_tokens = {}
+        tokens_linea = []
         # Abre el archivo 'resultados_lexicos.txt' en modo escritura ('w')
         # para guardar los resultados del análisis léxico.
         with open(ruta_completa, 'w') as salida:
@@ -192,12 +226,13 @@ class AnalizadorLexico:
             while self.pila_tokens:
                 # Extrae un token desde la pila (tipo pila LIFO)
                 resultado = self.pila_tokens.popDat()
-                if resultado is not None:
-                    # Desempaqueta el token y su número de línea
-                    token, linea = resultado
-                else:
+                if resultado is None:
                     break # Sale del ciclo si no hay más tokens
-                
+
+                # Desempaqueta el token y su número de línea
+                token, linea = resultado
+                tokens_linea.append((token, linea))
+
                 # Determina el tipo léxico del token (identificador, número, palabra reservada, etc.)
                 tipo = self.clasificar_token(token)
                 # Obtiene el atributo asociado al token (puede ser un valor numérico o textual)
@@ -206,7 +241,7 @@ class AnalizadorLexico:
                 # Clasificación y almacenamiento de los tokens
                 if tipo not in ["Error Léxico"]:
                     if token not in tabla_tokens: 
-                        tabla_tokens[token]={
+                        tabla_tokens[token] = {
                             "tipo": tipo,
                             "atributo": atributo,
                             "repeticiones": 1,
@@ -216,18 +251,22 @@ class AnalizadorLexico:
                         # Actualizamos la información
                         tabla_tokens[token]["repeticiones"] += 1
                         tabla_tokens[token]["lineas"].append(linea)
-                
+
+            tokens_linea.reverse() # Porque era pila LIFO
+
+            # Guardar la tabla de tokens    
             salida.write("\nTabla de Tokens:\n")
             for token, info in tabla_tokens.items():
                 lineas_string = ", ".join(map(str, info['lineas']))
                 salida.write(f"| {token:<15} | Tipo: {info['tipo']:<20} | Atributo: {info['atributo']:<6} | Linea: {lineas_string:<5}\n")
 
-            tabla_simbolos = self.generar_tabla_simbolos(tabla_tokens)
+            # Construir la tabla de símbolos a partir de la tabla de tokens
+            tabla_simbolos = self.generar_tabla_simbolos(tabla_tokens, tokens_linea)
 
             salida.write("\nTabla de Símbolos:\n")
             for simbolo, info in tabla_simbolos.items():
                 lineas_string = ", ".join(map(str, info['lineas']))
-                salida.write(f"| {simbolo:<15} | Tipo: {info['tipo']:<20} | Atributo: {info['atributo']:<6} | Repeticiones: {info['repeticiones']:<3} | Linea: {lineas_string:<20}\n")
+                salida.write(f"| {simbolo:<15} | Tipo: {info['tipo']:<20} | id_token: {info['id_token']:<6} | Repeticiones: {info['repeticiones']:<3} | Linea: {lineas_string:<20} | valor: {info["valor"]}\n")
     
 
     # Elimina los espacios en blanco de una cadena

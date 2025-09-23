@@ -1,7 +1,5 @@
 programa ejemplo
-   int b, c;
-   b = 1;
-   c = 1;
+   int b = 1, c = 1;
    float a;
    double13N$$;
    a = b + c;

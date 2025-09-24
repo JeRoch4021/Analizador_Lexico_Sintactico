@@ -157,6 +157,7 @@ class AnalizadorLexico:
         """
 
         tabla_simbolos = {}
+        errores = []
         id_token_actual = 500
         i = 0
 
@@ -182,6 +183,14 @@ class AnalizadorLexico:
                                     "lineas": tabla_tokens[var_token]["lineas"],
                                     "valor": "0.0" if tipo_var == "float" else "0"
                                 }
+                            else:
+                                # Error de redeclaración
+                                errores.append({
+                                    "variable": var_token,
+                                    "linea": tokens_linea[i][1],
+                                    "tipo_anterior": tabla_simbolos[var_token]["tipo"],
+                                    "tipo_nuevo": tipo_var
+                                })
                             id_token_actual += 1
 
                     # Si hay asignación (=) después del identificador
@@ -206,7 +215,7 @@ class AnalizadorLexico:
                         "valor": token
                     }
 
-        return tabla_simbolos
+        return tabla_simbolos, errores
 
 
     def distribuir_tokens_en_tablas(self):
@@ -261,13 +270,16 @@ class AnalizadorLexico:
                 salida.write(f"| {token:<15} | Tipo: {info['tipo']:<20} | Atributo: {info['atributo']:<6} | Linea: {lineas_string:<5}\n")
 
             # Construir la tabla de símbolos a partir de la tabla de tokens
-            tabla_simbolos = self.generar_tabla_simbolos(tabla_tokens, tokens_linea)
+            tabla_simbolos, errores = self.generar_tabla_simbolos(tabla_tokens, tokens_linea)
 
             salida.write("\nTabla de Símbolos:\n")
             for simbolo, info in tabla_simbolos.items():
                 lineas_string = ", ".join(map(str, info['lineas']))
                 salida.write(f"| {simbolo:<15} | Tipo: {info['tipo']:<20} | id_token: {info['id_token']:<6} | Repeticiones: {info['repeticiones']:<3} | Linea: {lineas_string:<20} | valor: {info["valor"]}\n")
-    
+            if errores:
+                salida.write("\nTabla de Errores:\n")
+                for err in errores:
+                    salida.write(f"| Variable: {err['variable']:<10} | Línea: {err['linea']:<3} | Declarada antes como {err['tipo_anterior']} y ahora como {err['tipo_nuevo']} |\n")
 
     # Elimina los espacios en blanco de una cadena
     def stripCadena(self, cadena: str) -> str:

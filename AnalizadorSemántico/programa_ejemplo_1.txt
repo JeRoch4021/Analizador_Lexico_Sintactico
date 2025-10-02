@@ -1,7 +1,5 @@
 programa ejemplo
-   int a, b, c;
-   b = 1;
-   c = 1;
+   int a, b = 1, c = 1;
    a = b + c;
    leer a;
    escribir a;

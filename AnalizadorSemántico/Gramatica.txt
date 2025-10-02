@@ -1,28 +1,23 @@
-1.- <programa> -> class id { <lista_sent> }
-2.- <lista_sent> -> <sentencia> <sent_final>
-3.- <sent_final> -> <sentencia> <sent_final>
-4.- <sent_final> -> ε
-5.- <sentencia> -> tipo <lista_id> ;
-6.- <sentencia> -> id = <expresion> ;
-7.- <sentencia> -> read ( <lista_id> ) ;
-8.- <sentencia> -> write ( <lista_expr> ) ;
-9.- <lista_id> -> id <id_final>
-10.- <id_final> -> , id <id_final>
-11.- <id_final> -> ε
-12.- <lista_expr> -> <expresion> <lista_exprfinal>
-13.- <lista_exprfinal> -> , <expresion> <lista_exprfinal>
-14.- <lista_exprfinal> -> ε
-15.- <expresion> -> <expr_arit> <expr_final>
-16.- <expr_final> -> <operador> <expr_arit> <expr_final>
-17.- <expr_final> -> ε
-18.- <expr_arit> -> ( <expresion> )
-19.- <expr_arit> -> id
-20.- <expr_arit> -> enteros
-21.- <expr_arit> -> reales
-22.- <tipo> -> int
-23.- <tipo> -> float
-24.- <operador> -> +
-25.- <operador> -> -
-26.- <operador> -> *
-27.- <operador> -> /
-28.- <inicio> -> <programa>
+1. <inicio> -> programa id <sentencias> finprograma 
+2. <sentencias> -> <sent> <sentf> 
+3. <sentf> -> <sent> <sentf>
+4. <sentf> -> ε 
+5. <sent> -> <tipo> <listaid>;
+6. <sent> -> id = <expresión>;
+7. <sent> -> leer (<listaid>);
+8. <sent> -> escribir (<expresión>);
+9. <listaid> -> id <listaf>
+10. <listaf> -> , id <listaf>
+11. <listaf> -> ε 
+12. <expresión> -> <expr> <exprf> 
+13. <exprf> -> <oper> <expr> <exprf>
+14. <exprf> -> ε
+15. <expr> -> id
+16. <expr> -> litint
+17. <expr> -> litfloat
+18. <tipo> -> int         
+19. <tipo> -> float         
+20. <oper> -> +        
+21. <oper> -> -        
+22. <oper> -> /        
+23. <oper> -> * 

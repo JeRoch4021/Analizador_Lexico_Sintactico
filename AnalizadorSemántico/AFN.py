@@ -133,3 +133,35 @@ class automata:
         if palabra:
             partes.append("".join(palabra))
         return partes
+
+    def precedencia(self, operador: str) -> int:
+        if operador in ('+', '-'):
+            return 1
+        elif operador in ('*', '/'):
+            return 2
+        return 0
+
+    def conversionPrefija(self, expresion: str) -> str:
+        pila = p.Pila()
+        cursor = len(expresion) - 1 # Inicia desde el final de la expresión
+        resultado = "" # Resultado en notación prefija
+        operadores = set(['+', '-', '*', '/'])
+        while cursor >= 0:
+            char = expresion[cursor]
+            if char.isspace():
+                cursor -= 1
+                continue
+            if char in operadores:
+                while (not pila.isEmpty() and pila.peek() in operadores and self.precedencia(char) < self.precedencia(pila.peek())):
+                    resultado += pila.pop().valor
+                pila.push(char)
+            else:
+                resultado += char
+            cursor -= 1
+        while not pila.isEmpty():
+            resultado += pila.pop().valor
+        return resultado[::-1]  # Invertir el resultado para obtener la notación prefija
+
+if __name__ == "__main__":
+    afn = automata()
+    print(afn.conversionPrefija("a + b * c - d / e"))

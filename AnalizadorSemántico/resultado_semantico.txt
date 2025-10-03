@@ -1,2 +1,37 @@
 -----Reporte semántico------
 
+Tokens: ['a', '=', '0']
+Prefija derecha: ['0']
+Resultado de la asignación: True
+
+--------------------------------------------------
+Tokens: ['c', '=', '0']
+Prefija derecha: ['0']
+Resultado de la asignación: True
+
+--------------------------------------------------
+Tokens: ['e', '=', '0']
+Prefija derecha: ['0']
+Resultado de la asignación: True
+
+--------------------------------------------------
+Tokens: ['b', '=', '0.0']
+Prefija derecha: ['0.0']
+Resultado de la asignación: True
+
+--------------------------------------------------
+Tokens: ['d', '=', '0.0']
+Prefija derecha: ['0.0']
+Resultado de la asignación: True
+
+--------------------------------------------------
+Tokens: ['f', '=', '0.0']
+Prefija derecha: ['0.0']
+Resultado de la asignación: True
+
+--------------------------------------------------
+Tokens: ['f', '=', 'a', '+', 'b', '*', 'c', '-', 'd', '/', 'e']
+Prefija derecha: ['+', 'a', '-', '*', 'b', 'c', '/', 'd', 'e']
+Resultado de la asignación: True
+
+--------------------------------------------------

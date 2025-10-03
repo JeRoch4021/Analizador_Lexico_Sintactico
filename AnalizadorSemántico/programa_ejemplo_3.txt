@@ -2,7 +2,7 @@ programa ejemplo
    int b = 1, c = 1;
    float a;
    double13N$$;
-   a = b + c;
+   a = b - c;
    leer a;
    escribir a;
 finprograma

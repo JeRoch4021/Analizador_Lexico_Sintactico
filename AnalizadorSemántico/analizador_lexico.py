@@ -8,7 +8,7 @@ import pila as stack
 class AnalizadorLexico:
 
 
-    def __init__(self, nombre_archivo="AnalizadorSemántico/programa_ejemplo_4.txt"):
+    def __init__(self, nombre_archivo="AnalizadorSemántico/programa_ejemplo_6.txt"):
         self.automata_transiciones = AFN.automata()
         # Pila para almacenar los tokens encontrados
         self.pila_tokens = stack.Pila()
@@ -301,9 +301,5 @@ class AnalizadorLexico:
 if __name__ == "__main__":
     analizador_lexico = AnalizadorLexico()
 
-    tabla_tokens, tokens_linea, tabla_simbolos, errores = analizador_lexico.distribuir_tokens_en_tablas()
-
-    print("\n Tabla de símbolos caragada en memoria")
-    for simbolos, info in tabla_simbolos.items():
-        print(simbolos, info)
+    
 

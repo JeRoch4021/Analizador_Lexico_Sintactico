@@ -1,18 +1,9 @@
-programa Ejemplo1
-   int a, b;
-   float c, d, e, f;
-   a = 0; 
-   b = 0;
-   c = 0.0; 
-   d = 0.0; 
-   e = 0.0; 
-   f = 0.0; 
-   leer a;
-   leer b;
-   leer d;
-   leer e;
-   c = a * b + 3 + b;
-   f = 3.14 * d / e;
-   escribir c;
-   escribir f;
+programa
+   float cuenta = 0.0, numero = 0.0, resultado = 0.0;
+   int valor = 0;
+   leer valor;
+   cuenta = 23 + (numero – valor);
+   numero = cuenta / 123.99;
+   resultado = numero + cuenta;
+   escribir resultado;
 finprograma

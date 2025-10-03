@@ -1,6 +1,6 @@
 programa ejemplo
    float a, b = 1.1, c = 1.1;
-   a = b + c;
+   a = b * c;
    leer a;
    escribir a;
 finprograma

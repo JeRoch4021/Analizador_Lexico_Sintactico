@@ -1,9 +1,6 @@
 programa
-   float cuenta = 0.0, numero = 0.0, resultado = 0.0;
-   int valor = 0;
-   leer valor;
-   cuenta = 23 + (numero – valor);
-   numero = cuenta / 123.99;
-   resultado = numero + cuenta;
-   escribir resultado;
+   int a = 0, c = 0, e = 0;
+   float b = 0.0, d = 0.0, f = 0.0;
+   f = a + b * c - d / e;
+   escribir f;
 finprograma

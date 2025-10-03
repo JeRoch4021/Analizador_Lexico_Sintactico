@@ -80,7 +80,7 @@ class AnalizadorSemantico:
             tabla_simbolos[var_izq]['tipo'] = tipo_der
 
         # Compatibilidad de tipos: exacta, float/int permitido o desconocido asignable
-        if tipo_izq == tipo_der or (tipo_izq == "float" and tipo_der == "int") or tipo_izq == "desconocido":
+        if tipo_izq == tipo_der or tipo_izq == "desconocido":
             return True, tokens_linea, expr_prefija, tipo_izq, tipo_der
         else:
             return False, tokens_linea, expr_prefija, tipo_izq, tipo_der
@@ -130,7 +130,7 @@ if __name__ == "__main__":
     analizador_lexico = AnalizadorLexico()
     tabla_tokens, tokens_linea, tabla_simbolos, errores = analizador_lexico.distribuir_tokens_en_tablas()
 
-    archivo_expresiones = "AnalizadorSemántico/programa_ejemplo_5.txt"
+    archivo_expresiones = "AnalizadorSemántico/programa_ejemplo_2.txt"
     ruta_carpeta = "AnalizadorSemántico"
     archivo_salida = "resultado_semantico.txt"
     ruta_completa = os.path.join(ruta_carpeta, archivo_salida)

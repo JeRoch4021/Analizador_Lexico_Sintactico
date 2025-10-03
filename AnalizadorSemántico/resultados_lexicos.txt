@@ -1,34 +1,5 @@
 Archivo Tabla de Tokens
 
 Tabla de Tokens:
-| finprograma     | Tipo: Palabra Reservada    | Atributo: 263    | Linea: 9    
-| ;               | Tipo: Caracter Simple      | Atributo: 59     | Linea: 8, 7, 6, 5, 4, 3, 2
-| resultado       | Tipo: Identificador        | Atributo: 261    | Linea: 8, 7, 2
-| escribir        | Tipo: Palabra Reservada    | Atributo: 262    | Linea: 8    
-| cuenta          | Tipo: Identificador        | Atributo: 261    | Linea: 7, 6, 5, 2
-| +               | Tipo: Operador Aritmético  | Atributo: 43     | Linea: 7, 5 
-| numero          | Tipo: Identificador        | Atributo: 261    | Linea: 7, 6, 5, 2
-| =               | Tipo: Asignación           | Atributo: 520    | Linea: 7, 6, 5, 3, 2, 2, 2
-| 123.99          | Tipo: Número Real          | Atributo: 891    | Linea: 6    
-| /               | Tipo: Operador Aritmético  | Atributo: 47     | Linea: 6    
-| )               | Tipo: Caracter Simple      | Atributo: 41     | Linea: 5    
-| valor           | Tipo: Identificador        | Atributo: 261    | Linea: 5, 4, 3
-| (               | Tipo: Caracter Simple      | Atributo: 40     | Linea: 5    
-| 23              | Tipo: Número Entero        | Atributo: 732    | Linea: 5    
-| leer            | Tipo: Palabra Reservada    | Atributo: 265    | Linea: 4    
-| 0               | Tipo: Número Entero        | Atributo: 732    | Linea: 3    
-| int             | Tipo: Palabra Reservada    | Atributo: 258    | Linea: 3    
-| 0.0             | Tipo: Número Real          | Atributo: 891    | Linea: 2, 2, 2
-| ,               | Tipo: Caracter Simple      | Atributo: 44     | Linea: 2, 2 
-| float           | Tipo: Palabra Reservada    | Atributo: 259    | Linea: 2    
-| programa        | Tipo: Palabra Reservada    | Atributo: 257    | Linea: 1    
 
 Tabla de Símbolos:
-| cuenta          | Tipo: float                | id_token: 500    | Repeticiones: 4   | Linea: 7, 6, 5, 2           | valor: 0.0
-| numero          | Tipo: float                | id_token: 501    | Repeticiones: 4   | Linea: 7, 6, 5, 2           | valor: 0.0
-| resultado       | Tipo: float                | id_token: 502    | Repeticiones: 3   | Linea: 8, 7, 2              | valor: 0.0
-| valor           | Tipo: int                  | id_token: 503    | Repeticiones: 3   | Linea: 5, 4, 3              | valor: 0
-| 123.99          | Tipo: float                | id_token:        | Repeticiones: 1   | Linea: 6                    | valor: 123.99
-| 23              | Tipo: int                  | id_token:        | Repeticiones: 1   | Linea: 5                    | valor: 23
-| 0               | Tipo: int                  | id_token:        | Repeticiones: 1   | Linea: 3                    | valor: 0
-| 0.0             | Tipo: float                | id_token:        | Repeticiones: 3   | Linea: 2, 2, 2              | valor: 0.0

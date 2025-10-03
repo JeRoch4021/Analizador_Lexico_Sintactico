@@ -281,6 +281,9 @@ class AnalizadorLexico:
                 for err in errores:
                     salida.write(f"| Variable: {err['variable']:<10} | Línea: {err['linea']:<3} | Declarada antes como {err['tipo_anterior']} y ahora como {err['tipo_nuevo']} |\n")
 
+        # Devolvemos las estructuras para usarlas en otros fragmentos de código
+        return tabla_tokens, tokens_linea, tabla_simbolos, errores
+
     # Elimina los espacios en blanco de una cadena
     def stripCadena(self, cadena: str) -> str:
         caracteres_no_validos = " \n\t\r"
@@ -296,4 +299,11 @@ class AnalizadorLexico:
         return cadena[inicio:fin + 1] # Devuelve una subcadena desde el inicio hasta el fin + 1 
     
 if __name__ == "__main__":
-    analizasor_lexico = AnalizadorLexico()
+    analizador_lexico = AnalizadorLexico()
+
+    tabla_tokens, tokens_linea, tabla_simbolos, errores = analizador_lexico.distribuir_tokens_en_tablas()
+
+    print("\n Tabla de símbolos caragada en memoria")
+    for simbolos, info in tabla_simbolos.items():
+        print(simbolos, info)
+

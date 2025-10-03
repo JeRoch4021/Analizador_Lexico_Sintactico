@@ -2,36 +2,32 @@
 
 Tokens: ['cuenta', '=', '0.0']
 Prefija derecha: ['0.0']
-Error de tipos: cuenta (desconocido) = expr (float)
 Resultado de la asignación: True
 
 --------------------------------------------------
 Tokens: ['numero', '=', '0.0']
 Prefija derecha: ['0.0']
-Error de tipos: numero (desconocido) = expr (float)
 Resultado de la asignación: True
 
 --------------------------------------------------
 Tokens: ['resultado', '=', '0.0']
 Prefija derecha: ['0.0']
-Error de tipos: resultado (desconocido) = expr (float)
 Resultado de la asignación: True
 
 --------------------------------------------------
 Tokens: ['valor', '=', '0']
 Prefija derecha: ['0']
-Error de tipos: valor (desconocido) = expr (int)
 Resultado de la asignación: True
 
 --------------------------------------------------
 Tokens: ['cuenta', '=', '23', '+', '(', 'numero', '-', 'valor', ')']
-Prefija derecha: ['+', '23', '-', '(', 'numero', 'valor', ')']
-Resultado de la asignación: False
+Prefija derecha: ['+', '23', '-', 'numero', 'valor']
+Resultado de la asignación: True
 
 --------------------------------------------------
 Tokens: ['numero', '=', 'cuenta', '/', '123.99']
 Prefija derecha: ['/', 'cuenta', '123.99']
-Resultado de la asignación: False
+Resultado de la asignación: True
 
 --------------------------------------------------
 Tokens: ['resultado', '=', 'numero', '+', 'cuenta']

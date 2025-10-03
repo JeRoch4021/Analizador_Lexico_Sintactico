@@ -133,3 +133,126 @@ class automata:
         if palabra:
             partes.append("".join(palabra))
         return partes
+
+    def precedencia(self, operador: str) -> int:
+        if operador in ('+', '-'):
+            return 1
+        elif operador in ('*', '/'):
+            return 2
+        return 0
+
+    def conversionPrefija(self, expresion: str) -> str:
+        pila = p.Pila()
+        cursor = len(expresion) - 1 # Inicia desde el final de la expresión
+        resultado = "" # Resultado en notación prefija
+        operadores = set(['+', '-', '*', '/'])
+        while cursor >= 0:
+            char = expresion[cursor]
+            if char.isspace():
+                cursor -= 1
+                continue
+            if char in operadores:
+                while (not pila.isEmpty() and pila.peek() in operadores and self.precedencia(char) < self.precedencia(pila.peek())):
+                    resultado += pila.pop().valor
+                pila.push(char)
+            else:
+                resultado += char
+            cursor -= 1
+        while not pila.isEmpty():
+            resultado += pila.pop().valor
+        return resultado[::-1]  # Invertir el resultado para obtener la notación prefija
+
+    def comprobar_asignacion(self, expresion: str, tabla_simbolos: dict) -> bool:
+        """
+        Verifica la validez de una asignación con comprobación de tipos.
+        """
+
+        # 1) Separamos lado izquierdo y derecho
+        if '=' not in expresion:
+            print("Error: no es una asignación válida")
+            return False
+        var_izq, expr_der = [parte.strip() for parte in expresion.split('=', 1)]
+
+        # 2) Validamos que la variable de la izquierda exista en la tabla
+        if var_izq not in tabla_simbolos:
+            print(f"Error: variable '{var_izq}' no declarada en tabla de símbolos")
+            return False
+        tipo_izq = tabla_simbolos[var_izq]
+
+        # 3) Convertimos la parte derecha a prefija (tokenizada)
+        tokens_der = expr_der.split()  # convertir string a lista de tokens
+        expr_prefija = self.conversionPrefija(tokens_der)
+        print(f"Prefija derecha: {expr_prefija}")
+
+        # 4) Comprobamos tipos en la parte derecha
+        tipo_derecha = self.comprobar_tipos(expr_prefija, tabla_simbolos)
+        if tipo_derecha is None:
+            return False  # error detectado
+
+        # 5) Comprobamos compatibilidad de asignación
+        if tipo_izq == tipo_derecha:
+            print(f"Asignación válida: {var_izq} ({tipo_izq}) = expr ({tipo_derecha})")
+            return True
+        elif tipo_izq == "float" and tipo_derecha == "int":
+            print(f"Asignación válida con promoción: {var_izq} ({tipo_izq}) = expr ({tipo_derecha})")
+            return True
+        else:
+            print(f"Error de tipos en asignación: {var_izq} ({tipo_izq}) = expr ({tipo_derecha})")
+            return False
+
+        
+    def comprobar_tipos(self, expresion_prefija: list[str], tabla_simbolos: dict) -> str | None:
+        """
+        Verifica la expresión prefija y devuelve el tipo resultante si es válido.
+        :return: 'int', 'float' o None si hubo error
+        """
+        pila_tipos = []
+        operadores = {'+', '-', '*', '/'}
+        tokens = expresion_prefija  # ya es lista de tokens
+
+        for token in reversed(tokens):
+            if token in operadores:
+                if len(pila_tipos) < 2:
+                    print(f"Error: faltan operandos para {token}")
+                    return None
+                tipo1 = pila_tipos.pop()
+                tipo2 = pila_tipos.pop()
+
+                if tipo1 == tipo2:
+                    pila_tipos.append(tipo1)
+                elif (tipo1, tipo2) in [('int', 'float'), ('float', 'int')]:
+                    pila_tipos.append('float')
+                else:
+                    print(f"Error de tipos: {tipo1} {token} {tipo2}")
+                    return None
+            else:
+                if token in tabla_simbolos:
+                    pila_tipos.append(tabla_simbolos[token])
+                elif token.isdigit():
+                    pila_tipos.append('int')
+                elif '.' in token and token.replace('.', '').isdigit():
+                    pila_tipos.append('float')
+                else:
+                    print(f"Error: token {token} no reconocido")
+                    return None
+
+        return pila_tipos[0] if len(pila_tipos) == 1 else None
+
+    
+if __name__ == "__main__":
+    afn = automata()
+    expresion = "a + b * c - d / e"
+    tokens = expresion.split()  # divide por espacios
+    prefija = afn.conversionPrefija(tokens)
+    print(prefija)
+
+    tabla_simbolos = {
+        'a': 'int',
+        'b': 'float',
+        'c': 'int',
+        'd': 'float',
+        'e': 'int'
+    }
+    expresion = "c = a + b * 3"
+    resultado = afn.comprobar_asignacion(expresion, tabla_simbolos)
+    print("Resultado de la asignación:", resultado)

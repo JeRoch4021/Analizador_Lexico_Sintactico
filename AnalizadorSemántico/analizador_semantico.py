@@ -130,7 +130,7 @@ if __name__ == "__main__":
     analizador_lexico = AnalizadorLexico()
     tabla_tokens, tokens_linea, tabla_simbolos, errores = analizador_lexico.distribuir_tokens_en_tablas()
 
-    archivo_expresiones = "AnalizadorSemántico/programa_ejemplo_4.txt"
+    archivo_expresiones = "AnalizadorSemántico/programa_ejemplo_5.txt"
     ruta_carpeta = "AnalizadorSemántico"
     archivo_salida = "resultado_semantico.txt"
     ruta_completa = os.path.join(ruta_carpeta, archivo_salida)

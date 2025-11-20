@@ -10,8 +10,9 @@ class automata:
             'int': 258, 
             'float': 259,
             'leer': 265, 
-            'escribir': 262, 
-            'finprograma': 263
+            'escribir': 262,
+            'mostrar' : 263,
+            'finprograma': 264
         }
 
         # Identificadores: Token 261

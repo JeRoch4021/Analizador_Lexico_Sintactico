@@ -1,12 +1,8 @@
 programa Ejemplo1
    int a, b;
    float c, d, e, f;
-   a = 0; 
-   b = 0;
-   c = 0.0; 
-   d = 0.0; 
-   e = 0.0; 
-   f = 0.0; 
+   a = 0, b = 0;
+   c = 0.0, d = 0.0, e = 0.0, f = 0.0; 
    leer a;
    leer b;
    leer d;

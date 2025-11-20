@@ -8,7 +8,7 @@ import pila as stack
 class AnalizadorLexico:
 
 
-    def __init__(self, nombre_archivo="AnalizadorSemántico/programa_ejemplo_6.txt"):
+    def __init__(self, nombre_archivo="AnalizadorSemántico/programa_ejemplo_No7.txt"):
         self.automata_transiciones = AFN.automata()
         # Pila para almacenar los tokens encontrados
         self.pila_tokens = stack.Pila()
@@ -18,13 +18,14 @@ class AnalizadorLexico:
             'int': 258, 
             'float': 259,
             'leer': 265, 
-            'escribir': 262, 
-            'finprograma': 263
+            'escribir': 262,
+            'mostrar' : 263,
+            'finprograma': 264
         }
         self.tokens = []
         self.cargar_tokens(nombre_archivo)
         self.analizar_archivo(nombre_archivo)
-        self.distribuir_tokens_en_tablas()
+        #self.distribuir_tokens_en_tablas()
 
 
     def cargar_tokens(self, nombre_archivo):
@@ -80,17 +81,29 @@ class AnalizadorLexico:
         longitud = len(cadena)
 
         while inicio < longitud:
-            final = inicio + 1
+            final = longitud
+            encontrado = False
+            #final = inicio + 1
 
             while final <= longitud:
                 subcadena = cadena[inicio:final]
                 tipo = self.clasificar_token(subcadena)
                 if tipo != 'Error Léxico':
                     # Si la subcadena completa es un token valido, lo guardamos como valido
-                    return [cadena]
-                else:
+                    #return [cadena]
+                    palabras.append(subcadena)
+                    inicio = final
+                    encontrado = True
+                    break
+                #else:
                     # Si no es un token valido, lo guardamos como error léxico
-                    return [cadena]
+                    #return [cadena]
+                final -= 1
+
+                if not encontrado:
+                    palabras.append(cadena[inicio])
+                    inicio += 1
+
 
         return palabras
     
@@ -229,7 +242,7 @@ class AnalizadorLexico:
         # Abre el archivo 'resultados_lexicos.txt' en modo escritura ('w')
         # para guardar los resultados del análisis léxico.
         with open(ruta_completa, 'w') as salida:
-            salida.write("Archivo Tabla de Tokens\n")
+            salida.write("Resultados Lexicos\n")
 
             # Recorre la pila de tokens mientras no esté vacía.
             while self.pila_tokens:
@@ -296,10 +309,4 @@ class AnalizadorLexico:
         while fin >= inicio and cadena[fin] in caracteres_no_validos:
             fin -= 1
         
-        return cadena[inicio:fin + 1] # Devuelve una subcadena desde el inicio hasta el fin + 1 
-    
-if __name__ == "__main__":
-    analizador_lexico = AnalizadorLexico()
-
-    
-
+        return cadena[inicio:fin + 1] # Devuelve una subcadena desde el inicio hasta el fin + 1

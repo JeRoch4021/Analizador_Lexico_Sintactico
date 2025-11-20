@@ -1,0 +1,16 @@
+programa
+   int a, b, c;
+   float d, e, f;
+   a = 0; b = 0; c = 0;
+   d = 0.0; e = 0.0; f = 0.0;
+   leer a;
+   leer b;
+   leer c;
+   leer d;
+   leer e;
+   leer f;
+   a = 3 + b * c - 5;
+   d = 3.14 / e * f / 5.25;
+   mostrar a;
+   mostrar d;
+finprograma

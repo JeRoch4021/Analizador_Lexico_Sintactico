@@ -1,0 +1,38 @@
+----- CÓDIGO P -----
+
+loadi a
+loadi b
+loadi c
+loadi d
+loadi e
+loadi f
+loadc 0
+assign a 0
+assign b 0
+assign c 0
+loadc 0.0
+assign d 0.0
+assign e 0.0
+assign f 0.0
+read a
+read b
+read c
+read d
+read e
+read f
+mult b c
+assign Temp1 b
+sum 3 Temp1
+assign Temp2 3
+rest Temp2 5
+assign Temp3 Temp2
+assign Temp3 a
+div 3.14 e
+assign Temp1 3.14
+mult Temp1 f
+assign Temp2 Temp1
+div Temp2 5.25
+assign Temp3 Temp2
+assign Temp3 d
+show a
+show d

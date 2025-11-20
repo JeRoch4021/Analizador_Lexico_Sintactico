@@ -1,50 +1,13 @@
-from pila import Pila
 from analizador_lexico import AnalizadorLexico
+from conversion_prefija import ConversionPrefija
+from codigo_intermedio import CodigoIntermedio
 import os
 
 class AnalizadorSemantico:
-
-    # Función que devuelve la precedencia de los operadores
-    def precedencia(self, operador: str) -> int:
-        if operador in ('+', '-'):
-            return 1 # Suma y resta tienen precedencia 1
-        elif operador in ('*', '/'):
-            return 2 # Multiplicación y división tienen precedencia 2
-        return 0 # Otros símbolos (o no operadores) tienen precedencia 0
-
-    # Convierte una lista de tokens a notación prefija
-    def conversionPrefija(self, tokens: list[str]) -> list[str]:
-        """Convierte una lista de tokens en notación prefija."""
-        pila = Pila() # Pila para operadores
-        resultado = [] # Lista de resultado prefija
-        operadores = set(['+', '-', '*', '/']) # Conjunto de operadores válidos
-
-        # Se recorre la lista de tokens de derecha a izquierda
-        for token in reversed(tokens):
-            if token == ')':
-                pila.push(token)  # Guardamos el paréntesis derecho
-            elif token == '(':
-                # Sacar operadores hasta encontrar un paréntesis derecho
-                while not pila.isEmpty() and pila.peek() != ')':
-                    resultado.append(pila.pop())
-                if not pila.isEmpty():
-                    pila.pop()  # Quitar el paréntesis derecho
-            elif token in operadores:
-                # Sacar operadores de mayor o igual precedencia antes de agregar
-                while (not pila.isEmpty() and pila.peek() in operadores 
-                       and self.precedencia(token) <= self.precedencia(pila.peek())):
-                    resultado.append(pila.pop())
-                pila.push(token) # Agregar operador actual a la pila
-            else:
-                # Si es un operando (número o variable)
-                resultado.append(token)
-        # Vaciar cualquier operador restante en la pila
-        while not pila.isEmpty():
-            resultado.append(pila.pop())
-        return resultado[::-1]  # Invertir la lista para obtener notación prefija correcta
-
+    
     # Verifica la validez de una asignación y tipos
     def comprobar_asignacion(self, expresion: str, tabla_simbolos: dict):
+        extraer_funcion = ConversionPrefija()
         """Verifica la validez de una asignación con comprobación de tipos."""
 
         if '=' not in expresion:
@@ -66,7 +29,7 @@ class AnalizadorSemantico:
 
         # Tokenizar expresión derecha y convertir a prefija
         tokens_der = expr_der.replace('(', ' ( ').replace(')', ' ) ').split()
-        expr_prefija = self.conversionPrefija(tokens_der)
+        expr_prefija = extraer_funcion.generar_conversion_prefija(tokens_der)
 
         # Comprobar tipo de expresión derecha
         tipo_der = self.comprobar_tipos(expr_prefija, tabla_simbolos)
@@ -123,22 +86,69 @@ class AnalizadorSemantico:
                 else:
                     return None
 
-        return pila_tipos[0] if len(pila_tipos) == 1 else None
-
+        return pila_tipos[0] if len(pila_tipos) == 1 else None                 
 
 if __name__ == "__main__":
+    # Crea una instancia del analizador léxico
     analizador_lexico = AnalizadorLexico()
+    # Crea una instancia del código intermedio (funciones)
+    codigo_intermedio = CodigoIntermedio()
+    # Crea una instancia del analizador semántico
+    analizador_semantico = AnalizadorSemantico()
+    # Llamada a la función distribuir_tokens_en_tablas del analizador_lexico
+    # para obtener los datos de algunas de las tabla de información
     tabla_tokens, tokens_linea, tabla_simbolos, errores = analizador_lexico.distribuir_tokens_en_tablas()
 
-    archivo_expresiones = "AnalizadorSemántico/programa_ejemplo_2.txt"
     ruta_carpeta = "AnalizadorSemántico"
-    archivo_salida = "resultado_semantico.txt"
-    ruta_completa = os.path.join(ruta_carpeta, archivo_salida)
+    archivo_programa = os.path.join(ruta_carpeta, "programa_ejemplo_No7.txt")
+    archivo_resultados_semanticos = os.path.join(ruta_carpeta, "resultado_semantico.txt")
+    archivo_notacion = os.path.join(ruta_carpeta, "notacion_prefija.txt")
+    archivo_codigo_p = os.path.join(ruta_carpeta, "codigo_p.txt")
 
-    analizador_semantico = AnalizadorSemantico()
+    # Instrucción para leer el programa fuente
+    with open(archivo_programa, "r") as f:
+        lineas_programa = f.readlines()
 
-    with open(archivo_expresiones, "r") as expresiones, open(ruta_completa, "w") as salida:
-        salida.write("-----Reporte semántico------\n\n")
+    # Extracción de la función para recibir el archivo del programa fuente
+    # escrito de forma prefija 
+    notacion_prefija = codigo_intermedio.generar_notacion_prefija(lineas_programa, tabla_simbolos)
+
+    # Creación del archivo con la notación prefija
+    with open(archivo_notacion, "w") as out_prefija:
+        out_prefija.write("----- NOTACIÓN PREFIJA -----\n\n")
+        # Escribir cada instrucción generada
+        for item in notacion_prefija:
+            # Escribir la instrucción en forma de tupla
+            if isinstance(item, tuple):
+                var, expr = item
+                out_prefija.write(f"= {var} {expr}\n")
+            else:
+                # Escribir solo la instrucción (en caso de que todo esté unido)
+                out_prefija.write(f"{item}\n")
+
+    print(f"Archivo generado: {archivo_notacion}")
+
+    # Extracción de la función para recibir el archivo escrito de forma
+    # prefija y obtener el archivo del código p
+    codigo_p = codigo_intermedio.generar_codigo_p(notacion_prefija, tabla_simbolos)
+
+    # Creación del archivo código p
+    with open(archivo_codigo_p, "w") as out_cp:
+        out_cp.write("----- CÓDIGO P -----\n\n")
+        # Escribir cada instrucción generada
+        for item in codigo_p:
+            # Escribir la instrucción en forma de tupla
+            if isinstance(item, tuple):
+                var, expr = item
+                out_cp.write(f"= {var} {expr}\n")
+            else:
+                # Escribir solo la instrucción (en caso de que todo esté unido)
+                out_cp.write(f"{item}\n")
+
+    print(f"Archivo generado: {archivo_codigo_p}")
+
+    with open(archivo_programa, "r") as expresiones, open(archivo_resultados_semanticos, "w") as salida:
+        salida.write("-----REPORTE SEMÁNTICO-----\n\n")
         for linea in expresiones:
             linea = linea.strip()
             if not linea or '=' not in linea:
@@ -177,7 +187,4 @@ if __name__ == "__main__":
                 salida.write(f"Resultado de la asignación: {resultado}\n\n")
                 salida.write("-" * 50 + "\n")
 
-    print(f"Archivo de resultados generado: {archivo_salida}")
-
-
-
+    print(f"Archivo de resultados generado: {archivo_resultados_semanticos}")

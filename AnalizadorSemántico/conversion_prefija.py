@@ -28,7 +28,7 @@ class ConversionPrefija:
                 if not pila.isEmpty():
                     pila.pop()  # Quitar el paréntesis derecho
             elif token in operadores:
-                # Sacar operadores de mayor o igual precedencia antes de agregar
+                # Sacar operadores de mayor precedencia antes de agregar
                 while (not pila.isEmpty() and pila.peek() in operadores 
                        and self.precedencia(token) < self.precedencia(pila.peek())):
                     resultado.append(pila.pop())

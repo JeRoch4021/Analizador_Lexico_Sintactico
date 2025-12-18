@@ -3,16 +3,18 @@ import os
 import AFN
 # Módulo que contiene la clase Pila (estructura tipo stack)
 import pila as stack
+# Módulo que contiene métodos para manipulación de cadenas
+import MetodosString as MS
 
 # Clase principal que implementa un analizador léxico utilizando AFNs.
 class AnalizadorLexico:
-
-
     def __init__(self, nombre_archivo="AnalizadorSemántico/programa_ejemplo_No7.txt"):
         self.automata_transiciones = AFN.automata()
         # Pila para almacenar los tokens encontrados
         self.pila_tokens = stack.Pila()
-         # Diccionario con palabras reservadas y sus atributos únicos
+        # Instancia de la clase MetodosString para manipulación de cadenas
+        self.MS = MS.MetodosString()
+        # Diccionario con palabras reservadas y sus atributos únicos
         self.atributos_reservados = {
             'programa': 257, 
             'int': 258, 
@@ -35,7 +37,7 @@ class AnalizadorLexico:
         with open (nombre_archivo, 'r') as archivo:
             numero_linea = 1
             for linea in archivo:
-                palabras = self.obtener_palabras_de_cadena(self.stripCadena(linea))
+                palabras = self.obtener_palabras_de_cadena(self.MS.stripCadena(linea))
 
                 for palabra in palabras:
                     self.tokens.append(palabra)
@@ -151,10 +153,10 @@ class AnalizadorLexico:
         with open(nombre_archivo, 'r') as archivo:
             numero_linea = 1
             for linea in archivo:
-                print(f"\nAnalizando línea {numero_linea}: {self.stripCadena(linea)}")
+                print(f"\nAnalizando línea {numero_linea}: {self.MS.stripCadena(linea)}")
 
                 # Método para extraer palabras/tokens
-                palabras = self.obtener_palabras_de_cadena(self.stripCadena(linea))
+                palabras = self.obtener_palabras_de_cadena(self.MS.stripCadena(linea))
 
                 for palabra in palabras:
                     self.pila_tokens.push((palabra, numero_linea))
@@ -296,17 +298,3 @@ class AnalizadorLexico:
 
         # Devolvemos las estructuras para usarlas en otros fragmentos de código
         return tabla_tokens, tokens_linea, tabla_simbolos, errores
-
-    # Elimina los espacios en blanco de una cadena
-    def stripCadena(self, cadena: str) -> str:
-        caracteres_no_validos = " \n\t\r"
-        inicio = 0
-        fin = len(cadena) - 1
-
-        while inicio <= fin and cadena[inicio] in caracteres_no_validos:
-            inicio += 1
-
-        while fin >= inicio and cadena[fin] in caracteres_no_validos:
-            fin -= 1
-        
-        return cadena[inicio:fin + 1] # Devuelve una subcadena desde el inicio hasta el fin + 1

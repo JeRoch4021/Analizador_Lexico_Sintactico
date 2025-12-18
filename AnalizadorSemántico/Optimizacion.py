@@ -1,6 +1,7 @@
 import os
 import pila as Pila
 import MetodosString as MS
+import re
 
 class Optimizacion:
     def __init__(self, codigo_intermedio="AnalizadorSemántico/codigo_p.txt"):
@@ -32,13 +33,5 @@ class Optimizacion:
                 return True
         return False
     
-    def esVariable(self) -> bool:
-        linea = self.Pila.peek()
-
-        if linea[len(linea) - 1]:
-            return True
-        return False
-    
-
-
-                            
+    def noEsNumero(self, valor: str) -> bool:
+        return not re.match(r'^\d+(\.\d+)?$', valor)  # Verifica si no es un número entero o real

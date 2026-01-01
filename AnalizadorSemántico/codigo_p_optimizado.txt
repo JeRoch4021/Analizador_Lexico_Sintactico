@@ -1,4 +1,4 @@
------ CÓDIGO P -----
+----- CÓDIGO P OPTIMIZADO -----
 
 loadi a
 loadi b
@@ -14,24 +14,18 @@ loadc 0.0
 assign d 0.0
 assign e 0.0
 assign f 0.0
-read a
 read b
 read c
-read d
 read e
 read f
-mult b c
 assign Temp1 b
 sum Temp1 3
 assign Temp2 Temp1
 rest Temp2 5
 assign Temp3 Temp2
 assign a Temp3
-div 3.14 e
 assign Temp1 3.14
-mult Temp1 f
 assign Temp2 Temp1
-div Temp2 5.25
 assign Temp3 Temp2
 assign d Temp3
 show a

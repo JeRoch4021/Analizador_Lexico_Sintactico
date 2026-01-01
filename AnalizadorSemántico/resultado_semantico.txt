@@ -1,4 +1,4 @@
------Reporte semántico------
+-----REPORTE SEMÁNTICO-----
 
 Tokens: ['a', '=', '0;', 'b', '=', '0;', 'c', '=', '0']
 Prefija derecha: ['0;', 'b', '=', '0;', 'c', '=', '0']

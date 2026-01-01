@@ -212,27 +212,32 @@ class CodigoIntermedio:
                     else:
                         # Sacamos de la pila los 2 operandos que se
                         # encuentren en el tope
-                        operando_1 = pila.pop()
-                        operando_2 = pila.pop()
+                        operando_izquierdo = pila.pop()
+                        operando_derecho = pila.pop()
                         # Registramos el temporal que los reemplazó
                         temp = f"Temp{contador_temporal}"
                         contador_temporal += 1
 
+                        # Si el operando izquierdo es un numero, los volteamos para
+                        # guardar el resultado en la variable temporal
+                        if operando_izquierdo.replace('.', '', 1).isdigit() and token in ['+', '*']:
+                            operando_izquierdo, operando_derecho = operando_derecho, operando_izquierdo
+                        
                         # Generamos las instrucciones correspondientes
                         if token == '+':
-                            codigo_p.append(f"sum {operando_1} {operando_2}")
+                            codigo_p.append(f"sum {operando_izquierdo} {operando_derecho}")
                         elif token == '-':
-                            codigo_p.append(f"rest {operando_1} {operando_2}")
+                            codigo_p.append(f"rest {operando_izquierdo} {operando_derecho}")
                         elif token == '*':
-                            codigo_p.append(f"mult {operando_1} {operando_2}")
+                            codigo_p.append(f"mult {operando_izquierdo} {operando_derecho}")
                         elif token == '/':
-                            codigo_p.append(f"div {operando_1} {operando_2}")
+                            codigo_p.append(f"div {operando_izquierdo} {operando_derecho}")
 
                         # Guardamos el resultado parcial de la operación
-                        codigo_p.append(f"assign {temp} {operando_1}")
+                        codigo_p.append(f"assign {temp} {operando_izquierdo}")
                         pila.append(temp)
 
                 # Agregamos la asignación final
-                codigo_p.append(f"assign {pila.pop()} {variable}")
+                codigo_p.append(f"assign {variable} {pila.pop()}")
 
         return codigo_p

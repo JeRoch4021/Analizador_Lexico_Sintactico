@@ -1,6 +1,8 @@
 programa
-   int a = 0, c = 0, e = 0;
-   float b = 0.0, d = 0.0, f = 0.0;
+   int a, c, e;
+   float b, d, f;
+   a = 0, c = 0, e = 0;
+   b = 0.0, d = 0.0, f = 0.0;
    f = a + b * c - d / e;
    escribir f;
 finprograma

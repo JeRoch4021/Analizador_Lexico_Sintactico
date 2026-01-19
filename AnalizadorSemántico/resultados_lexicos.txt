@@ -1,42 +1,33 @@
 Resultados Lexicos
 
 Tabla de Tokens:
-| finprograma     | Tipo: Palabra Reservada    | Atributo: 264    | Linea: 16   
-| ;               | Tipo: Caracter Simple      | Atributo: 59     | Linea: 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 5, 5, 4, 4, 4, 3, 2
-| d               | Tipo: Identificador        | Atributo: 261    | Linea: 15, 13, 9, 5, 3
-| mostrar         | Tipo: Palabra Reservada    | Atributo: 263    | Linea: 15, 14
-| a               | Tipo: Identificador        | Atributo: 261    | Linea: 14, 12, 6, 4, 2
-| 5.25            | Tipo: Número Real          | Atributo: 891    | Linea: 13   
-| /               | Tipo: Operador Aritmético  | Atributo: 47     | Linea: 13, 13
-| f               | Tipo: Identificador        | Atributo: 261    | Linea: 13, 11, 5, 3
-| *               | Tipo: Operador Aritmético  | Atributo: 42     | Linea: 13, 12
-| e               | Tipo: Identificador        | Atributo: 261    | Linea: 13, 10, 5, 3
-| 3.14            | Tipo: Número Real          | Atributo: 891    | Linea: 13   
-| =               | Tipo: Asignación           | Atributo: 520    | Linea: 13, 12, 5, 5, 5, 4, 4, 4
-| 5               | Tipo: Número Entero        | Atributo: 732    | Linea: 12   
-| -               | Tipo: Operador Aritmético  | Atributo: 45     | Linea: 12   
-| c               | Tipo: Identificador        | Atributo: 261    | Linea: 12, 8, 4, 2
-| b               | Tipo: Identificador        | Atributo: 261    | Linea: 12, 7, 4, 2
-| +               | Tipo: Operador Aritmético  | Atributo: 43     | Linea: 12   
-| 3               | Tipo: Número Entero        | Atributo: 732    | Linea: 12   
-| leer            | Tipo: Palabra Reservada    | Atributo: 265    | Linea: 11, 10, 9, 8, 7, 6
+| finprograma     | Tipo: Palabra Reservada    | Atributo: 264    | Linea: 8    
+| ;               | Tipo: Caracter Simple      | Atributo: 59     | Linea: 7, 6, 5, 4, 3, 2
+| f               | Tipo: Identificador        | Atributo: 261    | Linea: 7, 6, 5, 3
+| escribir        | Tipo: Palabra Reservada    | Atributo: 262    | Linea: 7    
+| e               | Tipo: Identificador        | Atributo: 261    | Linea: 6, 4, 2
+| /               | Tipo: Operador Aritmético  | Atributo: 47     | Linea: 6    
+| d               | Tipo: Identificador        | Atributo: 261    | Linea: 6, 5, 3
+| -               | Tipo: Operador Aritmético  | Atributo: 45     | Linea: 6    
+| c               | Tipo: Identificador        | Atributo: 261    | Linea: 6, 4, 2
+| *               | Tipo: Operador Aritmético  | Atributo: 42     | Linea: 6    
+| b               | Tipo: Identificador        | Atributo: 261    | Linea: 6, 5, 3
+| +               | Tipo: Operador Aritmético  | Atributo: 43     | Linea: 6    
+| a               | Tipo: Identificador        | Atributo: 261    | Linea: 6, 4, 2
+| =               | Tipo: Asignación           | Atributo: 520    | Linea: 6, 5, 5, 5, 4, 4, 4
 | 0.0             | Tipo: Número Real          | Atributo: 891    | Linea: 5, 5, 5
+| ,               | Tipo: Caracter Simple      | Atributo: 44     | Linea: 5, 5, 4, 4, 3, 3, 2, 2
 | 0               | Tipo: Número Entero        | Atributo: 732    | Linea: 4, 4, 4
-| ,               | Tipo: Caracter Simple      | Atributo: 44     | Linea: 3, 3, 2, 2
 | float           | Tipo: Palabra Reservada    | Atributo: 259    | Linea: 3    
 | int             | Tipo: Palabra Reservada    | Atributo: 258    | Linea: 2    
 | programa        | Tipo: Palabra Reservada    | Atributo: 257    | Linea: 1    
 
 Tabla de Símbolos:
-| a               | Tipo: int                  | id_token: 500    | Repeticiones: 5   | Linea: 14, 12, 6, 4, 2      | valor: 0
-| b               | Tipo: int                  | id_token: 501    | Repeticiones: 4   | Linea: 12, 7, 4, 2          | valor: 0
-| c               | Tipo: int                  | id_token: 502    | Repeticiones: 4   | Linea: 12, 8, 4, 2          | valor: 0
-| d               | Tipo: float                | id_token: 503    | Repeticiones: 5   | Linea: 15, 13, 9, 5, 3      | valor: 0.0
-| e               | Tipo: float                | id_token: 504    | Repeticiones: 4   | Linea: 13, 10, 5, 3         | valor: 0.0
-| f               | Tipo: float                | id_token: 505    | Repeticiones: 4   | Linea: 13, 11, 5, 3         | valor: 0.0
-| 5.25            | Tipo: float                | id_token:        | Repeticiones: 1   | Linea: 13                   | valor: 5.25
-| 3.14            | Tipo: float                | id_token:        | Repeticiones: 1   | Linea: 13                   | valor: 3.14
-| 5               | Tipo: int                  | id_token:        | Repeticiones: 1   | Linea: 12                   | valor: 5
-| 3               | Tipo: int                  | id_token:        | Repeticiones: 1   | Linea: 12                   | valor: 3
+| a               | Tipo: int                  | id_token: 500    | Repeticiones: 3   | Linea: 6, 4, 2              | valor: 0
+| c               | Tipo: int                  | id_token: 501    | Repeticiones: 3   | Linea: 6, 4, 2              | valor: 0
+| e               | Tipo: int                  | id_token: 502    | Repeticiones: 3   | Linea: 6, 4, 2              | valor: 0
+| b               | Tipo: float                | id_token: 503    | Repeticiones: 3   | Linea: 6, 5, 3              | valor: 0.0
+| d               | Tipo: float                | id_token: 504    | Repeticiones: 3   | Linea: 6, 5, 3              | valor: 0.0
+| f               | Tipo: float                | id_token: 505    | Repeticiones: 4   | Linea: 7, 6, 5, 3           | valor: 0.0
 | 0.0             | Tipo: float                | id_token:        | Repeticiones: 3   | Linea: 5, 5, 5              | valor: 0.0
 | 0               | Tipo: int                  | id_token:        | Repeticiones: 3   | Linea: 4, 4, 4              | valor: 0

@@ -100,7 +100,7 @@ if __name__ == "__main__":
     tabla_tokens, tokens_linea, tabla_simbolos, errores = analizador_lexico.distribuir_tokens_en_tablas()
 
     ruta_carpeta = "AnalizadorSemántico"
-    archivo_programa = os.path.join(ruta_carpeta, "programa_ejemplo_No7.txt")
+    archivo_programa = os.path.join(ruta_carpeta, "programa_ejemplo_4.txt")
     archivo_resultados_semanticos = os.path.join(ruta_carpeta, "resultado_semantico.txt")
     archivo_notacion = os.path.join(ruta_carpeta, "notacion_prefija.txt")
     archivo_codigo_p = os.path.join(ruta_carpeta, "codigo_p.txt")

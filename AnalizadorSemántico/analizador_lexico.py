@@ -8,7 +8,7 @@ import MetodosString as MS
 
 # Clase principal que implementa un analizador léxico utilizando AFNs.
 class AnalizadorLexico:
-    def __init__(self, nombre_archivo="AnalizadorSemántico/programa_ejemplo_No7.txt"):
+    def __init__(self, nombre_archivo="AnalizadorSemántico/programa_ejemplo_4.txt"):
         self.automata_transiciones = AFN.automata()
         # Pila para almacenar los tokens encontrados
         self.pila_tokens = stack.Pila()
@@ -29,7 +29,6 @@ class AnalizadorLexico:
         self.analizar_archivo(nombre_archivo)
         #self.distribuir_tokens_en_tablas()
 
-
     def cargar_tokens(self, nombre_archivo):
         if not os.path.exists(nombre_archivo):
             print("Archivo no encontrado.")
@@ -43,7 +42,6 @@ class AnalizadorLexico:
                     self.tokens.append(palabra)
 
                 numero_linea += 1
-
 
     def obtener_palabras_de_cadena(self, cadena: str) -> list:
         # Separa una cadena continua en tokens, reconociendo caracteres simples y espacios.
@@ -74,7 +72,6 @@ class AnalizadorLexico:
             palabras.extend(self.procesar_subcadena(subcadena))
 
         return palabras
-    
 
     def procesar_subcadena(self, cadena: str) -> list:
         # Divide una subcadena continua en múltiples tokens válidos (máximo prefijo válido).
@@ -108,19 +105,16 @@ class AnalizadorLexico:
 
 
         return palabras
-    
 
     def es_caracter_simple(self, caracter: str) -> bool:
         # Verifica si un carácter es un símbolo reconocido por el AFN de caracteres simples
         return caracter in '()*+,-/;'
-
 
     def clasificar_token(self, token: str) -> str:
         # Clasifica un token usando los AFNs disponibles y palabras reservadas
         estado = self.automata_transiciones.transiciones(0, token)
         tipo = self.automata_transiciones.transiciones(estado, token)
         return tipo
-
 
     def obtener_atributo(self, token: str, tipo: str) -> int:
          # Devuelve el valor numérico del atributo para cada tipo de token
@@ -142,7 +136,6 @@ class AnalizadorLexico:
             case _ :
                 return 0
     
-    
     def analizar_archivo(self, nombre_archivo: str) -> str:
         # Analiza línea por línea un archivo de texto para extraer y clasificar tokens
         if not os.path.exists(nombre_archivo):
@@ -163,7 +156,6 @@ class AnalizadorLexico:
 
                 numero_linea += 1
         print()
-
 
     def generar_tabla_simbolos(self, tabla_tokens: dict, tokens_linea: list) -> dict:
         """
@@ -231,7 +223,6 @@ class AnalizadorLexico:
                     }
 
         return tabla_simbolos, errores
-
 
     def distribuir_tokens_en_tablas(self):
         # Definimos la ruta y nombre del archivo
